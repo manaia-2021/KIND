@@ -1,4 +1,5 @@
 import React from 'react'
+import LeaderBoard from './LeaderBoard'
 // import { connect } from 'react-redux'
 
 function App (props) {
@@ -10,6 +11,7 @@ function App (props) {
     <>
       <div className='app'>
         <h1>Fullstack Boilerplate</h1>
+        <LeaderBoard/>
       </div>
     </>
   )
