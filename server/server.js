@@ -1,13 +1,15 @@
 const express = require('express')
 const path = require('path')
 
-const routes = require('./routes/routes')
+const categoryRoutes = require('./routes/categories')
+const userRoutes = require('./routes/categories')
 
 const server = express()
 
 server.use(express.json())
 server.use(express.static(path.join(__dirname, 'public')))
 
-server.use('/api/v1/routes', routes)
+server.use('/api/v1/categories', categoryRoutes)
+server.use('/api/v1/users', userRoutes)
 
 module.exports = server
