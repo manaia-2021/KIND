@@ -1,15 +1,15 @@
-const express = require('express')
+// const express = require('express')
 
-//const db = require('../db/fruits')
+// const db = require('../db/db')
 
-const router = express.Router()
+// const router = express.Router()
 
-router.get('/', (req, res) => {
+// router.get('/', (req, res) => {
 
-    // .catch(err => {
-    //   console.log(err)
-    //   res.status(500).json({ message: 'Somthing went wrong' })
-    // })
-})
+//     .catch(err => {
+//       console.log(err)
+//       res.status(500).json({ message: 'Somthing went wrong' })
+//     })
+// })
 
-module.exports = router
+// module.exports = router
