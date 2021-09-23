@@ -7,4 +7,3 @@ export default function Login() {
      <button onClick={() => loginWithRedirect()}>Login</button>
   )
 }
-development
