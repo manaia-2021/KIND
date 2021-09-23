@@ -1,4 +1,4 @@
-const environment = process.env.NODE_ENV || 'development'
+const environment = process.env.NODE_ENV || 'test'
 const config = require('./knexfile')[environment]
 const testDb = require('knex')(config)
 
@@ -11,7 +11,6 @@ beforeAll(() => {
 beforeEach(() => {
   return testDb.seed.run()
 })
-
 
 test('getAllUsers returns all users', () => {
   return db.getAllUsers(testDb)
