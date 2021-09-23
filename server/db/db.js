@@ -1,3 +1,4 @@
+const { action } = require('commander')
 const connection = require('./connection')
 
 module.exports = {
@@ -71,6 +72,7 @@ function getActionsByCategory (id, db = connection) {
 // Get user action by user id
 function getUserActionByUser (id, db = connection) {
   return db('user_action')
+    .join('action', 'action_id', '=', 'action.id')
     .select()
     .where('user_id', id)
 }
