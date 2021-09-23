@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-
+import React from 'react'
+// import { connect } from 'react-redux'
 
 function App (props) {
-  useEffect(() => {
-    props.dispatch(())
-  }, [])
+  // useEffect(() => {
+  //   props.dispatch(())
+  // }, [])
 
   return (
     <>
@@ -15,9 +14,10 @@ function App (props) {
     </>
   )
 }
-const mapStateToProps = (globalState) => {
-  return {
-  }
-}
+// const mapStateToProps = (globalState) => {
+//   return {
+//   }
+// }
 
-export default connect(mapStateToProps)(App)
+// export default connect(mapStateToProps)(App)
+export default App

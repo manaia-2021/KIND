@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
       return null
     })
     .catch((err) => {
-      // console.log(err)
+      console.log(err)
       res.status(500).json({ message: 'Somthing went wrong' })
     })
 })
