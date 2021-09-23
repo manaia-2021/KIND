@@ -1,6 +1,6 @@
-import { Box, Button, Grid, makeStyles } from "@material-ui/core"
-import React from "react"
-import HeaderBar from "./HeaderBar"
+import React from 'react'
+import HeaderBar from './HeaderBar'
+import { Box, Button, Grid, makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => {
   return {
