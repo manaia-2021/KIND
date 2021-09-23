@@ -15,10 +15,11 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const { id } = req.params
+
   db.getUser(Number(id))
     .then((user) => {
-      res.status(200).json({ status: 'success', data: { user: user[0] } })
-      return null
+      if (!user) return res.status(404).json({ status: 'error', message: 'No user with that corresponding ID was found' })
+      return res.status(200).json({ status: 'success', data: { user: user } })
     })
     .catch(() => {
       res.status(500).json({ status: 'error', message: 'Backend server error' })
@@ -39,6 +40,7 @@ router.post('/', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   const { id } = req.params
+
   db.deleteUser(Number(id))
     .then(() => {
       res.sendStatus(204)
@@ -49,16 +51,18 @@ router.delete('/:id', (req, res) => {
     })
 })
 
-router.get('/:id/actions', (req, res) => {
+router.get('/:id/actions', async (req, res) => {
   const { id } = req.params
-  db.getUserActionByUser(Number(id))
-    .then(actions => {
-      res.status(200).json({ status: 'success', data: { actions } })
-      return null
-    })
-    .catch(() => {
-      res.status(500).json({ status: 'error', message: 'Backend server error' })
-    })
+
+  try {
+    const user = await db.getUser(Number(id))
+    if (!user) return res.status(404).json({ status: 'error', message: 'No user of that ID exists' })
+
+    const userActions = await db.getUserActionByUser(Number(id))
+    res.status(200).json({ status: 'success', data: { userActions } })
+  } catch (err) {
+    res.status(500).json({ status: 'error', message: 'Backend server error' })
+  }
 })
 
 router.post('/:id/actions', (req, res) => {
@@ -75,18 +79,19 @@ router.post('/:id/actions', (req, res) => {
     })
 })
 
-router.patch('/:id/actions', (req, res) => {
+router.patch('/:id/actions', async (req, res) => {
   const { id } = req.params
   const { userActionId, status } = req.body
 
-  db.updateUserAction(userActionId, status)
-    .then(() => {
-      res.status(201).json({ status: 'success' })
-      return null
-    })
-    .catch(() => {
-      res.status(500).json({ status: 'error', message: 'Backend server error' })
-    })
+  try {
+    const user = await db.getUser(Number(id))
+    if (!user) return res.status(404).json({ status: 'error', message: 'No user of that ID exists' })
+
+    await db.updateUserAction(userActionId, status)
+    res.status(201).json({ status: 'success' })
+  } catch (err) {
+    res.status(500).json({ status: 'error', message: 'Backend server error' })
+  }
 })
 
 module.exports = router

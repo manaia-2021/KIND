@@ -17,8 +17,9 @@ module.exports = {
 
 // Add a new user
 function addNewUser (user, db = connection) {
+  const { name, username } = user
   return db('users')
-    .insert(user)
+    .insert({ name, user_name: username })
 }
 
 // Get all users

@@ -43,9 +43,9 @@ describe('GET /api/v1/users', () => {
 describe('GET /api/v1/user/1', () => {
   test('returns status code of 200 and the found user object', () => {
     getUser.mockImplementation(() =>
-      Promise.resolve([
+      Promise.resolve(
         { id: 1, name: 'user 1' }
-      ])
+      )
     )
 
     expect.assertions(3)
@@ -55,6 +55,20 @@ describe('GET /api/v1/user/1', () => {
         expect(res.status).toBe(200)
         expect(res.body.status).toBe('success')
         expect(res.body.data).toEqual({ user: { id: 1, name: 'user 1' } })
+        return null
+      })
+  })
+
+  test('returns a status code of 404 and appropriate error message if user not found', () => {
+    getUser.mockImplementation(() => Promise.resolve())
+
+    expect.assertions(3)
+    return request(server)
+      .get('/api/v1/users/999')
+      .then((res) => {
+        expect(res.status).toBe(404)
+        expect(res.body.status).toBe('error')
+        expect(res.body.message).toBe('No user with that corresponding ID was found')
         return null
       })
   })
@@ -138,6 +152,7 @@ describe('DELETE /api/v1/users/1', () => {
 
 describe('GET /api/v1/users/1/actions', () => {
   test('returns status code of 200 and list of user actions', () => {
+    getUser.mockImplementation(() => Promise.resolve(true))
     getUserActionByUser.mockImplementation(() => Promise.resolve([{ user_id: 1, action_id: 1, completed: true, counter: 5 }, { user_id: 1, action_id: 2, completed: false, counter: 0 }]))
 
     expect.assertions(4)
@@ -147,12 +162,28 @@ describe('GET /api/v1/users/1/actions', () => {
         expect(res.status).toBe(200)
         expect(getUserActionByUser).toHaveBeenCalledWith(1)
         expect(res.body.status).toBe('success')
-        expect(res.body.data).toEqual({ actions: [{ user_id: 1, action_id: 1, completed: true, counter: 5 }, { user_id: 1, action_id: 2, completed: false, counter: 0 }] })
+        expect(res.body.data).toEqual({ userActions: [{ user_id: 1, action_id: 1, completed: true, counter: 5 }, { user_id: 1, action_id: 2, completed: false, counter: 0 }] })
+        return null
+      })
+  })
+
+  test('returns a status code of 404 and appropriate error message if resource not found', () => {
+    getUser.mockImplementation(() => Promise.resolve())
+    getUserActionByUser.mockImplementation(() => Promise.resolve([]))
+
+    expect.assertions(3)
+    return request(server)
+      .get('/api/v1/users/999/actions')
+      .then(res => {
+        expect(res.status).toBe(404)
+        expect(res.body.status).toBe('error')
+        expect(res.body.message).toBe('No user of that ID exists')
         return null
       })
   })
 
   test('returns status code of 500 on error with appropriate error message', () => {
+    getUser.mockImplementation(() => Promise.resolve(true))
     getUserActionByUser.mockImplementation(() => Promise.reject(new Error('not working')))
 
     expect.assertions(3)
@@ -215,7 +246,23 @@ describe('PATCH /api/v1/users/1/actions', () => {
       })
   })
 
+  test('returns a status code of 404 and appropriate error message if user not found', () => {
+    getUser.mockImplementation(() => Promise.resolve())
+    updateUserAction.mockImplementation(() => Promise.resolve(0))
+
+    expect.assertions(3)
+    return request(server)
+      .get('/api/v1/users/999')
+      .then((res) => {
+        expect(res.status).toBe(404)
+        expect(res.body.status).toBe('error')
+        expect(res.body.message).toBe('No user with that corresponding ID was found')
+        return null
+      })
+  })
+
   test('returns status code of 500 on error with appropriate error message', () => {
+    getUser.mockImplementation(() => Promise.resolve(true))
     updateUserAction.mockImplementation(() => Promise.reject(new Error('not working')))
 
     expect.assertions(3)
