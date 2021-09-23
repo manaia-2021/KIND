@@ -4,73 +4,55 @@ const rootUrl = '/api/v1'
 
 export const createUser = (user) => {
   // user needs to be object containing name, email address, googleId
-  request.post(`${rootUrl}/users`).send(user)
-}
-
-// can be used to populate the leaderboard
-export const getUsers = () => {
-  request
-    .get(`${rootUrl}/users`)
-    .then((res) => {
-      console.log(res)
-      return null
-    })
-    .catch((err) => {
-      console.error(err)
+  return request.post(`${rootUrl}/users`).send(user)
+    .then(res => {
+      return res.body.data.id
     })
 }
 
-// Use to get information for specific userId - also need to send auth token
 export const getUser = (userId) => {
-  request
+  return request
     .get(`${rootUrl}/users/${userId}`)
-    .then((res) => {
-      console.log(res)
-      return null
+    .then(res => {
+      return res.body.data.user
     })
-    .catch((err) => {
-      console.error(err)
+}
+
+// Get users for leaderboard
+export const getLeaderboard = () => {
+  return request
+    .get(`${rootUrl}/leaderboard`)
+    .then((res) => {
+      return res.body.data.users
     })
 }
 
 // get current actions of user - also send auth token
 export const getUserActions = (userId) => {
-  request
+  return request
     .get(`${rootUrl}/users/${userId}/actions`)
     .then((res) => {
-      console.log(res)
-      return null
-    })
-    .catch((err) => {
-      console.error(err)
+      return res.body.data.userActions
     })
 }
 
-// add new user action
-export const createUserAction = (userId, actionId) => {
-  request
+// add new user actions
+export const addNewUserActions = (userId, actionIds) => {
+  return request
     .post(`${rootUrl}/users/${userId}/actions`)
-    .send(actionId)
-    .then((res) => {
-      console.log(res)
+    .send({ actionIds: actionIds })
+    .then(() => {
       return null
-    })
-    .catch((err) => {
-      console.error(err)
     })
 }
 
 //
 export const updateUserAction = (userId, userActionId, status) => {
-  request
-    .put(`${rootUrl}/users/${userId}/actions/${userActionId}`)
-    .send(status)
-    .then((res) => {
-      console.log(res)
+  return request
+    .patch(`${rootUrl}/users/${userId}/actions`)
+    .send({ userActionId, status })
+    .then(() => {
       return null
-    })
-    .catch((err) => {
-      console.error(err)
     })
 }
 
