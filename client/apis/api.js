@@ -3,7 +3,7 @@ import request from 'superagent'
 const rootUrl = '/api/v1'
 
 export const createUser = (user) => {
-  // user needs to be object containing name, username??, default avatar?, authId
+  // user needs to be object containing name, email address, googleId
   request.post(`${rootUrl}/users`).send(user)
 }
 
@@ -46,10 +46,25 @@ export const getUserActions = (userId) => {
     })
 }
 
-export const updateUserActions = (userId, actions) => {
+// add new user action
+export const createUserAction = (userId, actionId) => {
   request
-    .put(`${rootUrl}/users/${userId}/actions`)
-    .send(actions)
+    .post(`${rootUrl}/users/${userId}/actions`)
+    .send(actionId)
+    .then((res) => {
+      console.log(res)
+      return null
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+}
+
+//
+export const updateUserAction = (userId, userActionId, status) => {
+  request
+    .put(`${rootUrl}/users/${userId}/actions/${userActionId}`)
+    .send(status)
     .then((res) => {
       console.log(res)
       return null
