@@ -34,7 +34,7 @@ export default function CategoriesPage() {
           </Grid>
         </Box>
         <Box display='flex' justifyContent='center' alignItems='flex-end' direction='column' style={{ paddingTop: '20px', minHeight: '2vw', border: '0px solid black' }}>
-          <Button size='large' variant='contained' color='primary'>
+          <Button size='large' variant='contained' color='primary' href='#'>
             CONTINUE
           </Button>
         </Box>
