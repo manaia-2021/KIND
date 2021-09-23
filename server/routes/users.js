@@ -1,14 +1,19 @@
 const express = require('express')
 const router = express.Router()
+const db = require('../db/db')
 
 router.get('/', (req, res) => {
   // obtain list of all users from db
   res.send('hitting user routes')
-
-  // .catch(err => {
-  //   console.log(err)
-  //   res.status(500).json({ message: 'Somthing went wrong' })
-  // })
+  db.getUsers()
+    .then((users) => {
+      res.status(200).json({ users })
+      return null
+    })
+    .catch((err) => {
+      // console.log(err)
+      res.status(500).json({ message: 'Somthing went wrong' })
+    })
 })
 
 router.get('/:id', (req, res) => {

@@ -2,7 +2,7 @@ const express = require('express')
 const path = require('path')
 
 const categoryRoutes = require('./routes/categories')
-const userRoutes = require('./routes/categories')
+const userRoutes = require('./routes/users')
 
 const server = express()
 
