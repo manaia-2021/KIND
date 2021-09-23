@@ -9,6 +9,7 @@ module.exports = {
   getUsersByPoints,
   updateUserAction,
   addNewUserAction,
+  addNewUserActions,
   addNewUser,
   getActionsByCategory,
   getUserActionByUser
@@ -29,8 +30,8 @@ function getAllUsers (db = connection) {
 // Get a specific user
 function getUser (id, db = connection) {
   return db('users')
-    .first()
     .where('id', id)
+    .first()
 }
 
 // Get users ordered by highest number of points for the leaderboard
@@ -77,6 +78,14 @@ function getUserActionByUser (id, db = connection) {
 function addNewUserAction (userId, actionId, db = connection) {
   return db('user_action')
     .insert({ user_id: userId, action_id: actionId })
+}
+
+// Add multiple user Actions
+function addNewUserActions (userId, actionIds, db = connection) {
+  const userActions = actionIds.map(id => ({ user_id: userId, action_id: id }))
+
+  return db('user_action')
+    .insert(userActions)
 }
 
 // Update user action
