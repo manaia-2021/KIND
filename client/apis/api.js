@@ -18,15 +18,6 @@ export const getUser = (userId) => {
     })
 }
 
-// Get users for leaderboard
-export const getLeaderboard = () => {
-  return request
-    .get(`${rootUrl}/leaderboard`)
-    .then((res) => {
-      return res.body.data.users
-    })
-}
-
 // get current actions of user - also send auth token
 export const getUserActions = (userId) => {
   return request
@@ -56,28 +47,37 @@ export const updateUserAction = (userId, userActionId, status) => {
     })
 }
 
-// Get all categories - use to pouplate the category page
-export const getCategories = () => {
-  request
-    .get(`${rootUrl}/categories`)
-    .then((res) => {
-      console.log(res)
+export const deleteUser = (userId) => {
+  return request
+    .delete(`${rootUrl}/users/${userId}`)
+    .then(() => {
       return null
     })
-    .catch((err) => {
-      console.error(err)
+}
+
+// Get all categories - use to pouplate the category page
+export const getCategories = () => {
+  return request
+    .get(`${rootUrl}/categories`)
+    .then((res) => {
+      return res.body.data.categories
     })
 }
 
 // Get actions under a specific category
 export const getCategoryActions = (categoryId) => {
-  request
+  return request
     .get(`${rootUrl}/categories/${categoryId}/actions`)
     .then((res) => {
-      console.log(res)
-      return null
+      return res.body.data.actions
     })
-    .catch((err) => {
-      console.error(err)
+}
+
+// Get users for leaderboard
+export const getLeaderboard = () => {
+  return request
+    .get(`${rootUrl}/leaderboard`)
+    .then((res) => {
+      return res.body.data.users
     })
 }

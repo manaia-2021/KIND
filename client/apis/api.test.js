@@ -1,5 +1,5 @@
 import nock from 'nock'
-import { addNewUserActions, createUser, getLeaderboard, getUser, getUserActions, updateUserAction } from './api'
+import { addNewUserActions, createUser, deleteUser, getCategories, getCategoryActions, getLeaderboard, getUser, getUserActions, updateUserAction } from './api'
 
 describe('createUser', () => {
   test('send user to api/v1/users and return res.body', () => {
@@ -75,6 +75,55 @@ describe('updateUserAction', () => {
       .reply(201)
 
     return updateUserAction(1, 5, true).then(() => {
+      expect(scope.isDone()).toBeTruthy()
+      return null
+    })
+  })
+})
+
+describe('deleteUser', () => {
+  test('DELETE request to api/v1/users/1 deletes user returning null', () => {
+    expect.assertions(1)
+
+    const scope = nock('http://localhost:80')
+      .delete('/api/v1/users/1')
+      .reply(204)
+
+    return deleteUser(1).then(() => {
+      expect(scope.isDone()).toBeTruthy()
+      return null
+    })
+  })
+})
+
+describe('getCategories', () => {
+  test('GET request to /api/v1/categories return res.body', () => {
+    expect.assertions(3)
+
+    const scope = nock('http://localhost:80')
+      .get('/api/v1/categories')
+      .reply(200, { status: 'success', data: { categories: [{ id: 1, title: 'travel' }] } })
+
+    return getCategories().then((categories) => {
+      expect(categories).toHaveLength(1)
+      expect(categories[0].id).toBe(1)
+      expect(scope.isDone()).toBeTruthy()
+      return null
+    })
+  })
+})
+
+describe('getCategoryActions', () => {
+  test('GET request to /api/v1/categories/101/actions', () => {
+    expect.assertions(3)
+
+    const scope = nock('http://localhost:80')
+      .get('/api/v1/categories/101/actions')
+      .reply(200, { status: 'success', data: { actions: [{ id: 5, title: 'travel', description: 'bike to work' }] } })
+
+    return getCategoryActions(101).then((actions) => {
+      expect(actions).toHaveLength(1)
+      expect(actions[0].id).toBe(5)
       expect(scope.isDone()).toBeTruthy()
       return null
     })
