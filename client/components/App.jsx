@@ -1,17 +1,16 @@
 import React, { useEffect } from 'react'
 // import { connect } from 'react-redux'
-import { useAuth0 } from '@auth0/auth0-react';
-import Profile from './Profile';
-import Login from './Login';
-import Logout from './Logout';
-
+import { useAuth0 } from '@auth0/auth0-react'
+import Profile from './Profile'
+import Login from './Login'
+import Logout from './Logout'
 
 function App (props) {
   const {
     isLoading,
     isAuthenticated,
     error
-  } = useAuth0();
+  } = useAuth0()
 
   // useEffect(() => {
   //   props.dispatch(())
@@ -26,25 +25,24 @@ function App (props) {
   // )
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
   if (error) {
-    return <div>Oops... {error.message}</div>;
+    return <div>Oops... {error.message}</div>
   }
 
-  if (isAuthenticated)  {
+  if (isAuthenticated) {
     return (
       <>
         <Profile />
         <Logout />
       </>
     )
-  } else if (!isAuthenticated)  {
+  } else if (!isAuthenticated) {
     return (
-        <Login />
+      <Login />
     )
   }
-
 }
 // const mapStateToProps = (globalState) => {
 //   return {
@@ -53,4 +51,3 @@ function App (props) {
 
 // export default connect(mapStateToProps)(App)
 export default App
-
