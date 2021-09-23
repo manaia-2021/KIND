@@ -6,6 +6,7 @@ const jwksRsa = require('jwks-rsa')
 
 const categoryRoutes = require('./routes/categories')
 const userRoutes = require('./routes/users')
+const leaderboardRoutes = require('./routes/leaderboard')
 
 const server = express()
 
@@ -35,5 +36,6 @@ const checkJwt = jwt({
 // ROUTES
 server.use('/api/v1/categories', categoryRoutes)
 server.use('/api/v1/users', userRoutes)
+server.use('/api/v1/leaderboard', leaderboardRoutes)
 
 module.exports = server
