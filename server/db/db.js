@@ -1,7 +1,6 @@
-
-const knex = require('knex')
-const config = require('./knexfile').development
-const database = knex(config)
+const environment = process.env.NODE_ENV || 'development'
+const config = require('./knexfile')[environment]
+const database = require('knex')(config)
 
 module.exports = {
     getAllActions,
@@ -19,7 +18,7 @@ module.exports = {
 
 
 // Add a new user
-function addNewUser(user, db = connection) {
+function addNewUser(user, db = database) {
     return db('users')
     .insert(user)
 }
@@ -38,7 +37,7 @@ function getUser(id, db  = database) {
 }
 
 // Get users ordered by highest number of points for the leaderboard
-function getUsersByPoints(db = connection) {
+function getUsersByPoints(db = database) {
     return db('users')
     .select()
     .orderBy('points', 'desc')
