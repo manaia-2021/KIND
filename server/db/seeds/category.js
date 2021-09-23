@@ -8,7 +8,7 @@ exports.seed = function(knex) {
         {id: 101, title: 'travel'},
         {id: 102, title: 'energy'},
         {id: 103, title: 'water'},
-        {id: 104, title: 'food_and_drink'},
+        {id: 104, title: 'food and drink'},
         {id: 105, title: 'waste'}
       ]);
     });
