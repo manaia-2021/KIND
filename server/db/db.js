@@ -1,8 +1,8 @@
-const connection = require('./connection')
+// const connection = require('./connection')
 
-function  (db = connection) {
-  return db().select()
-}
+// function (db = connection) {
+//   return db().select()
+// }
 
-module.exports = {
-}
+// module.exports = {
+// }
