@@ -1,31 +1,10 @@
-import { Button, Grid, TextField, Typography } from "@material-ui/core"
-import React from "react"
+import React from 'react'
+import { useAuth0 } from '@auth0/auth0-react'
 
 export default function Login() {
+  const { loginWithRedirect }= useAuth0()
   return (
-    <Grid container justify='center' alignItems='center' direction='column' style={{ minHeight: '100vh' }} spacing={5}>
-      <Grid item>
-        <Typography variant='h5' color='primary' />
-      </Grid>
-      <Grid item style={{ border: '1pm solid black' }}>
-        <Fields />
-      </Grid>
-    </Grid>
-
+     <button onClick={() => loginWithRedirect()}>Login</button>
   )
 }
-
-const Fields = () => (
-  <Grid container direction='column' alighItems='center'
-    justifyContent='center'>
-    <TextField variant='outlined' label='Email'
-      fullWidth
-      style={{ marginBottom: '2em' }}
-    />
-    <TextField variant='outlined' label='Password' fullWidth
-      style={{ marginBottom: '2em' }} />
-    <Button size='large' variant='contained' color='primary'>
-      LOGIN
-    </Button>
-  </Grid>
-)
+development
