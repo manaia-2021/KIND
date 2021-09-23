@@ -1,43 +1,72 @@
 import React from 'react'
-import connect from 'react-redux'
+
 const dummyData = [
   {
     id: 1,
     name: 'kerry',
     user_name: 'kindKerry',
-    points: 10
+    points: 60
   },
   {
     id: 2,
     name: 'brad',
     user_name: 'kindBrad',
     points: 12
+  },
+  {
+    id: 2,
+    name: 'Waggle',
+    user_name: 'kindW',
+    points: 30
+  },
+  {
+    id: 2,
+    name: 'ChrisA',
+    user_name: 'kindA',
+    points: 50
+  },
+  {
+    id: 2,
+    name: 'ChrisA',
+    user_name: 'kindA',
+    points: 200
   }
+
+
 ]
 
 function Leaderboard () {
-  getRankings()
+  // function rank (arr, f) {
+  //   const sorted = arr.slice().sort(f)
+  //   return arr.map(x => sorted.findIndex(s => f(x, s) === 0) + 1)
+  // }
+  dummyData.sort((input1, input2) => (input1.points < input2.points) ? 1 : -1)
 
   return (
+
     <>
-      <h1>display all data</h1>
-      <ul>
-   {dummyData.map((user)) => {
-          <li>
-            {user.name} {user.points}
-          </li>
-        })}
-
-      </ul>
-
+      <div className='leaderboard'>
+        <table>
+          <thead>
+            <tr>
+              <th>User Name</th>
+              <th>Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            {dummyData.map((user, index) => {
+              return (
+                <tr key={index}>
+                  <td>{user.user_name}</td>
+                  <td>{user.points}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
     </>
 
   )
-
-  // function mapStateToProps (state) {
-  //   return {
-  //     rank: state.rank
-  //   }
-  // }
-
+}
 export default Leaderboard
