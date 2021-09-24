@@ -10,7 +10,7 @@ module.exports = {
   deleteUser,
   getUsersByPoints,
   updateUserAction,
-  addNewUserAction,
+  addNewUserActions,
   addNewUser,
   getActionsByCategory,
   getUserActionByUser
@@ -69,7 +69,7 @@ function getActionsByCategory (id, db = database) {
     .where('category_id', id)
 }
 
-// Get user action by user id
+// Get user actions by user id
 function getUserActionByUser (id, db = database) {
   return db('user_action')
     .select()
@@ -77,7 +77,7 @@ function getUserActionByUser (id, db = database) {
 }
 
 // Add new action to user
-function addNewUserAction (userId, actionId, db = database) {
+function addNewUserActions (userId, actionId, db = database) {
   return db('user_action')
     .insert({ user_id: userId, action_id: actionId })
 }
