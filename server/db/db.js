@@ -1,4 +1,4 @@
-// const { action } = require('commander')
+const { generateUsername, getRandomAvatar } = require('../utils')
 const connection = require('./connection')
 
 module.exports = {
@@ -9,7 +9,6 @@ module.exports = {
   deleteUser,
   getUsersByPoints,
   updateUserAction,
-  addNewUserAction,
   addNewUserActions,
   addNewUser,
   getActionsByCategory,
@@ -18,9 +17,12 @@ module.exports = {
 
 // Add a new user
 function addNewUser (user, db = connection) {
-  const { name, username } = user
+  const { name } = user
+  const randomUsername = generateUsername()
+  const avatarUrl = getRandomAvatar()
+
   return db('users')
-    .insert({ name, user_name: username })
+    .insert({ name, user_name: randomUsername, avatar_url: avatarUrl })
 }
 
 // Get all users
@@ -32,11 +34,12 @@ function getAllUsers (db = connection) {
 // Get a specific user
 function getUser (id, db = connection) {
   return db('users')
-    .where('id', id)
     .first()
+    .where('id', id)
 }
 
 // Get users ordered by highest number of points for the leaderboard
+// return username and points
 function getUsersByPoints (db = connection) {
   return db('users')
     .select()
@@ -69,7 +72,7 @@ function getActionsByCategory (id, db = connection) {
     .where('category_id', id)
 }
 
-// Get user action by user id
+// Get user actions by user id
 function getUserActionByUser (id, db = connection) {
   return db('user_action')
     .join('action', 'action_id', '=', 'action.id')
@@ -78,17 +81,9 @@ function getUserActionByUser (id, db = connection) {
 }
 
 // Add new action to user
-function addNewUserAction (userId, actionId, db = connection) {
+function addNewUserActions (userId, actionId, db = connection) {
   return db('user_action')
     .insert({ user_id: userId, action_id: actionId })
-}
-
-// Add multiple user Actions
-function addNewUserActions (userId, actionIds, db = connection) {
-  const userActions = actionIds.map(id => ({ user_id: userId, action_id: id }))
-
-  return db('user_action')
-    .insert(userActions)
 }
 
 // Update user action
