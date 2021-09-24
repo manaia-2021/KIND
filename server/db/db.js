@@ -72,6 +72,7 @@ function getActionsByCategory (id, db = database) {
 // Get user actions by user id
 function getUserActionByUser (id, db = database) {
   return db('user_action')
+    .join('action', 'action_id', '=', 'action.id')
     .select()
     .where('user_id', id)
 }
