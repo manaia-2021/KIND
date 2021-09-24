@@ -1,5 +1,6 @@
-const { action } = require('commander')
-const connection = require('./connection')
+const environment = process.env.NODE_ENV || 'development'
+const config = require('./knexfile')[environment]
+const database = require('knex')(config)
 
 module.exports = {
   getAllActions,
@@ -9,7 +10,6 @@ module.exports = {
   deleteUser,
   getUsersByPoints,
   updateUserAction,
-  addNewUserAction,
   addNewUserActions,
   addNewUser,
   getActionsByCategory,
@@ -17,60 +17,60 @@ module.exports = {
 }
 
 // Add a new user
-function addNewUser (user, db = connection) {
-  const { name, username } = user
+function addNewUser (user, db = database) {
   return db('users')
-    .insert({ name, user_name: username })
+    .insert(user)
 }
 
 // Get all users
-function getAllUsers (db = connection) {
+function getAllUsers (db = database) {
   return db('users')
     .select()
 }
 
 // Get a specific user
-function getUser (id, db = connection) {
+function getUser (id, db = database) {
   return db('users')
-    .where('id', id)
     .first()
+    .where('id', id)
 }
 
 // Get users ordered by highest number of points for the leaderboard
-function getUsersByPoints (db = connection) {
+// return username and points
+function getUsersByPoints (db = database) {
   return db('users')
     .select()
     .orderBy('points', 'desc')
 }
 
 // Delete user
-function deleteUser (id, db = connection) {
+function deleteUser (id, db = database) {
   return db('users')
     .where('id', id)
     .del()
 }
 
 // Get all categories
-function getAllCategories (db = connection) {
+function getAllCategories (db = database) {
   return db('category')
     .select()
 }
 
 // Get all actions
-function getAllActions (db = connection) {
+function getAllActions (db = database) {
   return db('action')
     .select()
 }
 
 // Get actions by category
-function getActionsByCategory (id, db = connection) {
+function getActionsByCategory (id, db = database) {
   return db('action')
     .select()
     .where('category_id', id)
 }
 
-// Get user action by user id
-function getUserActionByUser (id, db = connection) {
+// Get user actions by user id
+function getUserActionByUser (id, db = database) {
   return db('user_action')
     .join('action', 'action_id', '=', 'action.id')
     .select()
@@ -78,21 +78,13 @@ function getUserActionByUser (id, db = connection) {
 }
 
 // Add new action to user
-function addNewUserAction (userId, actionId, db = connection) {
+function addNewUserActions (userId, actionId, db = database) {
   return db('user_action')
     .insert({ user_id: userId, action_id: actionId })
 }
 
-// Add multiple user Actions
-function addNewUserActions (userId, actionIds, db = connection) {
-  const userActions = actionIds.map(id => ({ user_id: userId, action_id: id }))
-
-  return db('user_action')
-    .insert(userActions)
-}
-
 // Update user action
-function updateUserAction (id, status, db = connection) {
+function updateUserAction (id, status, db = database) {
   return db('user_action')
     .first()
     .where('id', id)
