@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => {
   }
 })
 
-export default function LandingPage() {
+export default function LandingPage () {
   const classes = useStyles()
   return (
     <>

@@ -1,4 +1,4 @@
-const { action } = require('commander')
+// const { action } = require('commander')
 const connection = require('./connection')
 
 module.exports = {

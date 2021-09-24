@@ -10,16 +10,16 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
+    backgroundColor: theme.palette.background.paper
+  }
+}))
 
-export default function ListItems() {
+export default function ListItems () {
   const classes = useStyles()
-  const [checked, setChecked] = React.useState([]);
+  const [checked, setChecked] = React.useState([])
 
   const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
+    const currentIndex = checked.indexOf(value)
     const newChecked = [...checked]
 
     if (currentIndex === -1) {
@@ -29,12 +29,12 @@ export default function ListItems() {
     }
 
     setChecked(newChecked)
-  };
+  }
 
   return (
     <List dense className={classes.root}>
       {[0, 1, 2, 3].map((value) => {
-        const labelId = `checkbox-list-secondary-label-${value}`;
+        const labelId = `checkbox-list-secondary-label-${value}`
         return (
           <ListItem key={value} button>
             <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
@@ -47,7 +47,7 @@ export default function ListItems() {
               />
             </ListItemSecondaryAction>
           </ListItem>
-        );
+        )
       })}
     </List>
   )
