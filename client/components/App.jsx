@@ -6,27 +6,27 @@ import Login from './Login'
 import Logout from './Logout'
 import Leaderboard from './LeaderBoard'
 
-function App(props) {
+function App (props) {
   useEffect(() => {
-    getUsersAPI();
+    getUsersAPI()
   }, [])
 
-  const [loading, setLoading] = useState(false);
-  const [backendData, setData] = useState([]);
+  const [loading, setLoading] = useState(false)
+  const [backendData, setData] = useState([])
 
   const getUsersAPI = () => {
     const API = 'http://localhost:3000/api/v1/users'
 
     fetch(API)
       .then((response) => {
-        return response.json();
+        return response.json()
       })
       .then((backendData) => {
-        console.log(backendData);
-        setLoading(true);
-        setData(backendData.data.users);
-      });
-  };
+        console.log(backendData)
+        setLoading(true)
+        setData(backendData.data.users)
+      })
+  }
 
   const {
     user,
@@ -36,12 +36,12 @@ function App(props) {
   } = useAuth0()
 
   const noteRootStyle = {
-    border: "2px #0af solid",
+    border: '2px #0af solid',
     borderRadius: 9,
     margin: 20,
-    backgroundColor: "#efefef",
+    backgroundColor: '#efefef',
     padding: 6
-  };
+  }
 
   if (isLoading) {
     return <div>Loading...</div>
