@@ -10,44 +10,30 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
+    backgroundColor: theme.palette.background.paper
+  }
+}))
 
-export default function ListItems() {
+export default function ListItems ({ handleToggle, checked, actions }) {
   const classes = useStyles()
-  const [checked, setChecked] = React.useState([]);
-
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked]
-
-    if (currentIndex === -1) {
-      newChecked.push(value)
-    } else {
-      newChecked.splice(currentIndex, 1)
-    }
-
-    setChecked(newChecked)
-  };
 
   return (
     <List dense className={classes.root}>
-      {[0, 1, 2, 3].map((value) => {
-        const labelId = `checkbox-list-secondary-label-${value}`;
+      {actions.map((action) => {
+        const labelId = `checkbox-list-secondary-label-${action.id}`
         return (
-          <ListItem key={value} button>
-            <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+          <ListItem key={action.id} button>
+            <ListItemText id={labelId} primary={action.description} />
             <ListItemSecondaryAction>
               <Checkbox
                 edge="end"
-                onChange={handleToggle(value)}
-                checked={checked.indexOf(value) !== -1}
+                onChange={handleToggle(action.id)}
+                checked={checked.includes(action.id)}
                 inputProps={{ 'aria-labelledby': labelId }}
               />
             </ListItemSecondaryAction>
           </ListItem>
-        );
+        )
       })}
     </List>
   )

@@ -4,13 +4,18 @@ import { useAuth0 } from '@auth0/auth0-react'
 import Profile from './Profile'
 import Login from './Login'
 import Logout from './Logout'
+import CategoriesPage from './CategoriesPage'
 
-function App (props) {
+export default function App(props) {
   const {
     isLoading,
     isAuthenticated,
     error
   } = useAuth0()
+  return (
+    <CategoriesPage />
+  )
+}
 
   // useEffect(() => {
   //   props.dispatch(())
@@ -24,30 +29,29 @@ function App (props) {
   //   </>
   // )
 
-  if (isLoading) {
-    return <div>Loading...</div>
-  }
-  if (error) {
-    return <div>Oops... {error.message}</div>
-  }
+  //   if (isLoading) {
+  //     return <div>Loading...</div>
+  //   }
+  //   if (error) {
+  //     return <div>Oops... {error.message}</div>
+  //   }
 
-  if (isAuthenticated) {
-    return (
-      <>
-        <Profile />
-        <Logout />
-      </>
-    )
-  } else if (!isAuthenticated) {
-    return (
-      <Login />
-    )
-  }
-}
-// const mapStateToProps = (globalState) => {
-//   return {
-//   }
-// }
+  //   if (isAuthenticated) {
+  //     return (
+  //       <>
+  //         <Profile />
+  //         <Logout />
+  //       </>
+  //     )
+  //   } else if (!isAuthenticated) {
+  //     return (
+  //       <Login />
+  //     )
+  //   }
+  // }
+  // const mapStateToProps = (globalState) => {
+  //   return {
+  //   }
+  // }
 
-// export default connect(mapStateToProps)(App)
-export default App
+  // export default connect(mapStateToProps)(App)

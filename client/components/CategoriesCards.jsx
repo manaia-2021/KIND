@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import clsx from 'clsx'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
-import CardMedia from '@material-ui/core/CardMedia'
+// import CardMedia from '@material-ui/core/CardMedia'
 import CardContent from '@material-ui/core/CardContent'
 import CardActions from '@material-ui/core/CardActions'
 import Collapse from '@material-ui/core/Collapse'
@@ -11,46 +11,59 @@ import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import { red } from '@material-ui/core/colors'
 
+import { getCategoryActions } from '../apis/api'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import ListItems from './ListItems'
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    maxWidth: 345
   },
   media: {
     height: 0,
-    paddingTop: '56.25%', // 16:9
+    paddingTop: '56.25%' // 16:9
   },
   expand: {
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
     transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
+      duration: theme.transitions.duration.shortest
+    })
   },
   expandOpen: {
-    transform: 'rotate(180deg)',
+    transform: 'rotate(180deg)'
   },
   avatar: {
-    backgroundColor: red[500],
-  },
-}));
+    backgroundColor: red[500]
+  }
+}))
 
-export default function CategoriesCards() {
+export default function CategoriesCards (props) {
   const classes = useStyles()
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = React.useState(false)
+
+  const [actions, setActions] = useState([])
+
+  useEffect(() => {
+    getCategoryActions(props.id)
+      .then(actions => {
+        setActions(actions)
+        return null
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
 
   const handleExpandClick = () => {
     setExpanded(!expanded)
-  };
+  }
 
   return (
     <Card className={classes.root}>
       <CardHeader
 
-        title="Category name"
+        title={props.title}
         subheader="category description"
       />
 
@@ -63,7 +76,7 @@ export default function CategoriesCards() {
 
         <IconButton
           className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
+            [classes.expandOpen]: expanded
           })}
           onClick={handleExpandClick}
           aria-expanded={expanded}
@@ -74,7 +87,7 @@ export default function CategoriesCards() {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <ListItems />
+          <ListItems handleToggle={props.handleToggle} checked={props.checkedActions} actions={actions} />
         </CardContent>
       </Collapse>
     </Card>

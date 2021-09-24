@@ -20,7 +20,7 @@ exports.seed = function(knex) {
         {id: 13, category_id: 102,title: 'energy',description: 'Line dry washing',points: 5 },
         {id: 14, category_id: 102,title: 'energy',description: 'Install a solar pannel',points: 120 },
         {id: 15, category_id: 102,title: 'energy',description: 'Replace electrical appliances with better Energy Star',points: 20 },
-        {id: 16, category_id: 103,title: 'water',description: 'Install a solar water heater',points: 30 },
+        {id: 16, category_id: 103, title: 'water',description: 'Install a solar water heater',points: 30 },
         {id: 17, category_id: 103,title: 'water',description: 'Install low flow toilets',points: 5 },
         {id: 18, category_id: 103,title: 'water',description: 'Turn off the faucet while brushing your teeth',points: 5 },
         {id: 19, category_id: 103,title: 'water',description: 'Only run the washing machine and dishwasher when you have a full load.',points: 5 },
