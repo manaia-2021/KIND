@@ -1,26 +1,16 @@
 import React from 'react'
-import { render } from 'react-dom'
-// import { Provider } from 'react-redux'
-import { Auth0Provider } from '@auth0/auth0-react'
-// import store from './store'
-
-// required for auth0
-import config from '../auth_config.json'
-
+import ReactDOM from 'react-dom'
 import App from './components/App'
+import { BrowserRouter as Router } from 'react-router-dom'
+import Auth0ProviderWithHistory from './auth/Auth0ProviderWithHistory'
 
 document.addEventListener('DOMContentLoaded', () => {
-  render(
-    <Auth0Provider
-      domain={config.domain}
-      clientId={config.clientId}
-      redirectUri={window.location.origin}
-    >
-      {/* <Provider store={store}> */}
-      <App />
-      {/* </Provider>, */}
-    </Auth0Provider>,
-
+  ReactDOM.render(
+    <Router>
+      <Auth0ProviderWithHistory>
+        <App />
+      </Auth0ProviderWithHistory>,
+    </Router>,
     document.getElementById('app')
   )
 })

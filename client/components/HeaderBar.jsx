@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Avatar, AppBar, Toolbar, Typography } from '@mui/material'
 import { makeStyles } from '@material-ui/core/styles'
+import Authentication from './Authentication'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -35,7 +36,7 @@ export default function HeaderBar () {
 
             <Avatar className={classes.avatar} />
             <Typography>
-              (userName)
+              <Authentication />
             </Typography>
 
           </Toolbar>
