@@ -1,4 +1,4 @@
-const { action } = require('commander')
+const { generateUsername, getRandomAvatar } = require('../utils')
 const connection = require('./connection')
 
 module.exports = {
@@ -18,9 +18,12 @@ module.exports = {
 
 // Add a new user
 function addNewUser (user, db = connection) {
-  const { name, username } = user
+  const { name } = user
+  const username = generateUsername()
+  const avatarUrl = getRandomAvatar()
+
   return db('users')
-    .insert({ name, user_name: username })
+    .insert({ name, user_name: username, avatar_url: avatarUrl })
 }
 
 // Get all users
