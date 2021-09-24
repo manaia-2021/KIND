@@ -25,11 +25,11 @@ function App(props) {
 
   //mock the backend
   const backendData = [
-    { id: 1, name: 'Kerry', user_name: 'kindKerry', email: 'kerry@gmail.com' },
-    { id: 2, name: 'Brad', user_name: 'kindBrad', email: 'brad@gmail.com' },
-    { id: 3, name: 'ChrisA', user_name: 'kindChirs', email: 'chrisa@gmail.com' },
-    { id: 4, name: 'ChrisW', user_name: 'kindChrisW', email: 'chrisw@gmail.com' },
-    { id: 5, name: 'Nirvan', user_name: 'kindNirvan', email: 'nirvan@gmail.com' }
+    { id: 1, name: 'Kerry', user_name: 'kindKerry', email_address: 'pulsta@gmail.com' },
+    { id: 2, name: 'Brad', user_name: 'kindBrad', email_address: 'brad@gmail.com' },
+    { id: 3, name: 'ChrisA', user_name: 'kindChirs', email_address: 'chrisa@gmail.com' },
+    { id: 4, name: 'ChrisW', user_name: 'kindChrisW', email_address: 'chrisw@gmail.com' },
+    { id: 5, name: 'Nirvan', user_name: 'kindNirvan', email_address: 'nirvan@gmail.com' }
   ]
 
   // useEffect(() => {
@@ -53,18 +53,18 @@ function App(props) {
 
   if (isAuthenticated) {
     console.log('user.email', user.email)
-    const hasEmail = backendData.filter(e => e.email == user.email)
+    const hasEmail = backendData.filter(e => e.email_address == user.email)
     // hasEmail.length > 0 ? console.log('hasEmail', hasEmail) : console.log('user does not exist')
 
     if (hasEmail.length > 0) {
       return (
         <>
-          {backendData.filter(e => e.email == user.email).map(ele => (
+          {backendData.filter(e => e.email_address == user.email).map(ele => (
             <div style={noteRootStyle}>
               <h3>{ele.name}</h3>
               <p>{ele.user_name}</p>
               <p>{ele.id}</p>
-              <small>{ele.email}</small>
+              <small>{ele.email_address}</small>
             </div>
           ))}
           <Logout />
