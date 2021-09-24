@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 // import { connect } from 'react-redux'
 import { useAuth0 } from '@auth0/auth0-react'
+
 import Profile from './Profile'
 import Login from './Login'
 import Logout from './Logout'
@@ -8,6 +9,27 @@ import Logout from './Logout'
 
 
 function App(props) {
+  useEffect(() => {
+    getAPI();
+  }, [])
+
+  const [loading, setLoading] = useState(false);
+  const [backendData, setData] = useState([]);
+
+  const getAPI = () => {
+    const API = 'http://localhost:3000/api/v1/users'
+
+    fetch(API)
+      .then((response) => {
+        return response.json();
+      })
+      .then((backendData) => {
+        console.log(backendData);
+        setLoading(true);
+        setData(backendData.data.users);
+      });
+  };
+
   const {
     user,
     isLoading,
@@ -24,17 +46,15 @@ function App(props) {
   };
 
   //mock the backend
-  const backendData = [
-    { id: 1, name: 'Kerry', user_name: 'kindKerry', email_address: 'pulsta@gmail.com' },
-    { id: 2, name: 'Brad', user_name: 'kindBrad', email_address: 'brad@gmail.com' },
-    { id: 3, name: 'ChrisA', user_name: 'kindChirs', email_address: 'chrisa@gmail.com' },
-    { id: 4, name: 'ChrisW', user_name: 'kindChrisW', email_address: 'chrisw@gmail.com' },
-    { id: 5, name: 'Nirvan', user_name: 'kindNirvan', email_address: 'nirvan@gmail.com' }
-  ]
+  // const backendData = [
+  //   { id: 1, name: 'Kerry', user_name: 'kindKerry', email_address: 'kerry@gmail.com' },
+  //   { id: 2, name: 'Brad', user_name: 'kindBrad', email_address: 'brad@gmail.com' },
+  //   { id: 3, name: 'ChrisA', user_name: 'kindChirs', email_address: 'chrisa@gmail.com' },
+  //   { id: 4, name: 'ChrisW', user_name: 'kindChrisW', email_address: 'chrisw@gmail.com' },
+  //   { id: 5, name: 'Nirvan', user_name: 'kindNirvan', email_address: 'nirvan@gmail.com' }
+  // ]
 
-  // useEffect(() => {
-  //   props.dispatch(())
-  // }, [])
+
 
   // return (
   //   <>
@@ -75,9 +95,9 @@ function App(props) {
 
       return (
         <>
-            <div style={noteRootStyle}>
-              <h3>User does not exist</h3>
-            </div>
+          <div style={noteRootStyle}>
+            <h3>User does not exist</h3>
+          </div>
           <Logout />
         </>
       )
