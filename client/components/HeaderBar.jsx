@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { Avatar, AppBar, makeStyles, Toolbar, Typography } from '@mui/material'
+import { Avatar, AppBar, Toolbar, Typography } from '@mui/material'
+import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => {
   return {
