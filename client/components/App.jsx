@@ -45,10 +45,10 @@ function App(props) {
   // )
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
   if (error) {
-    return <div>Oops... {error.message}</div>;
+    return <div>Oops... {error.message}</div>
   }
 
   if (isAuthenticated) {
@@ -112,7 +112,6 @@ function App(props) {
       <Login />
     )
   }
-
 }
 // const mapStateToProps = (globalState) => {
 //   return {
@@ -121,4 +120,3 @@ function App(props) {
 
 // export default connect(mapStateToProps)(App)
 export default App
-
