@@ -4,6 +4,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import Profile from './Profile'
 import Login from './Login'
 import Logout from './Logout'
+import Leaderboard from './LeaderBoard'
 
 function App (props) {
   const {
@@ -36,6 +37,7 @@ function App (props) {
       <>
         <Profile />
         <Logout />
+        <Leaderboard />
       </>
     )
   } else if (!isAuthenticated) {
