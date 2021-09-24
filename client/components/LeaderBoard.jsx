@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { getLeaderboard } from '../apis/api'
 
 function Leaderboard () {
-  const [users, setUsers] = useState([{user_name: '', points: 0 }])
+  const [users, setUsers] = useState([{ user_name: '', points: 0 }])
   useEffect(() => {
     getLeaderboard()
       .then(user => {

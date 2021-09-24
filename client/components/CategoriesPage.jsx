@@ -1,10 +1,9 @@
-import { Box, Grid, Toolbar } from "@material-ui/core"
-import React from "react"
-import CategoriesCards from "./CategoriesCards"
+import { Box, Grid, Toolbar, Button } from '@material-ui/core'
+import React from 'react'
+import CategoriesCards from './CategoriesCards'
 import HeaderBar from './HeaderBar'
-import { Button } from "@material-ui/core"
 
-export default function CategoriesPage() {
+export default function CategoriesPage () {
   return (
     <>
       <HeaderBar />
