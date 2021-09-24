@@ -4,6 +4,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import Profile from './Profile'
 import Login from './Login'
 import Logout from './Logout'
+import Leaderboard from './LeaderBoard'
 
 function App(props) {
   useEffect(() => {
@@ -50,36 +51,13 @@ function App(props) {
   }
 
   if (isAuthenticated) {
-    console.log('user.email', user.email)
-    const hasEmail = backendData.filter(e => e.email_address == user.email)
-
-    if (hasEmail.length > 0) {
-      return (
-        <>
-          {backendData.filter(e => e.email_address == user.email).map(ele => (
-            <div style={noteRootStyle}>
-              <h3>{ele.name}</h3>
-              <p>{ele.user_name}</p>
-              <p>{ele.id}</p>
-              <small>{ele.email_address}</small>
-            </div>
-          ))}
-          <Logout />
-        </>
-      )
-
-    } else {
-
-      return (
-        <>
-          <div style={noteRootStyle}>
-            <h3>User does not exist</h3>
-          </div>
-          <Logout />
-        </>
-      )
-    }
-   
+    return (
+      <>
+        <Profile />
+        <Logout />
+        <Leaderboard />
+      </>
+    )
   } else if (!isAuthenticated) {
     return (
       <Login />
