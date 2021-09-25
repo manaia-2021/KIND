@@ -1,5 +1,4 @@
 import React from 'react'
-import HeaderBar from './HeaderBar'
 import { Box, Button, Grid, makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => {
@@ -20,7 +19,6 @@ export default function LandingPage () {
   const classes = useStyles()
   return (
     <>
-      <HeaderBar />
       <Box>
         <Grid container spacing={1}>
           <Grid item xs={12} sm={12} md={6} lg={6}>

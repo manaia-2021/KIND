@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <Router>
       <Auth0ProviderWithHistory>
         <App />
-      </Auth0ProviderWithHistory>,
+      </Auth0ProviderWithHistory>
     </Router>,
     document.getElementById('app')
   )

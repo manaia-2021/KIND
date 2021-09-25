@@ -1,5 +1,6 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Route } from 'react-router-dom'
+
 import { useAuth0 } from '@auth0/auth0-react'
 
 import Loading from '../components/Loading'
@@ -18,13 +19,9 @@ function App () {
 
   return (
     <>
-      <HeaderBar />
-      <Switch>
-        <Router>
-          <Route exact path='/' component={LandingPage} />
-          <ProtectedRoute path='/profile' component={Profile} />
-        </Router>
-      </Switch>
+      <Route path='/' component={HeaderBar} />
+      <Route exact path='/' component={LandingPage} />
+      <ProtectedRoute path='/users' component={Profile} />
     </>
   )
 }
