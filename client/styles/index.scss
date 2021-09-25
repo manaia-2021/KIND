@@ -4,3 +4,15 @@ html,
 body {
   font-family: 'Montserrat', sans-serif;
 }
+
+.loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.loader img {
+  width: 400px;
+}

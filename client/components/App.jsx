@@ -9,6 +9,7 @@ import ProtectedRoute from '../auth/ProtectedRoute'
 
 import LandingPage from './LandingPage'
 import Profile from './Profile'
+import Auth from './Auth'
 
 function App () {
   const { isLoading } = useAuth0()
@@ -21,7 +22,7 @@ function App () {
     <>
       <Route path='/' component={HeaderBar} />
       <Route exact path='/' component={LandingPage} />
-      <ProtectedRoute path='/users' component={Profile} />
+      <ProtectedRoute path='/users' component={Auth} />
     </>
   )
 }

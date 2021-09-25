@@ -27,8 +27,8 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const { name, username } = req.body
-  db.addNewUser({ name, username })
+  const { name, username, email } = req.body
+  db.addNewUser({ name, username, email })
     .then((ids) => {
       res.status(201).json({ status: 'success', data: { id: ids[0] } })
       return null

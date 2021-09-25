@@ -4,6 +4,8 @@ import { useAuth0 } from '@auth0/auth0-react'
 // import Profile from './Profile'
 import Login from './Login'
 import Logout from './Logout'
+import SignUp from './SignUp'
+import Loading from '../components/Loading'
 
 function App (props) {
   useEffect(() => {
@@ -34,7 +36,6 @@ function App (props) {
   const {
     user,
     isLoading,
-    isAuthenticated,
     error
   } = useAuth0()
 
@@ -47,43 +48,38 @@ function App (props) {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <Loading />
   }
+
   if (error) {
     return <div>Oops... {error.message}</div>
   }
 
-  if (isAuthenticated) {
-    console.log('user.email', user.email)
-    const hasEmail = backendData.filter(e => e.email_address === user.email)
+  console.log('user.email', user.email)
+  const hasEmail = backendData.filter(e => e.email_address === user.email)
 
-    if (hasEmail.length > 0) {
-      return (
-        <>
-          {backendData.filter(e => e.email_address === user.email).map(ele => (
-            <div key={ele.email_address} style={noteRootStyle}>
-              <h3>{ele.name}</h3>
-              <p>{ele.user_name}</p>
-              <p>{ele.id}</p>
-              <small>{ele.email_address}</small>
-            </div>
-          ))}
-          <Logout />
-        </>
-      )
-    } else {
-      return (
-        <>
-          <div style={noteRootStyle}>
-            <h3>User does not exist</h3>
-          </div>
-          <Logout />
-        </>
-      )
-    }
-  } else if (!isAuthenticated) {
+  if (hasEmail.length > 0) {
     return (
-      <Login />
+      <>
+        {backendData.filter(e => e.email_address === user.email).map(ele => (
+          <div key={ele.email_address} style={noteRootStyle}>
+            <h3>{ele.name}</h3>
+            <p>{ele.user_name}</p>
+            <p>{ele.id}</p>
+            <small>{ele.email_address}</small>
+          </div>
+        ))}
+        <Logout />
+      </>
+    )
+  } else {
+    return (
+      <>
+        <div style={noteRootStyle}>
+          <h3>User does not exist</h3>
+        </div>
+        <SignUp />
+      </>
     )
   }
 }
