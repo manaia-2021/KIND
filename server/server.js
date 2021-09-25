@@ -13,9 +13,6 @@ const server = express()
 server.use(express.json())
 server.use(express.static(path.join(__dirname, 'public')))
 
-// handle random routes
-server.get('*', function (request, response) { response.sendFile(path.resolve(__dirname, 'public', 'index.html')) })
-
 // Auth0 Middleware.
 // When used, the Access Token must exist and be verified against
 // the Auth0 JSON Web Key Set
@@ -40,5 +37,8 @@ server.get('*', function (request, response) { response.sendFile(path.resolve(__
 server.use('/api/v1/categories', categoryRoutes)
 server.use('/api/v1/users', userRoutes)
 server.use('/api/v1/leaderboard', leaderboardRoutes)
+
+// handle random routes
+server.get('*', function (request, response) { response.sendFile(path.resolve(__dirname, 'public', 'index.html')) })
 
 module.exports = server
