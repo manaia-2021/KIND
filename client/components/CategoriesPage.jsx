@@ -8,6 +8,7 @@ import { getCategories, addNewUserActions } from '../apis/api'
 export default function CategoriesPage () {
   const [categories, setCategories] = useState([])
   const [checkedActions, setCheckedActions] = useState([])
+
   useEffect(() => {
     getCategories()
       .then(categories => {

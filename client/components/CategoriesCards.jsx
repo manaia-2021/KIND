@@ -14,7 +14,7 @@ import { red } from '@material-ui/core/colors'
 import { getCategoryActions } from '../apis/api'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import ListItems from './ListItems'
-import { Button, Modal } from '@material-ui/core'
+import { Backdrop, Button, Fade, Modal, DialogContent } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -98,16 +98,19 @@ export default function CategoriesCards (props) {
           aria-expanded={expanded}
           aria-label="show more"
         >
-          <ExpandMoreIcon />
+          {/* <ExpandMoreIcon /> */}
         </IconButton>
         <Button variant='outlined' onClick={handleOpen}>
-          OPEN MODEL
+          OPEN
         </Button>
         <Modal
           className={classes.modal}
           open={open}
-          onClose={handleClose}>
-          <ListItems/>
+          onClose={handleClose}
+        >
+          <>
+            <ListItems handleToggle={props.handleToggle} checked={props.checkedActions} actions={actions}/>
+          </>
         </Modal>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
