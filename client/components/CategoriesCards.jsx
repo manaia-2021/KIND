@@ -40,7 +40,8 @@ const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    // height: '300px'
   }
 }))
 
@@ -101,7 +102,7 @@ export default function CategoriesCards (props) {
           {/* <ExpandMoreIcon /> */}
         </IconButton>
         <Button variant='outlined' onClick={handleOpen}>
-          OPEN
+          SEE ACTIONS
         </Button>
         <Modal
           className={classes.modal}
