@@ -1,7 +1,7 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, useHistory } from 'react-router-dom'
 
-import { useAuth0 } from '@auth0/auth0-react'
+import { useAuth0, loginWithRedirect } from '@auth0/auth0-react'
 
 import Loading from '../components/Loading'
 import HeaderBar from '../components/HeaderBar'
@@ -13,7 +13,20 @@ import CheckUser from './CheckUser'
 import CategoriesPage from './CategoriesPage'
 
 function App () {
-  const { isLoading } = useAuth0()
+  const history = useHistory()
+  const { isLoading, isAuthenticated } = useAuth0()
+
+  React.useEffect(() => {
+    async function checkUser () {
+      if (isAuthenticated) {
+        history.push('/profile')
+      } else {
+        loginWithRedirect()
+      }
+    }
+
+    checkUser()
+  }, [isAuthenticated, loginWithRedirect])
 
   if (isLoading) {
     return <Loading />
