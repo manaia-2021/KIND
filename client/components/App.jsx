@@ -10,6 +10,7 @@ import ProtectedRoute from '../auth/ProtectedRoute'
 import LandingPage from './LandingPage'
 import Profile from './Profile'
 import CheckUser from './CheckUser'
+import CategoriesPage from './CategoriesPage'
 
 function App () {
   const { isLoading } = useAuth0()
@@ -22,6 +23,7 @@ function App () {
     <>
       <Route path='/' component={HeaderBar} />
       <Route exact path='/' component={LandingPage} />
+      <Route path='/categories' component={CategoriesPage} />
       <ProtectedRoute path='/users' component={CheckUser} />
       <ProtectedRoute path='/profile' component={Profile} />
     </>
