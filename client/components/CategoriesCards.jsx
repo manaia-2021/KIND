@@ -1,20 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import clsx from 'clsx'
-import Card from '@material-ui/core/Card'
-import CardHeader from '@material-ui/core/CardHeader'
-// import CardMedia from '@material-ui/core/CardMedia'
-import CardContent from '@material-ui/core/CardContent'
-import CardActions from '@material-ui/core/CardActions'
-import Collapse from '@material-ui/core/Collapse'
-import IconButton from '@material-ui/core/IconButton'
-import Typography from '@material-ui/core/Typography'
 import { red } from '@material-ui/core/colors'
-
 import { getCategoryActions } from '../apis/api'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import ListItems from './ListItems'
-import { Backdrop, Button, Fade, Modal, DialogContent } from '@material-ui/core'
+import { Button, Modal, Box, Collapse, Typography, CardContent, CardActions, CardHeader, Card, makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,13 +29,30 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    // height: '300px'
+  },
+  boxModal: {
+    maxHeight: '500px',
+    overflow: 'scroll',
+    overflowX: 'hidden',
+    '&::-webkit-scrollbar-track': {
+      webkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.3)',
+      backgroundColor: '#F5F5F5'
+    },
+    '&::-webkit-scrollbar': {
+      width: '5px',
+      backgroundColor: '#F5F5F5'
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: '#555',
+      borderRadius: '10px',
+      border: '2px solid #555555'
+    }
   }
 }))
 
 export default function CategoriesCards (props) {
   const classes = useStyles()
-  const [expanded, setExpanded] = useState(false)
+  // const [expanded, setExpanded] = useState(false)
 
   const [actions, setActions] = useState([])
 
@@ -72,9 +77,9 @@ export default function CategoriesCards (props) {
       })
   }, [])
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded)
-  }
+  // const handleExpandClick = () => {
+  //   setExpanded(!expanded)
+  // }
 
   return (
     <Card className={classes.root}>
@@ -91,7 +96,7 @@ export default function CategoriesCards (props) {
       </CardContent>
       <CardActions disableSpacing>
 
-        <IconButton
+        {/* <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded
           })}
@@ -99,8 +104,8 @@ export default function CategoriesCards (props) {
           aria-expanded={expanded}
           aria-label="show more"
         >
-          {/* <ExpandMoreIcon /> */}
-        </IconButton>
+          <ExpandMoreIcon />
+        </IconButton> */}
         <Button variant='outlined' onClick={handleOpen}>
           SEE ACTIONS
         </Button>
@@ -109,16 +114,16 @@ export default function CategoriesCards (props) {
           open={open}
           onClose={handleClose}
         >
-          <>
-            <ListItems handleToggle={props.handleToggle} checked={props.checkedActions} actions={actions}/>
-          </>
+          <Box className={classes.boxModal}>
+            <ListItems handleToggle={props.handleToggle} checked={props.checkedActions} actions={actions} />
+          </Box>
         </Modal>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <ListItems handleToggle={props.handleToggle} checked={props.checkedActions} actions={actions} />
         </CardContent>
-      </Collapse>
+      </Collapse> */}
     </Card>
   )
 }
