@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useCallback } from 'react'
+import { useHistory } from 'react-router-dom'
 
-import { Avatar, AppBar, makeStyles, Toolbar, Typography } from '@material-ui/core'
+import { Avatar, AppBar, Toolbar, Typography, makeStyles } from '@material-ui/core'
+import Authentication from './Authentication'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -20,12 +22,14 @@ const useStyles = makeStyles((theme) => {
 
 export default function HeaderBar () {
   const classes = useStyles()
+  const history = useHistory()
+  const handleOnClick = useCallback(() => history.push('/'), [history])
 
   return (
     <div>
       <div className={classes.root}>
         {/* app bar */}
-        <AppBar elevation={0}>
+        <AppBar elevation={0} onClick={handleOnClick}>
           <Toolbar>
 
             <Typography className={classes.title}>
@@ -34,7 +38,7 @@ export default function HeaderBar () {
 
             <Avatar className={classes.avatar} />
             <Typography>
-              (userName)
+              <Authentication />
             </Typography>
 
           </Toolbar>

@@ -2,6 +2,15 @@ import request from 'superagent'
 
 const rootUrl = '/api/v1'
 
+// get all users
+export const getUsers = () => {
+  return request
+    .get(`${rootUrl}/users`)
+    .then((res) => {
+      return res.body.data.users
+    })
+}
+
 export const createUser = (user) => {
   // user needs to be object containing name, email address, googleId
   return request.post(`${rootUrl}/users`).send(user)
