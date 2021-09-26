@@ -18,11 +18,12 @@ module.exports = {
 // Add a new user
 function addNewUser (user, db = connection) {
   const { name } = user
+  const { email } = user
   const randomUsername = generateUsername()
   const avatarUrl = getRandomAvatar()
 
   return db('users')
-    .insert({ name, user_name: randomUsername, avatar_url: avatarUrl })
+    .insert({ name, user_name: randomUsername, avatar_url: avatarUrl, email_address: email })
 }
 
 // Get all users
