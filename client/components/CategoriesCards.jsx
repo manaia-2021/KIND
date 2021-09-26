@@ -14,7 +14,7 @@ import { red } from '@material-ui/core/colors'
 import { getCategoryActions } from '../apis/api'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import ListItems from './ListItems'
-import { Button, Modal } from '@material-ui/core'
+import { Backdrop, Button, Fade, Modal } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -106,7 +106,8 @@ export default function CategoriesCards (props) {
         <Modal
           className={classes.modal}
           open={open}
-          onClose={handleClose}>
+          onClose={handleClose}
+        >
           <ListItems/>
         </Modal>
       </CardActions>

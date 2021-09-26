@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function ListItems () {
+export default function ListItems (props) {
   const classes = useStyles()
   const [checked, setChecked] = React.useState([])
 
