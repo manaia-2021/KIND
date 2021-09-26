@@ -82,9 +82,13 @@ function getUserActionByUser (id, db = connection) {
 }
 
 // Add new action to user
-function addNewUserActions (userId, actionId, db = connection) {
+function addNewUserActions (userId, actionIds, db = connection) {
+  const dataToInsert = actionIds.map(actionId => {
+    return { user_id: userId, action_id: actionId }
+  })
+
   return db('user_action')
-    .insert({ user_id: userId, action_id: actionId })
+    .insert(dataToInsert)
 }
 
 // Update user action
