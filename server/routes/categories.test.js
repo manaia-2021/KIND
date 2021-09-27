@@ -4,6 +4,8 @@ const { getAllCategories, getActionsByCategory } = require('../db/db')
 
 jest.mock('../db/db')
 
+beforeEach(() => jest.clearAllMocks())
+
 describe('GET /api/v1/categories', () => {
   test('returns status code of 200 and list of all categories in the database', () => {
     const categories = [{ id: 101, title: 'travel' }, { id: 102, title: 'energy' }]
