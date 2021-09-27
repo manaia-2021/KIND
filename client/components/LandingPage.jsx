@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Box, Button, Grid, makeStyles, Typography } from '@material-ui/core'
 import { teal } from '@material-ui/core/colors'
 
@@ -55,7 +56,7 @@ The term carbon footprint, therefore, is a shorthand to describe the best estima
         </Grid>
       </Box>
       <Box className={classes.button} display='flex' justifyContent='center'>
-        <Button variant='contained' href='/categories' className={classes.buttonColor}>
+        <Button component={Link} variant='contained' to='/categories' className={classes.buttonColor}>
           Start
         </Button>
       </Box>
