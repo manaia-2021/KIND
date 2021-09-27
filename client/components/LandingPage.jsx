@@ -1,5 +1,6 @@
 import React from 'react'
 import { Box, Button, Grid, makeStyles, Typography } from '@material-ui/core'
+import { teal } from '@material-ui/core/colors'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -7,10 +8,14 @@ const useStyles = makeStyles((theme) => {
       background: '#e8edea',
       marginTop: '80px',
       height: '700px',
-      border: '1px solid black'
+      border: '1px solid black',
+      backgroundColor: teal[100]
     },
     button: {
       marginTop: '20px'
+    },
+    buttonColor: {
+      backgroundColor: teal[200]
     }
   }
 })
@@ -50,7 +55,7 @@ The term carbon footprint, therefore, is a shorthand to describe the best estima
         </Grid>
       </Box>
       <Box className={classes.button} display='flex' justifyContent='center'>
-        <Button variant='contained' color='primary' href='/categories'>
+        <Button variant='contained' href='/categories' className={classes.buttonColor}>
           Start
         </Button>
       </Box>

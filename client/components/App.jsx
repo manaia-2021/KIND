@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, useHistory } from 'react-router-dom'
 
 import { useAuth0 } from '@auth0/auth0-react'
 
@@ -13,7 +13,18 @@ import CheckUser from './CheckUser'
 import CategoriesPage from './CategoriesPage'
 
 function App () {
-  const { isLoading } = useAuth0()
+  const history = useHistory()
+  const { isLoading, isAuthenticated } = useAuth0()
+
+  React.useEffect(() => {
+    async function checkUser () {
+      if (isAuthenticated) {
+        history.push('/profile')
+      }
+    }
+
+    checkUser()
+  }, [isAuthenticated])
 
   if (isLoading) {
     return <Loading />
