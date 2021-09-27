@@ -11,6 +11,7 @@ import LandingPage from './LandingPage'
 import Profile from './Profile'
 import CheckUser from './CheckUser'
 import CategoriesPage from './CategoriesPage'
+import UserDashboard from './UserDashboard'
 
 function App () {
   const { isLoading } = useAuth0()
@@ -24,6 +25,7 @@ function App () {
       <Route path='/' component={HeaderBar} />
       <Route exact path='/' component={LandingPage} />
       <Route path='/categories' component={CategoriesPage} />
+      <Route path='/userDashboard' component={UserDashboard} />
       <ProtectedRoute path='/users' component={CheckUser} />
       <ProtectedRoute path='/profile' component={Profile} />
     </>
