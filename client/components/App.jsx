@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, useHistory } from 'react-router-dom'
 
-import { useAuth0, loginWithRedirect } from '@auth0/auth0-react'
+import { useAuth0 } from '@auth0/auth0-react'
 
 import Loading from '../components/Loading'
 import HeaderBar from '../components/HeaderBar'
@@ -21,12 +21,12 @@ function App () {
       if (isAuthenticated) {
         history.push('/profile')
       } else {
-        loginWithRedirect()
+        history.push('/')
       }
     }
 
     checkUser()
-  }, [isAuthenticated, loginWithRedirect])
+  }, [isAuthenticated])
 
   if (isLoading) {
     return <Loading />
