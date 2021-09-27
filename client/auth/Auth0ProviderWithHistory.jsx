@@ -3,11 +3,11 @@ import { useHistory } from 'react-router-dom'
 import { Auth0Provider } from '@auth0/auth0-react'
 
 // required for auth0
-import config from '../../auth_config.json'
+// import config from '../../auth_config.json'
 
 const Auth0ProviderWithHistory = ({ children }) => {
-  const domain = config.domain
-  const clientId = config.clientId
+  const domain = process.env.REACT_APP_AUTH0_DOMAIN
+  const clientId = process.env.REACT_APP_AUTH0_CLIENTID
 
   const history = useHistory()
 
