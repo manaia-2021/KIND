@@ -39,6 +39,6 @@ server.use('/api/v1/users', userRoutes)
 server.use('/api/v1/leaderboard', leaderboardRoutes)
 
 // handle random routes
-// server.get('*', function (request, response) { response.sendFile(path.resolve(__dirname, 'public', 'index.html')) })
+server.get('*', function (request, response) { response.sendFile(path.resolve(__dirname, 'public', 'index.html')) })
 
 module.exports = server
