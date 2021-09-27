@@ -3,15 +3,17 @@ import React, { useEffect, useState } from 'react'
 import { getLeaderboard } from '../apis/api'
 
 function Leaderboard () {
-  const [users, setUsers] = useState([{ user_name: '', points: 0 }])
+  const [users, setUsers] = useState([{ user_name: '', points: 0 }]) // why not start with an empty array?
   useEffect(() => {
     getLeaderboard()
-      .then(user => {
+      .then(user => { //should probably be newUsers not user?
         setUsers(user)
         return null
       })
       .catch(() => { ' something went wrong' })
   }, [])
+
+  // remove commented out code
   // function rank (arr, f) {
   //   const sorted = arr.slice().sort(f)
   //   return arr.map(x => sorted.findIndex(s => f(x, s) === 0) + 1)

@@ -28,7 +28,7 @@ export default function HeaderBar () {
   return (
     <div>
       <div className={classes.root}>
-        {/* app bar */}
+        {/* app bar  - redundant comment? */}
         <AppBar elevation={0} onClick={handleOnClick}>
           <Toolbar>
 

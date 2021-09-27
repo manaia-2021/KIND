@@ -21,6 +21,7 @@ test('getAllUsers returns all users', () => {
 })
 
 test('addNewUser adds a new user', () => {
+  // this data implies that user_name will be saved when it is in fact auto generated - I would remove the user_name data from the user
   const user = { name: 'bob', user_name: 'kindBob' }
   return db.addNewUser(user, testDb)
     .then(() => {

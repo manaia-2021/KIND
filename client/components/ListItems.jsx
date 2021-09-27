@@ -41,6 +41,8 @@ class ListItems extends React.Component {
   }
 }
 
+// remove commented out code
+
 // const ListItems = ({ handleToggle, checked, actions }) => {
 //   const classes = useStyles()
 

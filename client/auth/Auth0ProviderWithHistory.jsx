@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { Auth0Provider } from '@auth0/auth0-react'
 
 // required for auth0
+// you should create an auth_config.sample.json with placeholders for sensitive data so devs new to this project can jump in easily
 import config from '../../auth_config.json'
 
 const Auth0ProviderWithHistory = ({ children }) => {

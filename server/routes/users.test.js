@@ -4,6 +4,9 @@ const { getAllUsers, getUser, addNewUser, deleteUser, getUserActionByUser, addNe
 
 jest.mock('../db/db')
 
+// when mocking functions always have the following to ensure your mocks are clean at the start of each test
+// beforeEach(() => jest.clearAllMocks())
+
 describe('GET /api/v1/users', () => {
   test('returns status code of 200 and list of all users in the database', () => {
     getAllUsers.mockImplementation(() =>
@@ -257,6 +260,8 @@ describe('PATCH /api/v1/users/1/actions', () => {
         expect(res.status).toBe(404)
         expect(res.body.status).toBe('error')
         expect(res.body.message).toBe('No user with that corresponding ID was found')
+        // I would also have the following to ensure that the update function was never called. Note you will need the beforeEach mentioned above for this to work properly
+      //  expect(updateUserAction).not.toHaveBeenCalled()
         return null
       })
   })

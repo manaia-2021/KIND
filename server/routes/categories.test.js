@@ -4,10 +4,13 @@ const { getAllCategories, getActionsByCategory } = require('../db/db')
 
 jest.mock('../db/db')
 
+// good coverage of happy and sad paths through the code
+
 describe('GET /api/v1/categories', () => {
   test('returns status code of 200 and list of all categories in the database', () => {
+    // I would use mockReturnValue instead as the implementation always returns the same thing
     getAllCategories.mockImplementation(() =>
-      Promise.resolve([{ id: 101, title: 'travel' }, { id: 102, title: 'energy' }])
+      Promise.resolve([{ id: 101, title: 'travel' }, { id: 102, title: 'energy' }]) // if you extract this array into a variable you can make it easier to reference on line 21
     )
 
     expect.assertions(4)

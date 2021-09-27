@@ -2,6 +2,7 @@ import request from 'superagent'
 
 const rootUrl = '/api/v1'
 
+// needs test
 // get all users
 export const getUsers = () => {
   return request
@@ -12,6 +13,7 @@ export const getUsers = () => {
 }
 
 export const createUser = (user) => {
+  // the below comment references a goolge id but the test doesn't - they should align with each other
   // user needs to be object containing name, email address, googleId
   return request.post(`${rootUrl}/users`).send(user)
     .then(res => {

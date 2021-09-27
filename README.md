@@ -1,3 +1,11 @@
+# JV Review
+- good start on the tests and nice work on keeping dev green
+- linting broken in dev, needs fixing
+- good test coverage for the files you tested, try running `npx jest --coverage` to see where it can be imprved
+- the status field in your api routes is redundant as it can be inferred from the status code of the response 
+- I would delete the store and reducers if you aren't using them - commented outu code should be avoided
+- Umm, anyone feel like testing components?
+
 # Fullstack boilerplate
 
 ## Getting Started

@@ -15,8 +15,12 @@ module.exports = {
   getUserActionByUser
 }
 
+// some of these comments seem redundant to me - e.g. "Add a new user" for a function titled addNewUser
+// if a function is well named it shouldn't need a comment to introduce it
+
 // Add a new user
 function addNewUser (user, db = connection) {
+  // what does the code do if name or email is not defined? I would add error checking and/or write a test to make your intentions clear
   const { name } = user
   const { email } = user
   const randomUsername = generateUsername()
@@ -39,6 +43,8 @@ function getUser (id, db = connection) {
     .where('id', id)
 }
 
+// this function is never tested
+//
 // Get users ordered by highest number of points for the leaderboard
 // return username and points
 function getUsersByPoints (db = connection) {
@@ -81,12 +87,15 @@ function getUserActionByUser (id, db = connection) {
     .where('user_id', id)
 }
 
+
+// needs testing
 // Add new action to user
 function addNewUserActions (userId, actionId, db = connection) {
   return db('user_action')
     .insert({ user_id: userId, action_id: actionId })
 }
 
+// needs testing
 // Update user action
 function updateUserAction (id, status, db = connection) {
   return db('user_action')

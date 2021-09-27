@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import { red } from '@material-ui/core/colors'
 
+// check your linting, a bunch of these imports are never used
 import { getCategoryActions } from '../apis/api'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import ListItems from './ListItems'
