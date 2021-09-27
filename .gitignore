@@ -7,3 +7,4 @@ server/public/styles.css
 server/public/styles.css.map
 auth_config.json
 tags
+.env

@@ -1,11 +1,12 @@
-import { Box, Grid, Toolbar, Button } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
+import { Box, Grid, Toolbar, Button } from '@material-ui/core'
 import CategoriesCards from './CategoriesCards'
 import HeaderBar from './HeaderBar'
 
 import { getCategories, addNewUserActions } from '../apis/api'
 
-export default function CategoriesPage () {
+const CategoriesPage = ({ user }) => {
   const [categories, setCategories] = useState([])
   const [checkedActions, setCheckedActions] = useState([])
 
@@ -34,10 +35,10 @@ export default function CategoriesPage () {
   }
 
   const handleButtonClick = () => {
-    const userId = 1
-    addNewUserActions(userId, checkedActions)
+    addNewUserActions(user.id, checkedActions)
+    alert('actions added successfully')
     setCheckedActions([])
-    // redirect to users dashboard page
+    // TODO redirect to users dashboard page
   }
 
   return (
@@ -67,3 +68,9 @@ export default function CategoriesPage () {
     </>
   )
 }
+
+const mapStateToProps = (state) => {
+  return { user: state.user }
+}
+
+export default connect(mapStateToProps)(CategoriesPage)
