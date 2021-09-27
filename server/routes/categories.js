@@ -16,6 +16,8 @@ router.get('/', (req, res) => {
 router.get('/:id/actions', (req, res) => {
   const { id } = req.params
 
+  if (!Number(id)) return res.status(400).json({ message: 'Invalid category Id in route parameter' })
+
   db.getActionsByCategory(Number(id))
     .then((actions) => {
       if (!actions.length) return res.status(404).json({ message: 'no category of that ID or no actions found' })
