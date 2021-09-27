@@ -1,5 +1,5 @@
 import nock from 'nock'
-import { addNewUserActions, createUser, deleteUser, getCategories, getCategoryActions, getLeaderboard, getUser, getUserActions, updateUserAction } from './api'
+import { addNewUserActions, createUser, deleteUser, getCategories, getCategoryActions, getLeaderboard, getUser, getUserByEmail, getUserActions, updateUserAction } from './api'
 
 describe('createUser', () => {
   test('send user to api/v1/users and return res.body', () => {
@@ -28,6 +28,22 @@ describe('getUser', () => {
 
     return getUser(1).then((user) => {
       expect(user.name).toBe('test name')
+      expect(scope.isDone()).toBeTruthy()
+      return null
+    })
+  })
+})
+
+describe('getUserByEmail', () => {
+  test('get request to api/v1/users/email/email@address.com and return res.body', () => {
+    expect.assertions(2)
+
+    const scope = nock('http://localhost:80')
+      .get('/api/v1/users/email/email@address.com')
+      .reply(200, { status: 'success', data: { user: { name: 'test name', user_name: 'test1', avatar_url: '/images/avatar.jpg', points: 500, email_address: 'email@address.com' } } })
+
+    return getUserByEmail('email@address.com').then((user) => {
+      expect(user.email_address).toBe('email@address.com')
       expect(scope.isDone()).toBeTruthy()
       return null
     })
