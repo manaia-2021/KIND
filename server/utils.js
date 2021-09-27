@@ -1,7 +1,6 @@
 module.exports = {
   generateUsername,
   getRandomAvatar
-
 }
 
 // returns a randomly generated username
