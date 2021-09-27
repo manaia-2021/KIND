@@ -1,8 +1,30 @@
 import React, { useEffect, useState } from 'react'
+import { makeStyles, Card, CardHeader, Avatar, Box, Button, Typography } from '@material-ui/core'
+import { teal } from '@material-ui/core/colors'
 
 import { getLeaderboard } from '../apis/api'
 
+const useStyles = makeStyles((theme) => ({
+  page: {
+    // background: '#e8edea',
+    marginTop: '80px',
+    height: '700px'
+    // backgroundColor: teal[100]
+  },
+  title: {
+    flexGrow: 1,
+    fontSize: 50
+  },
+  root: {
+    maxWidth: 345
+  },
+  avatar: {
+    backgroundColor: '#26a69a'
+  }
+}))
+
 function Leaderboard () {
+  const classes = useStyles()
   const [users, setUsers] = useState([{ user_name: '', points: 0 }])
   useEffect(() => {
     getLeaderboard()
@@ -21,7 +43,30 @@ function Leaderboard () {
   return (
 
     <>
-      <div className='leaderboard'>
+      <Box className={classes.page}>
+        <Typography className={classes.title}>
+          Leaderboard
+        </Typography>
+        {users.map((user, index) => {
+          return (
+            <>
+              <Card key={index} className={classes.root}>
+                <CardHeader
+                  avatar={
+                    <Avatar aria-label="user" className={classes.avatar}>
+                      {user.points}
+                    </Avatar>
+                  }
+                  title={user.user_name}
+                />
+              </Card>
+              {/* Fake button to add spacing */}
+              <Button disabled={true}></Button>
+            </>
+          )
+        })}
+      </Box>
+      {/* <div className='leaderboard'>
         <table>
           <thead>
             <tr>
@@ -40,7 +85,7 @@ function Leaderboard () {
             })}
           </tbody>
         </table>
-      </div>
+      </div> */}
     </>
 
   )
