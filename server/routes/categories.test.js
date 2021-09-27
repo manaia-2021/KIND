@@ -10,12 +10,11 @@ describe('GET /api/v1/categories', () => {
       Promise.resolve([{ id: 101, title: 'travel' }, { id: 102, title: 'energy' }])
     )
 
-    expect.assertions(4)
+    expect.assertions(3)
     return request(server)
       .get('/api/v1/categories')
       .then((res) => {
         expect(res.status).toBe(200)
-        expect(res.body.status).toBe('success')
         expect(res.body.data.categories).toHaveLength(2)
         expect(res.body.data).toEqual({ categories: [{ id: 101, title: 'travel' }, { id: 102, title: 'energy' }] })
         return null
@@ -25,12 +24,11 @@ describe('GET /api/v1/categories', () => {
   test('returns status code of 500 on error with appropriate error message', () => {
     getAllCategories.mockImplementation(() => Promise.reject(new Error('not working')))
 
-    expect.assertions(3)
+    expect.assertions(2)
     return request(server)
       .get('/api/v1/categories')
       .then(res => {
         expect(res.status).toBe(500)
-        expect(res.body.status).toBe('error')
         expect(res.body.message).toBe('Backend server error')
         return null
       })
@@ -44,12 +42,11 @@ describe('GET /api/v1/categories/101/actions', () => {
         { id: 2, category_id: 101, title: 'travel', description: 'Telecommute to work', points: 20 }])
     )
 
-    expect.assertions(4)
+    expect.assertions(3)
     return request(server)
       .get('/api/v1/categories/101/actions')
       .then((res) => {
         expect(res.status).toBe(200)
-        expect(res.body.status).toBe('success')
         expect(res.body.data.actions).toHaveLength(2)
         expect(res.body.data.actions[0]).toEqual({ id: 1, category_id: 101, title: 'travel', description: 'Purchase electric vehicle', points: 100 })
         return null
@@ -61,12 +58,11 @@ describe('GET /api/v1/categories/101/actions', () => {
       Promise.resolve([])
     )
 
-    expect.assertions(2)
+    expect.assertions(1)
     return request(server)
       .get('/api/v1/categories/999/actions')
       .then((res) => {
         expect(res.status).toBe(404)
-        expect(res.body.status).toBe('error')
         return null
       })
   })
@@ -74,12 +70,11 @@ describe('GET /api/v1/categories/101/actions', () => {
   test('returns status code of 500 on error with appropriate error message', () => {
     getActionsByCategory.mockImplementation(() => Promise.reject(new Error('not working')))
 
-    expect.assertions(3)
+    expect.assertions(2)
     return request(server)
       .get('/api/v1/categories/101/actions')
       .then(res => {
         expect(res.status).toBe(500)
-        expect(res.body.status).toBe('error')
         expect(res.body.message).toBe('Backend server error')
         return null
       })
