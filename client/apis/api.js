@@ -27,6 +27,15 @@ export const getUser = (userId) => {
     })
 }
 
+// get the user by email address
+export const getUserByEmail = (userEmail) => {
+  return request
+    .get(`${rootUrl}/users/email/${userEmail}`)
+    .then(res => {
+      return res.body.data.user
+    })
+}
+
 // get current actions of user - also send auth token
 export const getUserActions = (userId) => {
   return request

@@ -44,8 +44,10 @@ export default function CheckUser (props) {
   const userExists = users.filter(e => e.email_address === user.email)
 
   if (userExists.length > 0) {
+    console.log('user exists')
     // user exists, redirect to the categories page
   } else {
+    console.log('user does not exist')
     // create new user, redirect to the categories page
     // setNewUser({ name: user.name, username: user.nickname, email: user.email })
   }

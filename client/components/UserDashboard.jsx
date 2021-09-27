@@ -61,7 +61,9 @@ function UserDashboard () {
             </form>
           </div>
         </div>
+        <div className="deleteUser">
 
+        </div>
       </div>
     </>
   )

@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
 import { Route } from 'react-router-dom'
-
 import { useAuth0 } from '@auth0/auth0-react'
-
-import Loading from '../components/Loading'
+// import { useAuth0 } from '@auth0/auth0-react'
 import HeaderBar from '../components/HeaderBar'
 import ProtectedRoute from '../auth/ProtectedRoute'
 
@@ -13,12 +12,16 @@ import CheckUser from './CheckUser'
 import CategoriesPage from './CategoriesPage'
 import UserDashboard from './UserDashboard'
 
-function App () {
-  const { isLoading } = useAuth0()
+import { fetchUserProfile } from '../actions/user'
 
-  if (isLoading) {
-    return <Loading />
-  }
+function App (props) {
+  const { user } = useAuth0()
+
+  useEffect(() => {
+    if (user?.email) {
+      props.dispatch(fetchUserProfile(user?.email))
+    }
+  }, [user?.email])
 
   return (
     <>
@@ -32,4 +35,4 @@ function App () {
   )
 }
 
-export default App
+export default connect()(App)

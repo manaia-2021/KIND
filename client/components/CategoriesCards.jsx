@@ -1,20 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import clsx from 'clsx'
-import Card from '@material-ui/core/Card'
-import CardHeader from '@material-ui/core/CardHeader'
-// import CardMedia from '@material-ui/core/CardMedia'
-import CardContent from '@material-ui/core/CardContent'
-import CardActions from '@material-ui/core/CardActions'
-import Collapse from '@material-ui/core/Collapse'
-import IconButton from '@material-ui/core/IconButton'
-import Typography from '@material-ui/core/Typography'
 import { red } from '@material-ui/core/colors'
-
 import { getCategoryActions } from '../apis/api'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import ListItems from './ListItems'
-import { Button, Modal } from '@material-ui/core'
+import { Button, Modal, Box, Typography, CardContent, CardActions, CardHeader, Card, makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,12 +29,29 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  boxModal: {
+    maxHeight: '500px',
+    overflow: 'scroll',
+    overflowX: 'hidden',
+    '&::-webkit-scrollbar-track': {
+      webkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.3)',
+      backgroundColor: '#F5F5F5'
+    },
+    '&::-webkit-scrollbar': {
+      width: '5px',
+      backgroundColor: '#F5F5F5'
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: '#555',
+      borderRadius: '10px',
+      border: '2px solid #555555'
+    }
   }
 }))
 
 export default function CategoriesCards (props) {
   const classes = useStyles()
-  const [expanded, setExpanded] = useState(false)
 
   const [actions, setActions] = useState([])
 
@@ -71,10 +76,6 @@ export default function CategoriesCards (props) {
       })
   }, [])
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded)
-  }
-
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -90,31 +91,19 @@ export default function CategoriesCards (props) {
       </CardContent>
       <CardActions disableSpacing>
 
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
         <Button variant='outlined' onClick={handleOpen}>
-          OPEN MODEL
+          SEE ACTIONS
         </Button>
         <Modal
           className={classes.modal}
           open={open}
-          onClose={handleClose}>
-          <ListItems/>
+          onClose={handleClose}
+        >
+          <Box className={classes.boxModal}>
+            <ListItems handleToggle={props.handleToggle} checked={props.checkedActions} actions={actions} />
+          </Box>
         </Modal>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <ListItems handleToggle={props.handleToggle} checked={props.checkedActions} actions={actions} />
-        </CardContent>
-      </Collapse>
     </Card>
   )
 }

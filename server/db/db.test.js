@@ -48,6 +48,13 @@ test('getUser returns the right user', () => {
     })
 })
 
+test('getUserByEmail returns the right user', () => {
+  return db.getUserByEmail('email@address.com', testDb)
+    .then(user => {
+      expect(user.email_address).toBe('email@address.com')
+    })
+})
+
 test('getAllCategories returns all categories', () => {
   return db.getAllCategories(testDb)
     .then(categories => {
