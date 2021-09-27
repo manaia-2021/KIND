@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { red } from '@material-ui/core/colors'
 import { getCategoryActions } from '../apis/api'
 import ListItems from './ListItems'
-import { Button, Modal, Box, Collapse, Typography, CardContent, CardActions, CardHeader, Card, makeStyles } from '@material-ui/core'
+import { Button, Modal, Box, Typography, CardContent, CardActions, CardHeader, Card, makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   boxModal: {
     maxHeight: '500px',
@@ -52,7 +52,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CategoriesCards (props) {
   const classes = useStyles()
-  // const [expanded, setExpanded] = useState(false)
 
   const [actions, setActions] = useState([])
 
@@ -77,10 +76,6 @@ export default function CategoriesCards (props) {
       })
   }, [])
 
-  // const handleExpandClick = () => {
-  //   setExpanded(!expanded)
-  // }
-
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -96,16 +91,6 @@ export default function CategoriesCards (props) {
       </CardContent>
       <CardActions disableSpacing>
 
-        {/* <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton> */}
         <Button variant='outlined' onClick={handleOpen}>
           SEE ACTIONS
         </Button>
@@ -119,11 +104,6 @@ export default function CategoriesCards (props) {
           </Box>
         </Modal>
       </CardActions>
-      {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <ListItems handleToggle={props.handleToggle} checked={props.checkedActions} actions={actions} />
-        </CardContent>
-      </Collapse> */}
     </Card>
   )
 }
