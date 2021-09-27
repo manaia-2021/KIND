@@ -30,23 +30,23 @@ export default function HeaderBar () {
   const handleOnClick = useCallback(() => history.push('/'), [history])
 
   return (
-    <div>
+    <>
       <div className={classes.root}>
-        <AppBar elevation={0} onClick={handleOnClick} className={classes.background}>
+        <AppBar elevation={0} className={classes.background}>
           <Toolbar>
 
-            <Typography className={classes.title}>
+            <Typography onClick={handleOnClick} className={classes.title}>
               KIND
             </Typography>
 
-            <Avatar className={classes.avatar} />
-            <Typography>
+            {/* <Avatar className={classes.avatar} /> */}
+            <Typography component={'span'} >
               <Authentication />
             </Typography>
 
           </Toolbar>
         </AppBar>
       </div >
-    </div>
+    </>
   )
 }
