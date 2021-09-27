@@ -46,20 +46,18 @@ export default function HeaderBar () {
             <Typography onClick={handleOnClick} className={classes.title}>
               KIND
             </Typography>
-
-            {/* <Avatar className={classes.avatar} /> */}
             <Typography>
               <Button variant='contained' onClick={handleButtonClick} className={classes.buttonColor}>
                 Leaderboard
               </Button>
             </Typography>
             <Typography>
+              {/* Fake button to add spacing */}
               <Button disabled={true}></Button>
             </Typography>
             <Typography component={'span'} >
               <Authentication />
             </Typography>
-
           </Toolbar>
         </AppBar>
       </div >
