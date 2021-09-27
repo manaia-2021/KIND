@@ -26,6 +26,19 @@ router.get('/:id', (req, res) => {
     })
 })
 
+router.get('/email/:email', (req, res) => {
+  const { email } = req.params
+
+  db.getUserByEmail(email)
+    .then((user) => {
+      if (!user) return res.status(404).json({ message: 'No user with that email address was found' })
+      return res.status(200).json({ data: { user: user } })
+    })
+    .catch(() => {
+      res.status(500).json({ message: 'Backend server error' })
+    })
+})
+
 router.post('/', (req, res) => {
   const { name, username, email } = req.body
   db.addNewUser({ name, username, email })
