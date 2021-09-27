@@ -2,6 +2,7 @@ import React, { useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { Avatar, AppBar, Toolbar, Typography, makeStyles } from '@material-ui/core'
+import { green, teal } from '@material-ui/core/colors'
 import Authentication from './Authentication'
 
 const useStyles = makeStyles((theme) => {
@@ -16,6 +17,9 @@ const useStyles = makeStyles((theme) => {
     },
     avatar: {
       marginRight: theme.spacing(2)
+    },
+    background: {
+      backgroundColor: teal[400]
     }
   }
 })
@@ -29,7 +33,7 @@ export default function HeaderBar () {
     <div>
       <div className={classes.root}>
         {/* app bar */}
-        <AppBar elevation={0} onClick={handleOnClick}>
+        <AppBar elevation={0} onClick={handleOnClick} className={classes.background}>
           <Toolbar>
 
             <Typography className={classes.title}>
