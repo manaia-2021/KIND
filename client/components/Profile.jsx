@@ -1,24 +1,10 @@
-import React, { useEffect } from 'react'
-// import { connect } from 'react-redux'
+import React from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
 
 import Loading from './Loading'
 
-// import { getUserByEmail } from '../apis/api'
-// import { fetchUserProfile } from '../actions/user'
-
 const Profile = (props) => {
   const { user, isAuthenticated, isLoading } = useAuth0()
-
-  // useEffect(() => {
-  // props.dispatch(fetchUserProfile(user.email))
-  // const getUserProfile = async () => {
-  //   const userProfile = await getUserByEmail(user.email)
-  //   console.log(userProfile)
-  // }
-
-  // getUserProfile()
-  // }, [user?.email])
 
   if (isLoading) {
     return <Loading />
