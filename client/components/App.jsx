@@ -20,8 +20,6 @@ function App () {
     async function checkUser () {
       if (isAuthenticated) {
         history.push('/profile')
-      } else {
-        history.push('/')
       }
     }
 
