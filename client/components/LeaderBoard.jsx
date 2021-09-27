@@ -6,7 +6,7 @@ function Leaderboard () {
   const [users, setUsers] = useState([{ user_name: '', points: 0 }]) // why not start with an empty array?
   useEffect(() => {
     getLeaderboard()
-      .then(user => { //should probably be newUsers not user?
+      .then(user => { // should probably be newUsers not user?
         setUsers(user)
         return null
       })

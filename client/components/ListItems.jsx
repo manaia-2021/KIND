@@ -23,8 +23,8 @@ class ListItems extends React.Component {
         {actions.map((action) => {
           const labelId = `checkbox-list-secondary-label-${action.id}`
           return (
-            <ListItem key={`action ${action.id}`} button>
-              <ListItemText id={labelId} primary={action.description} />
+            <ListItem key={`action ${action.id}`} button onClick={handleToggle(action.id)}>
+              <ListItemText id={labelId} primary={action.description} secondary={`+${action.points} Points`} />
               <ListItemSecondaryAction>
                 <Checkbox
                   edge="end"

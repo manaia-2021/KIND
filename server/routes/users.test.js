@@ -261,7 +261,7 @@ describe('PATCH /api/v1/users/1/actions', () => {
         expect(res.body.status).toBe('error')
         expect(res.body.message).toBe('No user with that corresponding ID was found')
         // I would also have the following to ensure that the update function was never called. Note you will need the beforeEach mentioned above for this to work properly
-      //  expect(updateUserAction).not.toHaveBeenCalled()
+        //  expect(updateUserAction).not.toHaveBeenCalled()
         return null
       })
   })
