@@ -1,9 +1,10 @@
 import React, { useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 
-import { Avatar, AppBar, Toolbar, Typography, makeStyles } from '@material-ui/core'
+import { Avatar, AppBar, Toolbar, Typography, makeStyles, Button } from '@material-ui/core'
 import { teal } from '@material-ui/core/colors'
 import Authentication from './Authentication'
+import Leaderboard from './LeaderBoard'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -18,6 +19,12 @@ const useStyles = makeStyles((theme) => {
     avatar: {
       marginRight: theme.spacing(2)
     },
+    button: {
+      marginTop: '20px'
+    },
+    buttonColor: {
+      backgroundColor: teal[200]
+    },
     background: {
       backgroundColor: teal[400]
     }
@@ -28,6 +35,7 @@ export default function HeaderBar () {
   const classes = useStyles()
   const history = useHistory()
   const handleOnClick = useCallback(() => history.push('/'), [history])
+  const handleButtonClick = useCallback(() => history.push('/leaderboard'), [history])
 
   return (
     <>
@@ -40,6 +48,14 @@ export default function HeaderBar () {
             </Typography>
 
             {/* <Avatar className={classes.avatar} /> */}
+            <Typography>
+              <Button variant='contained' onClick={handleButtonClick} className={classes.buttonColor}>
+                Leaderboard
+              </Button>
+            </Typography>
+            <Typography>
+              <Button disabled={true}></Button>
+            </Typography>
             <Typography component={'span'} >
               <Authentication />
             </Typography>
