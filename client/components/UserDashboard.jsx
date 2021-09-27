@@ -19,49 +19,50 @@ function UserDashboard () {
 
   return (
     <>
+      <div className="profileboard">
 
-      <div className="dashboard">
-        <div> <UserActions /></div>
-        <div>
-          <form >
-            <figure />
-            <img className="avatar" src={user.avatar_url}/>
-            <div className="">
-              <label className="">Points</label>
+        <UserActions />
+        <div className="dashboard">
+          <div>
+            <form >
+              <figure />
+              <img className="avatar" src={user.avatar_url}/>
               <div className="">
-                <button className="">{user.points}</button>
+                <label className="">Points</label>
+                <div className="">
+                  <button className="">{user.points}</button>
+                </div>
               </div>
-            </div>
-            <div className="">
-              <label className="">Name</label>
               <div className="">
-                <input class_name="" name="name" placeholder={user.name} />
+                <label className="">Name</label>
+                <div className="">
+                  <input class_name="" name="name" placeholder={user.name} />
+                </div>
               </div>
-            </div>
-            <div className="">
-              <label className="">User Name</label>
               <div className="">
-                <input class_name="" name ="user_name" placeholder={user.user_name} />
+                <label className="">User Name</label>
+                <div className="">
+                  <input class_name="" name ="user_name" placeholder={user.user_name} />
+                </div>
               </div>
-            </div>
-            <div className="">
-              <label className="">Email</label>
               <div className="">
-                <input class_name="" name ="email_address" placeholder={user.email_address} />
+                <label className="">Email</label>
+                <div className="">
+                  <input class_name="" name ="email_address" placeholder={user.email_address} />
+                </div>
               </div>
-            </div>
-            <div className="">
-              <label className="">Password</label>
               <div className="">
-                <input className="" name ="password" placeholder="******" />
+                <label className="">Password</label>
+                <div className="">
+                  <input className="" name ="password" placeholder="******" />
+                </div>
               </div>
-            </div>
-            <button className="" >Save</button>
-          </form>
+              <button className="" >Save</button>
+            </form>
+          </div>
         </div>
 
       </div>
-
     </>
   )
 }

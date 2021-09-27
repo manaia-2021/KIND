@@ -16,15 +16,23 @@ body {
 .loader img {
   width: 400px;
 }
-.dashboard  {
 
-  margin-top: 80px;
-  margin-left: 20%;
+.profileboard {
+  display: flex;
+  
+
+}
+.dashboard  {
+  margin-top: 90px;
+  margin-left: 10%;
   width: 400px;
   justify-content: center
- }
+  
+  
+ } 
  .userAction {
-  margin-left: 60%;
+  margin-left: 25%;
+  margin-top: 100px;
   width: 400px;
   justify-content: center
  }
