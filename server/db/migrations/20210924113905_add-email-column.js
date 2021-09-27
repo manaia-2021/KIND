@@ -1,6 +1,6 @@
 exports.up = function (knex) {
   return knex.schema.table('users', table => {
-    table.string('email_address')
+    table.string('email_address').unique()
   })
 }
 
