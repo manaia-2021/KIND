@@ -26,8 +26,6 @@ const Authentication = () => {
     setOpen(false)
   }
 
-  const handleButtonClick = useCallback(() => history.push('/profile'), [history])
-
   if (isAuthenticated) {
     return (
       <>
@@ -37,7 +35,7 @@ const Authentication = () => {
           <DialogContent>
             <form >
               <FormControl style={{ align: 'centre', width: '100%' }}>
-                <Button onClick={handleButtonClick} ><PersonIcon />&nbsp;&nbsp;&nbsp;Profile</Button>
+                <Button href='/profile' ><PersonIcon />&nbsp;&nbsp;&nbsp;Profile</Button>
                 {/* Fake button to add spacing */}
                 <Button disabled={true}></Button>
                 <Button onClick={() => logout({ returnTo: window.location.origin }) }><PowerSettingsNewIcon />&nbsp;&nbsp;&nbsp;Logout</Button>
