@@ -10,17 +10,17 @@ export const getUsers = () => {
     })
 }
 
-export const createUser = ({ name, email }) => {
-  return request.post(`${rootUrl}/users`).send({ name, email })
-    .then(res => {
-      return res.body.data.id
-    })
-}
+// export const createUser = ({ name, email }) => {
+//   return request.post(`${rootUrl}/users`).send({ name, email })
+//     .then(res => {
+//       return res.body.data.id
+//     })
+// }
 
 export const findOrCreateUser = ({ name, email }) => {
-  return request.post(`${rootUrl}/users`).send({ name, email })
+  return request.put(`${rootUrl}/users`).send({ name, email })
     .then(res => {
-      return res.body.data.id
+      return res.body.data.user
     })
 }
 
