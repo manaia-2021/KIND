@@ -3,6 +3,7 @@ import { red } from '@material-ui/core/colors'
 import { getCategoryActions } from '../apis/api'
 import ListItems from './ListItems'
 import { Button, Modal, Box, Typography, CardContent, CardActions, CardHeader, Card, makeStyles } from '@material-ui/core'
+import CardMedia from '@material-ui/core/CardMedia'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -78,6 +79,11 @@ export default function CategoriesCards (props) {
 
   return (
     <Card className={classes.root}>
+      <CardMedia
+        className={classes.media}
+        image="/images/energy.png"
+        title="energy"
+      />
       <CardHeader
 
         title={props.title}
