@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { makeStyles, withStyles, Grid, Card, CardHeader, Avatar, Box, Typography, LinearProgress } from '@material-ui/core'
+import { makeStyles, withStyles, Card, CardHeader, Avatar, Box, Typography, LinearProgress } from '@material-ui/core'
 
 import { getLeaderboard } from '../apis/api'
 
