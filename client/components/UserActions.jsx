@@ -81,10 +81,9 @@ function UserActions ({ user }) {
           </tbody>
         </table>
         <div className="points">
-          <label className=""> <h1> Total Points </h1></label>
-          <div className="">
-            <div> <h1>{totalPoints}</h1> </div>
-          </div>
+          <label>
+            <h1> Total Points: {totalPoints} </h1>
+          </label>
         </div>
 
       </div>
