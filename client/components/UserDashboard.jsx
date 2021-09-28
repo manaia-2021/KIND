@@ -30,7 +30,6 @@ function UserDashboard (props) {
       .catch((error) => { console.log(error) })
   }
 
-  console.log("USERNAME", props.user.user_name)
   const classes = useStyles()
 
   return (
