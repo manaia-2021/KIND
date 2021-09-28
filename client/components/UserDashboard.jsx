@@ -2,7 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import UserActions from './UserActions'
 
-import { deleteUser } from '../apis/api'
+import { deleteUser, getUser } from '../apis/api'
+import { Avatar, Button, makeStyles, TextField } from '@material-ui/core'
+
+const useStyles = makeStyles((theme) => ({
+  fields: {
+    margin: theme.spacing(0),
+    marginTop: '10px'
+  }
+}))
 
 function UserDashboard (props) {
   function handleDeleteUser () {
@@ -14,52 +22,49 @@ function UserDashboard (props) {
       .catch((error) => { console.log(error) })
   }
 
+  const [user, setUser] = useState([])
+
+  useEffect(() => {
+    getUser(props.id)
+      .then(user => {
+        setUser(user)
+        return null
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
+
+  const classes = useStyles()
+
   return (
     <>
       <div className="profileboard">
-
         <UserActions />
         <div className="dashboard">
+          <form>
+            <Avatar alt='avatar picture' src={props.user.avatar_url}/>
+            <TextField id='outlined' label='Name' variant='outlined' className={classes.fields}>
+              {user.user}
+            </TextField>
+            <TextField id='outlined' label='Username' variant='outlined' className={classes.fields}>
+              {user.userName}
+            </TextField>
+            <TextField id='outlined' label='Email' variant='outlined' className={classes.fields}>
+              {user.emailAddress}
+            </TextField>
+            <TextField id='outlined' label='Password' variant='outlined' className={classes.fields}>
+              {user.password}
+            </TextField>
+          </form>
           <div>
-            <form >
-              <figure />
-              <img className="avatar" src={props.user.avatar_url}/>
-              <div className="">
-                <label className=""></label>
-                <div className="">
-                </div>
-              </div>
-              <div className="name">
-                <label className="">Name</label>
-                <div className="">
-                  <input class_name="" name="name" placeholder={props.user.name} />
-                </div>
-              </div>
-              <div className="">
-                <label className="">User Name</label>
-                <div className="">
-                  <input class_name="" name ="user_name" placeholder={props.user.user_name} />
-                </div>
-              </div>
-              <div className="">
-                <label className="">Email</label>
-                <div className="">
-                  <input class_name="" name ="email_address" placeholder={props.user.email_address} />
-                </div>
-              </div>
-              <div className="">
-                <label className="">Password</label>
-                <div className="">
-                  <input className="" name ="password" placeholder="******" />
-                </div>
-              </div>
-              <button className="" >Save</button>
-            </form>
+            <Button variant='contained' className={classes.fields}> Save </Button>
+          </div>
+          <div>
+            <Button variant='contained' color='secondary' className={classes.fields} onClick={handleDeleteUser}> Delete my account
+            </Button>
           </div>
         </div>
-      </div>
-      <div className="deleteUser">
-        <button className="deleteButton" onClick={handleDeleteUser}>Delete my account</button>
       </div>
     </>
   )
