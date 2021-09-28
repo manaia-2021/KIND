@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import UserActions from './UserActions'
 
-import { deleteUser, getUser } from '../apis/api'
+import { deleteUser } from '../apis/api'
 import { Avatar, Button, makeStyles, TextField } from '@material-ui/core'
 import { teal } from '@material-ui/core/colors'
 
@@ -14,6 +14,14 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 function UserDashboard (props) {
+  const [form, setForm] = useState({ name: '', username: '', email: '' })
+
+  useEffect(() => {
+    if (props.user.name) {
+      setForm({ name: props.user.name, username: props.user.user_name, email: props.user.email_address })
+    }
+  }, [props.user])
+
   function handleDeleteUser () {
     deleteUser(props.user.id)
       .then(() => {
@@ -22,19 +30,6 @@ function UserDashboard (props) {
       })
       .catch((error) => { console.log(error) })
   }
-
-  const [user, setUser] = useState([])
-
-  useEffect(() => {
-    getUser(props.id)
-      .then(user => {
-        setUser(user)
-        return null
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }, [])
 
   const classes = useStyles()
 
@@ -45,18 +40,9 @@ function UserDashboard (props) {
         <div className="dashboard">
           <form>
             <Avatar alt='avatar picture' src={props.user.avatar_url}/>
-            <TextField label='Name' variant='outlined' className={classes.fields}>
-              {user.user}
-            </TextField>
-            <TextField label='Username' variant='outlined' className={classes.fields}>
-              {user.userName}
-            </TextField>
-            <TextField label='Email' variant='outlined' className={classes.fields}>
-              {user.emailAddress}
-            </TextField>
-            <TextField label='Password' variant='outlined' className={classes.fields}>
-              {user.password}
-            </TextField>
+            <TextField label='Name' variant='outlined' className={classes.fields} value={form.name} />
+            <TextField label="username" value={form.username} variant='outlined' className={classes.fields} />
+            <TextField label='Email' variant='outlined' className={classes.fields} value={form.email} disabled />
           </form>
           <div>
             <Button variant='contained' style={{ backgroundColor: teal[400], color: '#FFFFFF' }} className={classes.fields}> Save </Button>
