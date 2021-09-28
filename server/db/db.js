@@ -13,7 +13,8 @@ module.exports = {
   addNewUserActions,
   addNewUser,
   getActionsByCategory,
-  getUserActionByUser
+  getUserActionByUser,
+  updateUserPoints
 }
 
 // Add a new user
@@ -51,7 +52,7 @@ function getUserByEmail (email, db = connection) {
 // return username and points
 function getUsersByPoints (db = connection) {
   return db('users')
-    .select()
+    .select('user_name', 'points', 'avatar_url')
     .orderBy('points', 'desc')
 }
 
@@ -100,11 +101,14 @@ function addNewUserActions (userId, actionIds, db = connection) {
 }
 
 // Update user action
-function updateUserAction (id, status, db = connection) {
+function updateUserAction (actionId, status, db = connection) {
   return db('user_action')
-    .first()
-    .where('id', id)
+    .where('action_id', actionId)
     .update({
       completed: status
     })
+}
+
+function updateUserPoints (id, points, db = connection) {
+  return db('users').where('id', id).update({ points })
 }

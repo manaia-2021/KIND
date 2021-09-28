@@ -1,5 +1,5 @@
 import nock from 'nock'
-import { addNewUserActions, createUser, deleteUser, getCategories, getCategoryActions, getLeaderboard, getUser, getUserByEmail, getUserActions, updateUserAction } from './api'
+import { addNewUserActions, createUser, deleteUser, getCategories, getCategoryActions, getLeaderboard, getUser, getUserByEmail, getUserActions, updateUserAction, updateUserPoints } from './api'
 
 describe('createUser', () => {
   test('send user to api/v1/users and return res.body', () => {
@@ -91,6 +91,21 @@ describe('updateUserAction', () => {
       .reply(201)
 
     return updateUserAction(1, 5, true).then(() => {
+      expect(scope.isDone()).toBeTruthy()
+      return null
+    })
+  })
+})
+
+describe('updateUserPoints', () => {
+  test('PATCH request to api/v1/users/1/points returning null', () => {
+    expect.assertions(1)
+
+    const scope = nock('http://localhost:80')
+      .patch('/api/v1/users/1/points', { points: 100 })
+      .reply(201)
+
+    return updateUserPoints(1, 100).then(() => {
       expect(scope.isDone()).toBeTruthy()
       return null
     })

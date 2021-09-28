@@ -85,7 +85,7 @@ export default function CategoriesCards (props) {
         title="energy"
       />
       <CardHeader
-
+        flexwrap='wrap'
         title={props.title}
         subheader="category description"
       />

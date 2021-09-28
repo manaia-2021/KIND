@@ -1,21 +1,23 @@
-import { red } from '@material-ui/core/colors'
 import { connect } from 'react-redux'
 import React, { useEffect, useState } from 'react'
 
-import { getUserActions, updateUserAction } from '../apis/api'
+import { getUserActions, updateUserAction, updateUserPoints } from '../apis/api'
 
-function UserActions (props) {
+function UserActions ({ user }) {
   const [userAction, setUserAction] = useState([])
   const [totalPoints, setTotalPoints] = useState(0)
+
   useEffect(() => {
-    getUserActions(props.id)
-      .then(newUserAction => {
-        setUserAction(newUserAction)
-        setTotalPoints(countPoints(newUserAction))
-        return null
-      })
-      .catch((error) => { console.log(error) })
-  }, [])
+    if (user?.id) {
+      getUserActions(user.id)
+        .then(newUserAction => {
+          setUserAction(newUserAction)
+          setTotalPoints(countPoints(newUserAction))
+          return null
+        })
+        .catch((error) => { console.log(error) })
+    }
+  }, [user])
 
   function countPoints (arr) {
     let points = 0
@@ -23,10 +25,15 @@ function UserActions (props) {
     completedActions.forEach((action) => {
       points += Number(action.points)
     })
+    updateUserPoints(user.id, points)
     return points
   }
+
   function handleChange (evt) {
     const { name, checked } = evt.target
+    // update the database for specific user, user action (name) and the new status
+    updateUserAction(user.id, name, checked)
+
     const updateUAction = userAction.map(action => {
       if (action.action_id === Number(name)) {
         if (checked) {
@@ -40,9 +47,9 @@ function UserActions (props) {
         return action
       }
     })
+
     setUserAction(updateUAction)
     setTotalPoints(countPoints(updateUAction))
-    updateUserAction(updateUAction)
   }
 
   // updateUserAction()
