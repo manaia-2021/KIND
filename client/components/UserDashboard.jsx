@@ -1,23 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
 import UserActions from './UserActions'
 
-import { getUser, deleteUser } from '../apis/api'
+import { deleteUser } from '../apis/api'
 
 function UserDashboard (props) {
-  const [user, setUser] = useState({})
-
-  useEffect(() => {
-    const id = 1
-    getUser(id)
-      .then(newUser => {
-        setUser(newUser)
-        console.log(newUser)
-        return null
-      })
-      .catch((error) => { console.log(error) })
-  }, [])
   function handleDeleteUser () {
-    deleteUser(user.id)
+    deleteUser(props.user.id)
       .then(() => {
         props.history.push('/')
         return null
@@ -34,7 +23,7 @@ function UserDashboard (props) {
           <div>
             <form >
               <figure />
-              <img className="avatar" src={user.avatar_url}/>
+              <img className="avatar" src={props.user.avatar_url}/>
               <div className="">
                 <label className=""></label>
                 <div className="">
@@ -43,19 +32,19 @@ function UserDashboard (props) {
               <div className="name">
                 <label className="">Name</label>
                 <div className="">
-                  <input class_name="" name="name" placeholder={user.name} />
+                  <input class_name="" name="name" placeholder={props.user.name} />
                 </div>
               </div>
               <div className="">
                 <label className="">User Name</label>
                 <div className="">
-                  <input class_name="" name ="user_name" placeholder={user.user_name} />
+                  <input class_name="" name ="user_name" placeholder={props.user.user_name} />
                 </div>
               </div>
               <div className="">
                 <label className="">Email</label>
                 <div className="">
-                  <input class_name="" name ="email_address" placeholder={user.email_address} />
+                  <input class_name="" name ="email_address" placeholder={props.user.email_address} />
                 </div>
               </div>
               <div className="">
@@ -75,5 +64,10 @@ function UserDashboard (props) {
     </>
   )
 }
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
 
-export default UserDashboard
+export default connect(mapStateToProps)(UserDashboard)

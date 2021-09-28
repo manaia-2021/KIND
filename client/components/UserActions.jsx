@@ -1,14 +1,14 @@
 import { red } from '@material-ui/core/colors'
+import { connect } from 'react-redux'
 import React, { useEffect, useState } from 'react'
 
 import { getUserActions, updateUserAction } from '../apis/api'
 
-function UserActions () {
+function UserActions (props) {
   const [userAction, setUserAction] = useState([])
   const [totalPoints, setTotalPoints] = useState(0)
   useEffect(() => {
-    const id = 1
-    getUserActions(id)
+    getUserActions(props.id)
       .then(newUserAction => {
         setUserAction(newUserAction)
         setTotalPoints(countPoints(newUserAction))
@@ -27,7 +27,7 @@ function UserActions () {
   }
   function handleChange (evt) {
     const { name, checked } = evt.target
-    const updateUserAction = userAction.map(action => {
+    const updateUAction = userAction.map(action => {
       if (action.action_id === Number(name)) {
         if (checked) {
           action.completed = 1
@@ -40,9 +40,12 @@ function UserActions () {
         return action
       }
     })
-    setUserAction(updateUserAction)
-    setTotalPoints(countPoints(updateUserAction))
+    setUserAction(updateUAction)
+    setTotalPoints(countPoints(updateUAction))
+    updateUserAction(updateUAction)
   }
+
+  // updateUserAction()
 
   return (
     <>
@@ -74,7 +77,6 @@ function UserActions () {
           <label className=""> <h1> Total Points </h1></label>
           <div className="">
             <div> <h1>{totalPoints}</h1> </div>
-            <button className=""> <h1>Save Points</h1></button>
           </div>
         </div>
 
@@ -82,5 +84,10 @@ function UserActions () {
     </>
   )
 }
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
 
-export default UserActions
+export default connect(mapStateToProps)(UserActions)
