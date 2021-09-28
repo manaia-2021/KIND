@@ -4,6 +4,7 @@ import { Box, Grid, Toolbar, Button, Typography } from '@material-ui/core'
 import CategoriesCards from './CategoriesCards'
 
 import { getCategories, addNewUserActions } from '../apis/api'
+import { teal } from '@material-ui/core/colors'
 
 const CategoriesPage = ({ user }) => {
   const [categories, setCategories] = useState([])
@@ -63,7 +64,7 @@ const CategoriesPage = ({ user }) => {
           </Grid>
         </Box>
         <Box display='flex' justifyContent='center' alignItems='flex-end' direction='column' style={{ paddingTop: '20px', minHeight: '2vw', border: '0px solid black' }}>
-          <Button size='large' variant='contained' color='primary' onClick={handleButtonClick}>
+          <Button size='large' variant='contained' style={{ backgroundColor: teal[400], color: '#FFFFFF' }} onClick={handleButtonClick}>
             Done
           </Button>
         </Box>

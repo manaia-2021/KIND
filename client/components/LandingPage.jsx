@@ -15,7 +15,8 @@ const useStyles = makeStyles((theme) => {
       marginTop: '20px'
     },
     buttonColor: {
-      backgroundColor: teal[400]
+      backgroundColor: teal[400],
+      color: '#FFFFFF'
     }
   }
 })
