@@ -28,12 +28,11 @@ function App (props) {
     <>
       <Route path='/' component={HeaderBar} />
       <Route exact path='/' component={LandingPage} />
-      <Route path='/categories' component={CategoriesPage} />
       <Route path='/userDashboard' component={UserDashboard} />
       <Route path='/leaderboard' component={Leaderboard} />
       <ProtectedRoute path='/categories' component={CategoriesPage} />
       <ProtectedRoute path='/users' component={CheckUser} />
-      <ProtectedRoute path='/profile' component={Profile} />
+      <ProtectedRoute path='/profile' component={UserDashboard} />
     </>
   )
 }

@@ -72,7 +72,7 @@ test('getAllActions returns all actions', () => {
 test('getUserActionByUser returns the correct number of actions', () => {
   return db.getUserActionByUser(1, testDb)
     .then(actions => {
-      expect(actions).toHaveLength(1)
+      expect(actions).toHaveLength(4)
     })
 })
 
@@ -81,5 +81,12 @@ test('getActionsByCategory returns the correct number of actions', () => {
     // eslint-disable-next-line promise/always-return
     .then(actions => {
       expect(actions).toHaveLength(8)
+    })
+})
+
+test('updateUserPoints updates users points', () => {
+  return db.updateUserPoints(1, 100, testDb)
+    .then((res) => {
+      expect(res).toBe(1)
     })
 })

@@ -1,6 +1,6 @@
 import request from 'superagent'
 
-const rootUrl = 'https://kind-manaia.herokuapp.com/api/v1'
+const rootUrl = '/api/v1'
 
 // get all users
 export const getUsers = () => {
@@ -60,6 +60,16 @@ export const updateUserAction = (userId, userActionId, status) => {
   return request
     .patch(`${rootUrl}/users/${userId}/actions`)
     .send({ userActionId, status })
+    .then(() => {
+      return null
+    })
+}
+
+export const updateUserPoints = (userId, points) => {
+  console.log(userId, points)
+  return request
+    .patch(`${rootUrl}/users/${userId}/points`)
+    .send({ points })
     .then(() => {
       return null
     })
