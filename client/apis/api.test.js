@@ -1,16 +1,33 @@
 import nock from 'nock'
-import { addNewUserActions, createUser, deleteUser, getCategories, getCategoryActions, getLeaderboard, getUser, getUserByEmail, getUserActions, updateUserAction, updateUserPoints } from './api'
+import { addNewUserActions, createUser, deleteUser, getCategories, getCategoryActions, getLeaderboard, getUser, getUserByEmail, getUserActions, updateUserAction, updateUserPoints, findOrCreateUser } from './api'
 
-describe('createUser', () => {
+// describe('createUser', () => {
+//   test('send user to api/v1/users and return res.body', () => {
+//     expect.assertions(2)
+//     const user = { name: 'test name', email: 'test@gmail.com' }
+
+//     const scope = nock('http://localhost:80')
+//       .post('/api/v1/users', user)
+//       .reply(201, { data: { id: 7 } })
+
+//     return createUser(user).then((id) => {
+//       expect(id).toBe(7)
+//       expect(scope.isDone()).toBeTruthy()
+//       return null
+//     })
+//   })
+// })
+
+describe('findOrCreateUser', () => {
   test('send user to api/v1/users and return res.body', () => {
     expect.assertions(2)
+    const user = { name: 'test name', email: 'test@gmail.com' }
 
     const scope = nock('http://localhost:80')
-      .post('/api/v1/users', { name: 'test name', email: 'test@gmail.com' })
+      .post('/api/v1/users', user)
       .reply(201, { data: { id: 7 } })
 
-    const user = { name: 'test name', email: 'test@gmail.com' }
-    return createUser(user).then((id) => {
+    return findOrCreateUser(user).then((id) => {
       expect(id).toBe(7)
       expect(scope.isDone()).toBeTruthy()
       return null

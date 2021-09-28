@@ -122,9 +122,59 @@ describe('GET /api/v1/user/email/email@address.com', () => {
   })
 })
 
+describe('PUT /api/v1/users', () => {
+  test('if user already found returns status code of 200 with user details', () => {
+    getUserByEmail.mockResolvedValue({ id: 1, name: 'john doe', email_address: 'johndoe@gmail.com' })
+    // addNewUser.mockResolvedValue([1])
+
+    expect.assertions(4)
+    return request(server)
+      .put('/api/v1/users')
+      .send({ name: 'john doe', email: 'johndoe@gmail.com' })
+      .then((res) => {
+        expect(res.status).toBe(200)
+        expect(res.body.data).toEqual({ user: { id: 1, name: 'john doe', email_address: 'johndoe@gmail.com' } })
+        expect(getUserByEmail).toHaveBeenCalledWith('johndoe@gmail.com')
+        expect(addNewUser).not.toHaveBeenCalled()
+        return null
+      })
+  })
+
+  test('if user not found, create user and return status of 201 with newly created user', () => {
+    getUserByEmail.mockResolvedValue()
+    addNewUser.mockResolvedValue({ id: 10, name: 'john doe', email_address: 'johndoe@gmail.com' })
+
+    expect.assertions(4)
+    return request(server)
+      .put('/api/v1/users')
+      .send({ name: 'john doe', email: 'johndoe@gmail.com' })
+      .then((res) => {
+        expect(res.status).toBe(201)
+        expect(getUserByEmail).toHaveBeenCalledWith('johndoe@gmail.com')
+        expect(addNewUser).toHaveBeenCalledWith({ name: 'john doe', email: 'johndoe@gmail.com' })
+        expect(res.body.data).toEqual({ user: { id: 10, name: 'john doe', email_address: 'johndoe@gmail.com' } })
+        return null
+      })
+  })
+
+  test('returns status code of 500 on error with appropriate error message', () => {
+    addNewUser.mockRejectedValue(new Error('not working'))
+
+    expect.assertions(2)
+    return request(server)
+      .post('/api/v1/users')
+      .send({ name: 'john doe', username: 'johndoe' })
+      .then(res => {
+        expect(res.status).toBe(500)
+        expect(res.body.message).toBe('Backend server error')
+        return null
+      })
+  })
+})
+
 describe('POST /api/v1/users', () => {
-  test('returns status code of 201 and id of newly created user', () => {
-    addNewUser.mockResolvedValue([1])
+  test('returns status code of 201 an details of newly created user', () => {
+    addNewUser.mockResolvedValue({ id: 10, name: 'john doe', email_address: 'johndoe@gmail.com' })
 
     expect.assertions(3)
     return request(server)
@@ -132,7 +182,7 @@ describe('POST /api/v1/users', () => {
       .send({ name: 'john doe', email: 'johndoe@gmail.com' })
       .then((res) => {
         expect(res.status).toBe(201)
-        expect(res.body.data).toEqual({ id: 1 })
+        expect(res.body.data).toEqual({ user: { id: 10, name: 'john doe', email_address: 'johndoe@gmail.com' } })
         expect(addNewUser).toHaveBeenCalledWith({ name: 'john doe', email: 'johndoe@gmail.com' })
         return null
       })

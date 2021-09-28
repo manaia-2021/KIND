@@ -17,6 +17,13 @@ export const createUser = ({ name, email }) => {
     })
 }
 
+export const findOrCreateUser = ({ name, email }) => {
+  return request.post(`${rootUrl}/users`).send({ name, email })
+    .then(res => {
+      return res.body.data.id
+    })
+}
+
 export const getUser = (userId) => {
   return request
     .get(`${rootUrl}/users/${userId}`)

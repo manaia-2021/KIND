@@ -26,6 +26,9 @@ function addNewUser (user, db = connection) {
 
   return db('users')
     .insert({ name, user_name: randomUsername, avatar_url: avatarUrl, email_address: email })
+    .then(ids => {
+      return db('users').select().where('id', ids[0]).first()
+    })
 }
 
 // Get all users

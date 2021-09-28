@@ -13,6 +13,20 @@ router.get('/', (req, res) => {
     })
 })
 
+router.put('/', async (req, res) => {
+  const { name, email } = req.body
+  try {
+    const foundUser = await db.getUserByEmail(email)
+    if (foundUser) {
+      return res.status(200).json({ data: { user: foundUser } })
+    }
+    const newUser = await db.addNewUser({ name, email })
+    return res.status(201).json({ data: { user: newUser } })
+  } catch (err) {
+    res.status(500).json({ message: 'Backend server error' })
+  }
+})
+
 router.get('/:id', (req, res) => {
   const { id } = req.params
 
@@ -41,8 +55,8 @@ router.get('/email/:email', (req, res) => {
 router.post('/', (req, res) => {
   const { name, email } = req.body
   db.addNewUser({ name, email })
-    .then((ids) => {
-      res.status(201).json({ data: { id: ids[0] } })
+    .then((newUser) => {
+      res.status(201).json({ data: { user: newUser } })
       return null
     })
     .catch(() => {
