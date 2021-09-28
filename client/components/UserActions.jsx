@@ -1,7 +1,10 @@
 import { connect } from 'react-redux'
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import { getUserActions, updateUserAction, updateUserPoints } from '../apis/api'
+import { Button } from '@material-ui/core'
+import { teal } from '@material-ui/core/colors'
 
 function UserActions ({ user }) {
   const [userAction, setUserAction] = useState([])
@@ -85,6 +88,9 @@ function UserActions ({ user }) {
             <h1> Total Points: {totalPoints} </h1>
           </label>
         </div>
+        <Button component={Link} variant='contained' to='/categories' style={{ backgroundColor: teal[400], color: '#FFFFFF' }}>
+          Choose more actions!
+        </Button>
 
       </div>
     </>
