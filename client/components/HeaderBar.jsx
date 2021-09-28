@@ -1,10 +1,9 @@
 import React, { useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 
-import { Avatar, AppBar, Toolbar, Typography, makeStyles, Button } from '@material-ui/core'
+import { AppBar, Toolbar, Typography, makeStyles, Button } from '@material-ui/core'
 import { teal } from '@material-ui/core/colors'
 import Authentication from './Authentication'
-import Leaderboard from './LeaderBoard'
 
 const useStyles = makeStyles((theme) => {
   return {
