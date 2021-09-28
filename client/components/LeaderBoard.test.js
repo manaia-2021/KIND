@@ -10,7 +10,7 @@ afterEach(() => {
   return jest.resetAllMocks()
 })
 
-test('opening text leaderboard', () => {
+test('leaderboard component has loaded and is displaying the correct heading', () => {
   getLeaderboard.mockImplementation((newMessage) => {
     return Promise.resolve([{ user_name: 'kindNirvan', points: 56, avatar_url: '/images/avatar.jpg' }])
   })
