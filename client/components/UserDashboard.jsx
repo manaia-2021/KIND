@@ -44,16 +44,16 @@ function UserDashboard (props) {
         <div className="dashboard">
           <form>
             <Avatar alt='avatar picture' src={props.user.avatar_url}/>
-            <TextField id='outlined' label='Name' variant='outlined' className={classes.fields}>
+            <TextField label='Name' variant='outlined' className={classes.fields}>
               {user.user}
             </TextField>
-            <TextField id='outlined' label='Username' variant='outlined' className={classes.fields}>
+            <TextField label='Username' variant='outlined' className={classes.fields}>
               {user.userName}
             </TextField>
-            <TextField id='outlined' label='Email' variant='outlined' className={classes.fields}>
+            <TextField label='Email' variant='outlined' className={classes.fields}>
               {user.emailAddress}
             </TextField>
-            <TextField id='outlined' label='Password' variant='outlined' className={classes.fields}>
+            <TextField label='Password' variant='outlined' className={classes.fields}>
               {user.password}
             </TextField>
           </form>
