@@ -34,8 +34,8 @@ export const getUserByEmail = (userEmail) => {
       if (res.status === 404) return null
       return res.body.data.user
     })
-    .catch(err => {
-      console.log(err)
+    .catch(() => {
+      return null
     })
 }
 

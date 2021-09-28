@@ -28,7 +28,7 @@ router.get('/:id', (req, res) => {
 
 router.get('/email/:email', (req, res) => {
   const { email } = req.params
-
+  console.log('hitting email request')
   db.getUserByEmail(email)
     .then((user) => {
       if (!user) return res.status(404).json({ message: 'No user with that email address was found' })

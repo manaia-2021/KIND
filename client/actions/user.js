@@ -9,8 +9,10 @@ export function fetchUserProfile ({ name, email }) {
       let foundUser = await getUserByEmail(email)
       console.log('found user', foundUser)
       if (!foundUser) {
+        console.log('creating user')
         await createUser({ name, email })
         foundUser = await getUserByEmail(email)
+        console.log('new usre created', foundUser)
       }
       dispatch({ type: FETCH_USER, payload: foundUser })
       return null
