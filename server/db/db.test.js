@@ -21,7 +21,7 @@ test('getAllUsers returns all users', () => {
 })
 
 test('addNewUser adds a new user', () => {
-  const user = { name: 'bob', user_name: 'kindBob' }
+  const user = { name: 'bob', email: 'bob@test.com' }
   return db.addNewUser(user, testDb)
     .then(() => {
       return db.getAllUsers(testDb)
