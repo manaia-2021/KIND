@@ -68,7 +68,6 @@ export default function CategoriesCards (props) {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    console.log('card props', props)
     getCategoryActions(props.id)
       .then(actions => {
         setActions(actions)
