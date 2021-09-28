@@ -84,7 +84,6 @@ export default function LandingPage () {
                 </Grid>
               </Grid>
             </Box>
-
             <Box className={classes.button} display='flex' justifyContent='center'>
               <Button component={Link} variant='contained' to='/categories' className={classes.buttonColor}>
                   Start

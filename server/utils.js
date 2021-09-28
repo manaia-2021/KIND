@@ -20,7 +20,7 @@ function generateUsername () {
 function getRandomAvatar () {
   const randomSeed = getRandomInt(1000)
 
-  const url = `https://avatars.dicebear.com/api/bottts/${randomSeed}.svg`
+  const url = `https://avatars.dicebear.com/api/jdenticon/${randomSeed}.svg`
   return url
 }
 
