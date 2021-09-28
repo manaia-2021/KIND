@@ -24,11 +24,11 @@ describe('findOrCreateUser', () => {
     const user = { name: 'test name', email: 'test@gmail.com' }
 
     const scope = nock('http://localhost:80')
-      .post('/api/v1/users', user)
-      .reply(201, { data: { id: 7 } })
+      .put('/api/v1/users', user)
+      .reply(201, { data: { user: { id: 7, name: 'test name', email: 'test@gmail.com' } } })
 
-    return findOrCreateUser(user).then((id) => {
-      expect(id).toBe(7)
+    return findOrCreateUser(user).then((user) => {
+      expect(user).toEqual({ id: 7, name: 'test name', email: 'test@gmail.com' })
       expect(scope.isDone()).toBeTruthy()
       return null
     })
