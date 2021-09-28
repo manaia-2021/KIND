@@ -2,17 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { red } from '@material-ui/core/colors'
 import { getCategoryActions } from '../apis/api'
 import ListItems from './ListItems'
-import { Button, Modal, Box, CardContent, CardActions, CardHeader, Card, makeStyles, Typography } from '@material-ui/core'
+import { Button, Modal, Box, Typography, CardContent, CardActions, CardHeader, Card, makeStyles } from '@material-ui/core'
 import CardMedia from '@material-ui/core/CardMedia'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 175
+    maxWidth: 345
   },
   media: {
-    height: '100%',
-    width: '100%',
-    paddingTop: '100%' // 1:1
+    height: 0,
+    paddingTop: '56.25%' // 16:9
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -79,25 +78,27 @@ export default function CategoriesCards (props) {
   }, [])
 
   return (
-    <Card className={classes.root} >
+    <Card className={classes.root}>
       <CardMedia
         className={classes.media}
-        image={props.icon}
-        title={props.title}
+        image="/images/energy.png"
+        title="energy"
       />
       <CardHeader
-        flexWrap='wrap'
+
         title={props.title}
+        subheader="category description"
       />
+
       <CardContent>
-        <Typography>
-          {props.description}
+        <Typography variant="body2" color="textSecondary" component="p">
+          Info about category
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
 
         <Button variant='outlined' onClick={handleOpen}>
-          Select Actions
+          SEE ACTIONS
         </Button>
         <Modal
           className={classes.modal}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { Box, Grid, Toolbar, Button, Typography } from '@material-ui/core'
+import { Box, Grid, Toolbar, Button } from '@material-ui/core'
 import CategoriesCards from './CategoriesCards'
 
 import { getCategories, addNewUserActions } from '../apis/api'
@@ -44,15 +44,10 @@ const CategoriesPage = ({ user }) => {
     <>
       {/* <HeaderBar /> */}
       <Toolbar />
-      <Box pt={10}>
-        <Typography>
-          <Box textAlign="center" fontSize="h4.fontSize" >
-        Which categories would you like to select from?
-          </Box>
-        </Typography>
-        <Box style={{ paddingTop: '50px' }}>
+      <Box style={{ paddingTop: '15px' }}>
 
-          <Grid container justifyContent='center' alignItems='stretch' direction='row' style={{ minHeight: '50vh', border: '0px solid black' }} spacing={3}>
+        <Box >
+          <Grid container justifyContent='center' alignItems='flex-end' direction='row' style={{ minHeight: '50vh', border: '0px solid black' }} spacing={3}>
             {categories.map(category => {
               return (
                 <Grid item key={category.id}>
@@ -64,9 +59,10 @@ const CategoriesPage = ({ user }) => {
         </Box>
         <Box display='flex' justifyContent='center' alignItems='flex-end' direction='column' style={{ paddingTop: '20px', minHeight: '2vw', border: '0px solid black' }}>
           <Button size='large' variant='contained' color='primary' onClick={handleButtonClick}>
-            Done
+            CONTINUE
           </Button>
         </Box>
+
       </Box>
     </>
   )

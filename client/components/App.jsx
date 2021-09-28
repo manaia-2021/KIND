@@ -7,7 +7,7 @@ import HeaderBar from '../components/HeaderBar'
 import ProtectedRoute from '../auth/ProtectedRoute'
 
 import LandingPage from './LandingPage'
-import Profile from './Profile'
+// import Profile from './Profile'
 import CheckUser from './CheckUser'
 import CategoriesPage from './CategoriesPage'
 import UserDashboard from './UserDashboard'
@@ -33,7 +33,7 @@ function App (props) {
       <Route path='/leaderboard' component={Leaderboard} />
       <ProtectedRoute path='/categories' component={CategoriesPage} />
       <ProtectedRoute path='/users' component={CheckUser} />
-      <ProtectedRoute path='/profile' component={Profile} />
+      <ProtectedRoute path='/profile' component={UserDashboard} />
     </>
   )
 }
