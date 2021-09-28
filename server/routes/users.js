@@ -28,7 +28,6 @@ router.get('/:id', (req, res) => {
 
 router.get('/email/:email', (req, res) => {
   const { email } = req.params
-
   db.getUserByEmail(email)
     .then((user) => {
       if (!user) return res.status(404).json({ message: 'No user with that email address was found' })
@@ -40,8 +39,8 @@ router.get('/email/:email', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const { name, username, email } = req.body
-  db.addNewUser({ name, username, email })
+  const { name, email } = req.body
+  db.addNewUser({ name, email })
     .then((ids) => {
       res.status(201).json({ data: { id: ids[0] } })
       return null
