@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1632814719499" clover="3.2.0">
-  <project timestamp="1632814719499" name="All files">
-    <metrics statements="253" coveredstatements="239" conditionals="32" coveredconditionals="18" methods="105" coveredmethods="91" elements="390" coveredelements="348" complexity="0" loc="253" ncloc="253" packages="8" files="21" classes="21"/>
+<coverage generated="1632815239781" clover="3.2.0">
+  <project timestamp="1632815239781" name="All files">
+    <metrics statements="253" coveredstatements="240" conditionals="32" coveredconditionals="18" methods="105" coveredmethods="92" elements="390" coveredelements="350" complexity="0" loc="253" ncloc="253" packages="8" files="21" classes="21"/>
     <package name="client.actions">
       <metrics statements="6" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="3"/>
       <file name="user.js" path="/media/chris/aae6a33f-1fa1-48d1-bd57-c9cdf4e1c49f/KIND/client/actions/user.js">
@@ -101,7 +101,7 @@
       </file>
     </package>
     <package name="server.db">
-      <metrics statements="29" coveredstatements="27" conditionals="15" coveredconditionals="1" methods="14" coveredmethods="12"/>
+      <metrics statements="29" coveredstatements="28" conditionals="15" coveredconditionals="1" methods="14" coveredmethods="13"/>
       <file name="connection.js" path="/media/chris/aae6a33f-1fa1-48d1-bd57-c9cdf4e1c49f/KIND/server/db/connection.js">
         <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="1" methods="0" coveredmethods="0"/>
         <line num="1" count="4" type="stmt"/>
@@ -111,7 +111,7 @@
         <line num="6" count="4" type="stmt"/>
       </file>
       <file name="db.js" path="/media/chris/aae6a33f-1fa1-48d1-bd57-c9cdf4e1c49f/KIND/server/db/db.js">
-        <metrics statements="22" coveredstatements="20" conditionals="13" coveredconditionals="0" methods="14" coveredmethods="12"/>
+        <metrics statements="22" coveredstatements="21" conditionals="13" coveredconditionals="0" methods="14" coveredmethods="13"/>
         <line num="1" count="4" type="stmt"/>
         <line num="2" count="4" type="stmt"/>
         <line num="4" count="4" type="stmt"/>
@@ -132,8 +132,8 @@
         <line num="95" count="1" type="stmt"/>
         <line num="96" count="2" type="stmt"/>
         <line num="99" count="1" type="stmt"/>
-        <line num="105" count="0" type="stmt"/>
-        <line num="113" count="1" type="stmt"/>
+        <line num="105" count="2" type="stmt"/>
+        <line num="113" count="2" type="stmt"/>
       </file>
       <file name="knexfile.js" path="/media/chris/aae6a33f-1fa1-48d1-bd57-c9cdf4e1c49f/KIND/server/db/knexfile.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -216,26 +216,26 @@
       <file name="action.js" path="/media/chris/aae6a33f-1fa1-48d1-bd57-c9cdf4e1c49f/KIND/server/db/seeds/action.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
-        <line num="3" count="11" type="stmt"/>
-        <line num="6" count="11" type="stmt"/>
+        <line num="3" count="14" type="stmt"/>
+        <line num="6" count="14" type="stmt"/>
       </file>
       <file name="category.js" path="/media/chris/aae6a33f-1fa1-48d1-bd57-c9cdf4e1c49f/KIND/server/db/seeds/category.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
-        <line num="3" count="11" type="stmt"/>
-        <line num="6" count="11" type="stmt"/>
+        <line num="3" count="14" type="stmt"/>
+        <line num="6" count="14" type="stmt"/>
       </file>
       <file name="user.js" path="/media/chris/aae6a33f-1fa1-48d1-bd57-c9cdf4e1c49f/KIND/server/db/seeds/user.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
-        <line num="3" count="11" type="stmt"/>
-        <line num="6" count="11" type="stmt"/>
+        <line num="3" count="14" type="stmt"/>
+        <line num="6" count="14" type="stmt"/>
       </file>
       <file name="user_action.js" path="/media/chris/aae6a33f-1fa1-48d1-bd57-c9cdf4e1c49f/KIND/server/db/seeds/user_action.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
-        <line num="3" count="11" type="stmt"/>
-        <line num="6" count="11" type="stmt"/>
+        <line num="3" count="14" type="stmt"/>
+        <line num="6" count="14" type="stmt"/>
       </file>
     </package>
     <package name="server.routes">

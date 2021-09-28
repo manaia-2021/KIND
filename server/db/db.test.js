@@ -122,3 +122,10 @@ describe('updateUserPoints', () => {
       })
   })
 })
+
+test('getUsersByPoints gets users points', () => {
+  return db.getUsersByPoints(testDb)
+    .then((res) => {
+      expect(res).toHaveLength(5)
+    })
+})

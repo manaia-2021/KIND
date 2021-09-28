@@ -52,7 +52,7 @@ function getUserByEmail (email, db = connection) {
 // return username and points
 function getUsersByPoints (db = connection) {
   return db('users')
-    .select()
+    .select('user_name', 'points', 'avatar_url')
     .orderBy('points', 'desc')
 }
 
