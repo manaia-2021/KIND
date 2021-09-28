@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Box, Grid, Toolbar, Button, Typography } from '@material-ui/core'
 import CategoriesCards from './CategoriesCards'
@@ -9,6 +10,7 @@ import { teal } from '@material-ui/core/colors'
 const CategoriesPage = ({ user }) => {
   const [categories, setCategories] = useState([])
   const [checkedActions, setCheckedActions] = useState([])
+  const history = useHistory()
 
   useEffect(() => {
     getCategories()
@@ -38,7 +40,7 @@ const CategoriesPage = ({ user }) => {
     addNewUserActions(user.id, checkedActions)
     alert('actions added successfully')
     setCheckedActions([])
-    // TODO redirect to users dashboard page
+    history.push('/profile')
   }
 
   return (
