@@ -10,7 +10,7 @@ describe('fetchUserByProfile', () => {
     getUserByEmail.mockResolvedValue(testUser)
     expect.assertions(3)
     const dispatch = jest.fn()
-    return fetchUserProfile('test@gmail.com')(dispatch).then(() => {
+    return fetchUserProfile({ name: 'test name', email: 'test@gmail.com' })(dispatch).then(() => {
       const action = dispatch.mock.calls[0][0]
       expect(action.type).toBe(FETCH_USER)
       expect(action.payload).toBe(testUser)

@@ -129,11 +129,11 @@ describe('POST /api/v1/users', () => {
     expect.assertions(3)
     return request(server)
       .post('/api/v1/users')
-      .send({ name: 'john doe', username: 'johndoe' })
+      .send({ name: 'john doe', email: 'johndoe@gmail.com' })
       .then((res) => {
         expect(res.status).toBe(201)
         expect(res.body.data).toEqual({ id: 1 })
-        expect(addNewUser).toHaveBeenCalledWith({ name: 'john doe', username: 'johndoe' })
+        expect(addNewUser).toHaveBeenCalledWith({ name: 'john doe', email: 'johndoe@gmail.com' })
         return null
       })
   })

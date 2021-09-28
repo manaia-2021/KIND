@@ -6,10 +6,10 @@ describe('createUser', () => {
     expect.assertions(2)
 
     const scope = nock('http://localhost:80')
-      .post('/api/v1/users', { name: 'test name', username: 'testusername', email: 'test@gmail.com' })
-      .reply(201, { status: 'success', data: { id: 7 } })
+      .post('/api/v1/users', { name: 'test name', email: 'test@gmail.com' })
+      .reply(201, { data: { id: 7 } })
 
-    const user = { name: 'test name', username: 'testusername', email: 'test@gmail.com' }
+    const user = { name: 'test name', email: 'test@gmail.com' }
     return createUser(user).then((id) => {
       expect(id).toBe(7)
       expect(scope.isDone()).toBeTruthy()
@@ -133,7 +133,7 @@ describe('getCategories', () => {
 
     const scope = nock('http://localhost:80')
       .get('/api/v1/categories')
-      .reply(200, { status: 'success', data: { categories: [{ id: 1, title: 'travel' }] } })
+      .reply(200, { data: { categories: [{ id: 1, title: 'travel' }] } })
 
     return getCategories().then((categories) => {
       expect(categories).toHaveLength(1)
