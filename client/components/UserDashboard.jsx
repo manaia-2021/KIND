@@ -4,6 +4,7 @@ import UserActions from './UserActions'
 
 import { deleteUser } from '../apis/api'
 import { Avatar, Button, makeStyles, TextField } from '@material-ui/core'
+import { teal } from '@material-ui/core/colors'
 
 const useStyles = makeStyles((theme) => ({
   fields: {
@@ -44,7 +45,7 @@ function UserDashboard (props) {
             <TextField label='Email' variant='outlined' className={classes.fields} value={form.email} disabled />
           </form>
           <div>
-            <Button variant='contained' color='primary' className={classes.fields}> Update </Button>
+            <Button variant='contained' style={{ backgroundColor: teal[400], color: '#FFFFFF' }} className={classes.fields}> Save </Button>
           </div>
           <div>
             <Button variant='contained' color='secondary' className={classes.fields} onClick={handleDeleteUser}> Delete my account

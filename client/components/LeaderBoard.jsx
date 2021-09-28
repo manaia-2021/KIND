@@ -13,7 +13,8 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 50
   },
   root: {
-    maxWidth: 345
+    maxWidth: 345,
+    minWidth: 300
   },
   avatar: {
     backgroundColor: '#26a69a'
@@ -50,7 +51,11 @@ function Leaderboard () {
   return (
 
     <>
-      <Box className={classes.page}>
+      <Box
+        display='flex'
+        flexDirection='column'
+        alignItems='center'
+        className={classes.page}>
         <Typography className={classes.title}>
           Leaderboard
         </Typography>
