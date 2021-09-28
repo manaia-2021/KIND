@@ -13,7 +13,8 @@ const useStyles = makeStyles((theme) => {
     toolbar: theme.mixins.toolbar,
     title: {
       flexGrow: 1,
-      fontSize: 50
+      fontSize: 50,
+      cursor: 'pointer'
     },
     avatar: {
       marginRight: theme.spacing(2)
