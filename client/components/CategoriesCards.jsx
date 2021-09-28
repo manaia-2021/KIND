@@ -99,7 +99,7 @@ export default function CategoriesCards (props) {
           open={open}
           onClose={handleClose}
         >
-          <Box className={classes.boxModal}>
+          <Box className={classes.boxModal} data-testid="button">
             <ListItems handleToggle={props.handleToggle} checked={props.checkedActions} actions={actions} />
           </Box>
         </Modal>
