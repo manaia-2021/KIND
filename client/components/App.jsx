@@ -10,7 +10,11 @@ import LandingPage from './LandingPage'
 import Profile from './Profile'
 import CheckUser from './CheckUser'
 import CategoriesPage from './CategoriesPage'
+<<<<<<< HEAD
 import UserDashboard from './UserDashboard'
+=======
+import Leaderboard from './LeaderBoard'
+>>>>>>> development
 
 import { fetchUserProfile } from '../actions/user'
 
@@ -29,6 +33,8 @@ function App (props) {
       <Route exact path='/' component={LandingPage} />
       <Route path='/categories' component={CategoriesPage} />
       <Route path='/userDashboard' component={UserDashboard} />
+      <Route path='/leaderboard' component={Leaderboard} />
+      <ProtectedRoute path='/categories' component={CategoriesPage} />
       <ProtectedRoute path='/users' component={CheckUser} />
       <ProtectedRoute path='/profile' component={Profile} />
     </>
