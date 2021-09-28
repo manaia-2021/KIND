@@ -95,12 +95,25 @@ router.post('/:id/actions', (req, res) => {
 router.patch('/:id/actions', async (req, res) => {
   const { id } = req.params
   const { userActionId, status } = req.body
-
   try {
     const user = await db.getUser(Number(id))
-    if (!user) return res.status(404).json({ message: 'No user of that ID exists' })
+    if (!user) return res.status(404).json({ message: 'No user with that corresponding ID was found' })
 
     await db.updateUserAction(userActionId, status)
+    res.sendStatus(201)
+  } catch (err) {
+    res.status(500).json({ message: 'Backend server error' })
+  }
+})
+
+router.patch('/:id/points', async (req, res) => {
+  const { id } = req.params
+  const { points } = req.body
+  try {
+    const user = await db.getUser(Number(id))
+    if (!user) return res.status(404).json({ message: 'No user with that corresponding ID was found' })
+
+    await db.updateUserPoints(Number(id), points)
     res.sendStatus(201)
   } catch (err) {
     res.status(500).json({ message: 'Backend server error' })
