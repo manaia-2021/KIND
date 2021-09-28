@@ -79,8 +79,8 @@ export default function CategoriesCards (props) {
   return (
     <Card className={classes.root}>
       <CardHeader
-
         title={props.title}
+        data-testid="subheader"
         subheader="category description"
       />
 
