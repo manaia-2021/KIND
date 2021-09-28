@@ -8,4 +8,3 @@ server/public/styles.css.map
 auth_config.json
 tags
 .env
-coverage
