@@ -2,7 +2,6 @@ import request from 'superagent'
 
 const rootUrl = '/api/v1'
 
-// get all users
 export const getUsers = () => {
   return request
     .get(`${rootUrl}/users`)
@@ -12,7 +11,6 @@ export const getUsers = () => {
 }
 
 export const createUser = (user) => {
-  // user needs to be object containing name, email address, googleId
   return request.post(`${rootUrl}/users`).send(user)
     .then(res => {
       return res.body.data.id
@@ -27,7 +25,6 @@ export const getUser = (userId) => {
     })
 }
 
-// get the user by email address
 export const getUserByEmail = (userEmail) => {
   return request
     .get(`${rootUrl}/users/email/${userEmail}`)
@@ -36,7 +33,7 @@ export const getUserByEmail = (userEmail) => {
     })
 }
 
-// get current actions of user - also send auth token
+// get current actions of a specific user
 export const getUserActions = (userId) => {
   return request
     .get(`${rootUrl}/users/${userId}/actions`)
@@ -45,7 +42,6 @@ export const getUserActions = (userId) => {
     })
 }
 
-// add new user actions
 export const addNewUserActions = (userId, actionIds) => {
   return request
     .post(`${rootUrl}/users/${userId}/actions`)
@@ -55,7 +51,6 @@ export const addNewUserActions = (userId, actionIds) => {
     })
 }
 
-//
 export const updateUserAction = (userId, userActionId, status) => {
   return request
     .patch(`${rootUrl}/users/${userId}/actions`)
@@ -66,7 +61,6 @@ export const updateUserAction = (userId, userActionId, status) => {
 }
 
 export const updateUserPoints = (userId, points) => {
-  console.log(userId, points)
   return request
     .patch(`${rootUrl}/users/${userId}/points`)
     .send({ points })
@@ -83,7 +77,6 @@ export const deleteUser = (userId) => {
     })
 }
 
-// Get all categories - use to pouplate the category page
 export const getCategories = () => {
   return request
     .get(`${rootUrl}/categories`)

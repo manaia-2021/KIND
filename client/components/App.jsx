@@ -7,7 +7,7 @@ import HeaderBar from '../components/HeaderBar'
 import ProtectedRoute from '../auth/ProtectedRoute'
 
 import LandingPage from './LandingPage'
-import Profile from './Profile'
+// import Profile from './Profile'
 import CheckUser from './CheckUser'
 import CategoriesPage from './CategoriesPage'
 import UserDashboard from './UserDashboard'
