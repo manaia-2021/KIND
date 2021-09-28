@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { makeStyles, withStyles, Grid, Card, CardHeader, Avatar, Box, Typography, LinearProgress } from '@material-ui/core'
-import { teal } from '@material-ui/core/colors'
 
 import { getLeaderboard } from '../apis/api'
 
 const useStyles = makeStyles((theme) => ({
   page: {
-    // background: '#e8edea',
     marginTop: '80px',
     height: '700px'
-    // backgroundColor: teal[100]
   },
   title: {
     flexGrow: 1,
@@ -40,6 +37,7 @@ const BorderLinearProgress = withStyles((theme) => ({
 function Leaderboard () {
   const classes = useStyles()
   const [users, setUsers] = useState([{ user_name: '', points: 0 }])
+
   useEffect(() => {
     getLeaderboard()
       .then(user => {

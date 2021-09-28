@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react'
+import React from 'react'
+import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -12,9 +13,10 @@ import Login from './Login'
 
 import { useAuth0 } from '@auth0/auth0-react'
 
-const Authentication = () => {
-  const { user, isAuthenticated, logout } = useAuth0()
+const Authentication = (props) => {
+  const { isAuthenticated, logout } = useAuth0()
   const [open, setOpen] = React.useState(false)
+  const { user } = props
 
   const handleClickOpen = (e) => {
     e.preventDefault()
@@ -29,9 +31,9 @@ const Authentication = () => {
   if (isAuthenticated) {
     return (
       <>
-        <Button onClick={handleClickOpen}><img src={user.picture} width="50" height="50" alt='Avatar'/><ExpandMoreIcon /></Button>
+        <Button onClick={handleClickOpen}><img src={user.avatar_url} width="50" height="50" alt='Avatar'/><ExpandMoreIcon /></Button>
         <Dialog open={open} onClose={handleClose} >
-          <DialogTitle >{user.email}</DialogTitle>
+          <DialogTitle >{user.user_name}</DialogTitle>
           <DialogContent>
             <form >
               <FormControl style={{ align: 'centre', width: '100%' }}>
@@ -50,4 +52,10 @@ const Authentication = () => {
   }
 }
 
-export default Authentication
+function mapStateToProps (state) {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps)(Authentication)

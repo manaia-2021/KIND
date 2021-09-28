@@ -1,6 +1,6 @@
 import request from 'superagent'
 
-const rootUrl = '/api/v1'
+const rootUrl = 'https://kind-manaia.herokuapp.com/api/v1'
 
 // get all users
 export const getUsers = () => {
