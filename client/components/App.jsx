@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
 import { Route } from 'react-router-dom'
-
+import { useAuth0 } from '@auth0/auth0-react'
 // import { useAuth0 } from '@auth0/auth0-react'
 import HeaderBar from '../components/HeaderBar'
 import ProtectedRoute from '../auth/ProtectedRoute'
@@ -11,7 +12,17 @@ import CheckUser from './CheckUser'
 import CategoriesPage from './CategoriesPage'
 import Leaderboard from './LeaderBoard'
 
-function App () {
+import { fetchUserProfile } from '../actions/user'
+
+function App (props) {
+  const { user } = useAuth0()
+
+  useEffect(() => {
+    if (user?.email) {
+      props.dispatch(fetchUserProfile(user?.email))
+    }
+  }, [user?.email])
+
   return (
     <>
       <Route path='/' component={HeaderBar} />
@@ -24,4 +35,4 @@ function App () {
   )
 }
 
-export default App
+export default connect()(App)
