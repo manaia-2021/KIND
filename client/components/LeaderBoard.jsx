@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { makeStyles, Card, CardHeader, Avatar, Box, Button, Typography } from '@material-ui/core'
+import { makeStyles, withStyles, Grid, Card, CardHeader, Avatar, Box, Typography, LinearProgress } from '@material-ui/core'
 import { teal } from '@material-ui/core/colors'
 
 import { getLeaderboard } from '../apis/api'
@@ -22,6 +22,21 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#26a69a'
   }
 }))
+
+const BorderLinearProgress = withStyles((theme) => ({
+  root: {
+    height: 10,
+    borderRadius: 5
+  },
+  colorPrimary: {
+    backgroundColor: theme.palette.grey[theme.palette.type === 'light' ? 200 : 700]
+  },
+  bar: {
+    borderRadius: 5,
+    backgroundColor: '#1a90ff'
+  },
+}))(LinearProgress)
+
 
 function Leaderboard () {
   const classes = useStyles()
@@ -49,8 +64,8 @@ function Leaderboard () {
         </Typography>
         {users.map((user, index) => {
           return (
-            <>
-              <Card key={index} className={classes.root}>
+            <div key={`div-${index}`}>
+              <Card className={classes.root}>
                 <CardHeader
                   avatar={
                     <Avatar aria-label="user" className={classes.avatar}>
@@ -59,33 +74,13 @@ function Leaderboard () {
                   }
                   title={user.user_name}
                 />
+                <BorderLinearProgress variant="determinate" value={user.points} />
               </Card>
-              {/* Fake button to add spacing */}
-              <Button disabled={true}></Button>
-            </>
+              <br />
+            </div>
           )
         })}
       </Box>
-      {/* <div className='leaderboard'>
-        <table>
-          <thead>
-            <tr>
-              <th>User Name</th>
-              <th>Points</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user, index) => {
-              return (
-                <tr key={index}>
-                  <td>{user.user_name}</td>
-                  <td>{user.points}</td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </div> */}
     </>
 
   )
