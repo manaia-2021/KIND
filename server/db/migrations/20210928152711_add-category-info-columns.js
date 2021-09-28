@@ -8,6 +8,6 @@ exports.up = function (knex) {
 exports.down = function (knex) {
   return knex.schema.table('category', table => {
     table.dropColumn('description')
-    table.string('icon')
+    table.dropColumn('icon')
   })
 }

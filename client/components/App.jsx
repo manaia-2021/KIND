@@ -20,7 +20,8 @@ function App (props) {
 
   useEffect(() => {
     if (user?.email) {
-      props.dispatch(fetchUserProfile(user?.email))
+      const { name, email } = user
+      props.dispatch(fetchUserProfile({ name, email }))
     }
   }, [user?.email])
 
