@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Box, Button, Grid, makeStyles, Typography, Card, CardContent } from '@material-ui/core'
-// import { teal } from '@material-ui/core/colors'
+import { teal } from '@material-ui/core/colors'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => {
       marginTop: '20px'
     },
     buttonColor: {
-      // backgroundColor: teal[200]
+      backgroundColor: teal[400]
     }
   }
 })
