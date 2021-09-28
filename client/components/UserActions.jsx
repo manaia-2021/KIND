@@ -1,7 +1,7 @@
 import { red } from '@material-ui/core/colors'
 import React, { useEffect, useState } from 'react'
 
-import { getUserActions, updateUserAction, deleteUser } from '../apis/api'
+import { getUserActions, updateUserAction } from '../apis/api'
 
 function UserActions () {
   const [userAction, setUserAction] = useState([])
@@ -70,8 +70,13 @@ function UserActions () {
             })}
           </tbody>
         </table>
-        <div><h1>total points</h1></div>
-        {totalPoints}
+        <div className="points">
+          <label className=""> <h1> Total Points </h1></label>
+          <div className="">
+            <button className=""> <h1>{totalPoints}</h1></button>
+          </div>
+        </div>
+
       </div>
     </>
   )

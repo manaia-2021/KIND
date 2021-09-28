@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import UserActions from './UserActions'
 
-import { getUser } from '../apis/api'
+import { getUser, deleteUser } from '../apis/api'
 
 function UserDashboard () {
   const [user, setUser] = useState({})
@@ -16,6 +16,9 @@ function UserDashboard () {
       })
       .catch((error) => { console.log(error) })
   }, [])
+  function handleDeleteUser () {
+    deleteUser(user.id)
+  }
 
   return (
     <>
@@ -28,12 +31,11 @@ function UserDashboard () {
               <figure />
               <img className="avatar" src={user.avatar_url}/>
               <div className="">
-                <label className="">Points</label>
+                <label className=""></label>
                 <div className="">
-                  <button className="">{user.points}</button>
                 </div>
               </div>
-              <div className="">
+              <div className="name">
                 <label className="">Name</label>
                 <div className="">
                   <input class_name="" name="name" placeholder={user.name} />
@@ -61,9 +63,9 @@ function UserDashboard () {
             </form>
           </div>
         </div>
-        <div className="deleteUser">
-
-        </div>
+      </div>
+      <div className="deleteUser">
+        <button className="deleteButton" onClick={handleDeleteUser}>Delete my account</button>
       </div>
     </>
   )
