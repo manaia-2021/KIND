@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { red } from '@material-ui/core/colors'
+import { red, teal } from '@material-ui/core/colors'
 import { getCategoryActions } from '../apis/api'
 import ListItems from './ListItems'
 import { Button, Modal, Box, CardContent, CardActions, CardHeader, Card, makeStyles, Typography } from '@material-ui/core'
@@ -49,6 +49,10 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: '10px',
       border: '2px solid #555555'
     }
+  },
+  buttonColor: {
+    backgroundColor: teal[400],
+    color: '#FFFFFF'
   }
 }))
 
@@ -96,7 +100,7 @@ export default function CategoriesCards (props) {
       </CardContent>
       <CardActions disableSpacing>
 
-        <Button variant='outlined' onClick={handleOpen}>
+        <Button variant='contained' className={classes.buttonColor} onClick={handleOpen}>
           Select Actions
         </Button>
         <Modal

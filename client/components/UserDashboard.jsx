@@ -58,7 +58,7 @@ function UserDashboard (props) {
             </TextField>
           </form>
           <div>
-            <Button variant='contained' className={classes.fields}> Save </Button>
+            <Button variant='contained' color='primary' className={classes.fields}> Save </Button>
           </div>
           <div>
             <Button variant='contained' color='secondary' className={classes.fields} onClick={handleDeleteUser}> Delete my account
