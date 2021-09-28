@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Box, Grid, Toolbar, Button } from '@material-ui/core'
 import CategoriesCards from './CategoriesCards'
-import HeaderBar from './HeaderBar'
 
 import { getCategories, addNewUserActions } from '../apis/api'
 
@@ -43,7 +42,7 @@ const CategoriesPage = ({ user }) => {
 
   return (
     <>
-      <HeaderBar />
+      {/* <HeaderBar /> */}
       <Toolbar />
       <Box style={{ paddingTop: '15px' }}>
 
