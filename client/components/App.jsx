@@ -21,7 +21,6 @@ function App (props) {
   useEffect(() => {
     if (user?.email) {
       const { name, email } = user
-      console.log(name, email)
       props.dispatch(fetchUserProfile({ name, email }))
     }
   }, [user?.email])
