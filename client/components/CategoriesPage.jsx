@@ -45,11 +45,11 @@ const CategoriesPage = ({ user }) => {
       {/* <HeaderBar /> */}
       <Toolbar />
       <Box pt={10}>
-        <Typography>
-          <Box textAlign="center" fontSize="h4.fontSize" >
+        <Box textAlign="center" fontSize="h4.fontSize" >
+          <Typography>
         Which categories would you like to select from?
-          </Box>
-        </Typography>
+          </Typography>
+        </Box>
         <Box style={{ paddingTop: '50px' }}>
 
           <Grid container justifyContent='center' alignItems='stretch' direction='row' style={{ minHeight: '50vh', border: '0px solid black' }} spacing={3}>

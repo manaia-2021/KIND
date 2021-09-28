@@ -86,7 +86,7 @@ export default function CategoriesCards (props) {
         title={props.title}
       />
       <CardHeader
-        flexWrap='wrap'
+        flexwrap='wrap'
         title={props.title}
       />
       <CardContent>
