@@ -20,7 +20,9 @@ function App (props) {
 
   useEffect(() => {
     if (user?.email) {
-      props.dispatch(fetchUserProfile(user?.email))
+      const { name, email } = user
+      console.log(name, email)
+      props.dispatch(fetchUserProfile({ name, email }))
     }
   }, [user?.email])
 
@@ -28,7 +30,7 @@ function App (props) {
     <>
       <Route path='/' component={HeaderBar} />
       <Route exact path='/' component={LandingPage} />
-      <Route path='/categories' component={CategoriesPage} />
+      {/* <Route path='/categories' component={CategoriesPage} /> */}
       <Route path='/userDashboard' component={UserDashboard} />
       <Route path='/leaderboard' component={Leaderboard} />
       <ProtectedRoute path='/categories' component={CategoriesPage} />

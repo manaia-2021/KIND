@@ -1,6 +1,6 @@
 import request from 'superagent'
 
-const rootUrl = 'https://kind-manaia.herokuapp.com/api/v1'
+const rootUrl = '/api/v1'
 
 // get all users
 export const getUsers = () => {
@@ -11,9 +11,8 @@ export const getUsers = () => {
     })
 }
 
-export const createUser = (user) => {
-  // user needs to be object containing name, email address, googleId
-  return request.post(`${rootUrl}/users`).send(user)
+export const createUser = ({ name, email }) => {
+  return request.post(`${rootUrl}/users`).send({ name, email })
     .then(res => {
       return res.body.data.id
     })
@@ -32,7 +31,11 @@ export const getUserByEmail = (userEmail) => {
   return request
     .get(`${rootUrl}/users/email/${userEmail}`)
     .then(res => {
+      if (res.status === 404) return null
       return res.body.data.user
+    })
+    .catch(err => {
+      console.log(err)
     })
 }
 

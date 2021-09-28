@@ -40,8 +40,8 @@ router.get('/email/:email', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const { name, username, email } = req.body
-  db.addNewUser({ name, username, email })
+  const { name, email } = req.body
+  db.addNewUser({ name, email })
     .then((ids) => {
       res.status(201).json({ data: { id: ids[0] } })
       return null
