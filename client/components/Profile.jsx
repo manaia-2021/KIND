@@ -3,7 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 
 import Loading from './Loading'
 
-export default function Profile () {
+const Profile = (props) => {
   const { user, isAuthenticated, isLoading } = useAuth0()
 
   if (isLoading) {
@@ -20,3 +20,5 @@ export default function Profile () {
     )
   )
 }
+
+export default Profile

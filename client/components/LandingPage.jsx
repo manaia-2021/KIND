@@ -1,5 +1,11 @@
 import React from 'react'
+<<<<<<< HEAD
 import { Box, Button, makeStyles, Typography, Card, CardContent, Grid } from '@material-ui/core'
+=======
+import { Link } from 'react-router-dom'
+import { Box, Button, Grid, makeStyles, Typography } from '@material-ui/core'
+import { teal } from '@material-ui/core/colors'
+>>>>>>> development
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -82,6 +88,7 @@ export default function LandingPage () {
                 </Grid>
               </Grid>
             </Box>
+<<<<<<< HEAD
             <Box className={classes.button} display='flex' justifyContent='center'>
               <Button variant='contained' color='primary' href='/categories' className={classes.buttonColor}>
                 Get Started
@@ -89,6 +96,15 @@ export default function LandingPage () {
             </Box>
           </Typography>
         </Box>
+=======
+          </Grid>
+        </Grid>
+      </Box>
+      <Box className={classes.button} display='flex' justifyContent='center'>
+        <Button component={Link} variant='contained' to='/categories' className={classes.buttonColor}>
+          Start
+        </Button>
+>>>>>>> development
       </Box>
     </>
   )
