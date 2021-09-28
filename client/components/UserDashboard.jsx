@@ -3,7 +3,7 @@ import UserActions from './UserActions'
 
 import { getUser, deleteUser } from '../apis/api'
 
-function UserDashboard () {
+function UserDashboard (props) {
   const [user, setUser] = useState({})
 
   useEffect(() => {
@@ -18,6 +18,11 @@ function UserDashboard () {
   }, [])
   function handleDeleteUser () {
     deleteUser(user.id)
+      .then(() => {
+        props.history.push('/')
+        return null
+      })
+      .catch((error) => { console.log(error) })
   }
 
   return (

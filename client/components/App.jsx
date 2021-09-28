@@ -10,11 +10,8 @@ import LandingPage from './LandingPage'
 import Profile from './Profile'
 import CheckUser from './CheckUser'
 import CategoriesPage from './CategoriesPage'
-<<<<<<< HEAD
 import UserDashboard from './UserDashboard'
-=======
 import Leaderboard from './LeaderBoard'
->>>>>>> development
 
 import { fetchUserProfile } from '../actions/user'
 

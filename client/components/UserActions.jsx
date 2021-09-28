@@ -73,7 +73,8 @@ function UserActions () {
         <div className="points">
           <label className=""> <h1> Total Points </h1></label>
           <div className="">
-            <button className=""> <h1>{totalPoints}</h1></button>
+            <div> <h1>{totalPoints}</h1> </div>
+            <button className=""> <h1>Save Points</h1></button>
           </div>
         </div>
 
