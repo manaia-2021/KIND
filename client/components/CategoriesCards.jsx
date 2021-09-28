@@ -68,6 +68,7 @@ export default function CategoriesCards (props) {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
+    console.log('card props', props)
     getCategoryActions(props.id)
       .then(actions => {
         setActions(actions)
@@ -86,7 +87,7 @@ export default function CategoriesCards (props) {
         title={props.title}
       />
       <CardHeader
-        flexWrap='wrap'
+        flexwrap='wrap'
         title={props.title}
       />
       <CardContent>
