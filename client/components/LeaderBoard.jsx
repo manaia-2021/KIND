@@ -34,9 +34,8 @@ const BorderLinearProgress = withStyles((theme) => ({
   bar: {
     borderRadius: 5,
     backgroundColor: '#1a90ff'
-  },
+  }
 }))(LinearProgress)
-
 
 function Leaderboard () {
   const classes = useStyles()
@@ -49,11 +48,6 @@ function Leaderboard () {
       })
       .catch(() => { ' something went wrong' })
   }, [])
-  // function rank (arr, f) {
-  //   const sorted = arr.slice().sort(f)
-  //   return arr.map(x => sorted.findIndex(s => f(x, s) === 0) + 1)
-  // }
-  // dummyData.sort((input1, input2) => (input1.points < input2.points) ? 1 : -1
 
   return (
 
@@ -62,7 +56,7 @@ function Leaderboard () {
         <Typography className={classes.title}>
           Leaderboard
         </Typography>
-        {users.map((user, index) => {
+        {users.sort((a, b) => (a.points < b.points) ? 1 : -1).map((user, index) => {
           return (
             <div key={`div-${index}`}>
               <Card className={classes.root}>
