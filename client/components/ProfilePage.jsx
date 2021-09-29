@@ -15,7 +15,7 @@ function ProfilePage (props) {
         <Box>
           <UserDashboard/>
         </Box>
-        <Box style={{ border: '2px solid black' }}>
+        <Box>
           <UserActions/>
         </Box>
       </Box>
