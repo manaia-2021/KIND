@@ -7,54 +7,46 @@ import { getUserActions, updateUserAction, updateUserPoints } from '../apis/api'
 import { Box, IconButton } from '@material-ui/core'
 
 function DashboardPage ({ user }) {
-  const [userAction, setUserAction] = useState([])
+  const [userActions, setUserActions] = useState([])
   const [totalPoints, setTotalPoints] = useState(0)
 
   useEffect(() => {
     if (user?.id) {
       getUserActions(user.id)
-        .then(newUserAction => {
-          setUserAction(newUserAction)
-          setTotalPoints(countPoints(newUserAction))
+        .then(actions => {
+          setUserActions(actions)
           return null
         })
         .catch((error) => { console.log(error) })
     }
   }, [user])
 
-  function countPoints (arr) {
+  useEffect(() => {
+    if (userActions.length > 0) {
+      countPoints(userActions)
+    }
+  }, [userActions])
+
+  function countPoints (actions) {
     let points = 0
-    const completedActions = arr.filter((action) => action.completed === 1)
+    const completedActions = actions.filter((action) => action.completed)
     completedActions.forEach((action) => {
       points += Number(action.points)
     })
     updateUserPoints(user.id, points)
-    return points
+    setTotalPoints(points)
   }
 
   function handleChange (evt) {
-    const { name, checked } = evt.target
-    // update the database for specific user, user action (name) and the new status
-    updateUserAction(user.id, name, checked)
-
-    const updateUAction = userAction.map(action => {
-      if (action.action_id === Number(name)) {
-        if (checked) {
-          action.completed = 1
-          return action
-        } else {
-          action.completed = 0
-          return action
-        }
-      } else {
-        return action
-      }
-    })
-
-    setUserAction(updateUAction)
-    setTotalPoints(countPoints(updateUAction))
+    const { name: userActionId, checked } = evt.target
+    const updatedActions = userActions.map(userAction => userAction.id === Number(userActionId) ? {
+      ...userAction,
+      completed:
+      checked
+    } : userAction)
+    updateUserAction(user.id, userActionId, checked)
+    setUserActions(updatedActions)
   }
-  // updateUserAction()
 
   return (
     <>
@@ -86,12 +78,12 @@ function DashboardPage ({ user }) {
               </tr>
             </thead>
             <tbody>
-              {userAction.map((action, index) => {
+              {userActions.map((userAction) => {
                 return (
-                  <tr key={index}>
-                    <td className='table-data'>{action.description}</td>
-                    <td>{action.points}</td>
-                    <th><input type="checkbox" name={action.id} onChange={handleChange} checked={action.completed === 1} /></th>
+                  <tr key={userAction.id}>
+                    <td className='table-data'>{userAction.description}</td>
+                    <td>{userAction.points}</td>
+                    <th><input type="checkbox" name={userAction.id} onChange={handleChange} checked={userAction.completed} /></th>
                   </tr>
                 )
               })}

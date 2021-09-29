@@ -90,7 +90,7 @@ function getActionsByCategory (id, db = connection) {
 function getUserActionByUser (id, db = connection) {
   return db('user_action')
     .join('action', 'action_id', '=', 'action.id')
-    .select()
+    .select('user_action.id as id', 'action.id as action_id', 'user_id', 'category_id', 'action.title as title', 'action.description as description', 'completed', 'points', 'counter', 'created_at', 'updated_at')
     .where('user_id', id)
 }
 
@@ -105,9 +105,9 @@ function addNewUserActions (userId, actionIds, db = connection) {
 }
 
 // Update user action
-function updateUserAction (actionId, status, db = connection) {
+function updateUserAction (userActionId, status, db = connection) {
   return db('user_action')
-    .where('action_id', actionId)
+    .where('id', userActionId)
     .update({
       completed: status
     })
