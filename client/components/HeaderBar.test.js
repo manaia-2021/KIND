@@ -1,6 +1,8 @@
 import React from 'react'
 import { screen, render, fireEvent } from '@testing-library/react'
 import { Provider } from 'react-redux'
+import { BrowserRouter as Router } from 'react-router-dom'
+
 
 import store from '../store'
 
@@ -16,14 +18,14 @@ jest.mock('react-router-dom', () => ({
 }))
 
 test('HeaderBar component has loaded', () => {
-  render(<Provider store={store}><HeaderBar /></Provider>)
+  render(<Provider store={store}><Router><HeaderBar /></Router></Provider>)
 
   const heading = screen.getByText(/KIND/)
   expect(heading).not.toBeUndefined()
 })
 
 test('HeaderBar click KIND button', () => {
-  render(<Provider store={store}><HeaderBar /></Provider>)
+  render(<Provider store={store}><Router><HeaderBar /></Router></Provider>)
 
   const button = screen.getByText('KIND')
   fireEvent.click(button)
@@ -31,7 +33,7 @@ test('HeaderBar click KIND button', () => {
 })
 
 test('HeaderBar click Leaderboard button', () => {
-  render(<Provider store={store}><HeaderBar /></Provider>)
+  render(<Provider store={store}><Router><HeaderBar /></Router></Provider>)
 
   const button = screen.getByText('Leaderboard')
   fireEvent.click(button)
