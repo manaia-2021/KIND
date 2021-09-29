@@ -41,14 +41,18 @@ function Profile (props) {
   }
 
   function handleButtonClick () {
-    updateUserProfile({ id: props.user.id, name: form.name, username: form.username })
-      .then(() => {
-        alert('User profile updated successfullly')
-        return null
-      })
-      .catch(() => {
-        alert('Could not update your profile')
-      })
+    if (form.name === '' || form.username === '') {
+      alert('Fields must not be blank ')
+    } else {
+      updateUserProfile({ id: props.user.id, name: form.name, username: form.username })
+        .then(() => {
+          alert('User profile updated successfullly')
+          return null
+        })
+        .catch(() => {
+          alert('Could not update your profile')
+        })
+    }
   }
 
   return (
