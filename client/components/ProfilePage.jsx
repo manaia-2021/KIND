@@ -24,12 +24,15 @@ function Profile (props) {
   }, [props.user])
 
   function handleDeleteUser () {
-    deleteUser(props.user.id)
-      .then(() => {
-        logout({ returnTo: window.location.origin })
-        return null
-      })
-      .catch((error) => { console.log(error) })
+    const check = confirm('Are you sure you want to delete your account? This action is final.')
+    if (check === true) {
+      deleteUser(props.user.id)
+        .then(() => {
+          logout({ returnTo: window.location.origin })
+          return null
+        })
+        .catch((error) => { console.log(error) })
+    }
   }
 
   const classes = useStyles()
