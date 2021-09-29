@@ -20,32 +20,40 @@ body {
 .profileboard {
   display: flex;
   
+}
 
+.table-data {
+  padding-bottom: 1em;
+  padding-top: 1em
+}
+
+th {
+  text-align: left
 }
 .dashboard  {
-  // margin-top: 90px;
-  // margin-left: 10%;
+  margin-top: 90px;
+  margin-left: 10%;
   width: 400px;
   justify-content: center
-  
-  
  } 
  .userAction {
   // margin-left: 25%;
-  margin-top: 100px;
+  margin-top: 20px;
   width: 400px;
   justify-content: center
  }
 
  .deleteUser {
    display: flex;
-  //  margin-top: 120px;
+   margin-top: 120px;
    margin-left: 68%;
  }
 .points {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   display: flex;
-  margin-left: 25%;
-  // margin-top: 10px;
+  margin-top: 40px;
 }
 .name{
   margin-top: 5%;
