@@ -14,6 +14,7 @@ import UserDashboard from './UserDashboard'
 import Leaderboard from './LeaderBoard'
 
 import { fetchUserProfile } from '../actions/user'
+import ProfilePage from './ProfilePage'
 
 function App (props) {
   const { user } = useAuth0()
@@ -29,11 +30,11 @@ function App (props) {
     <>
       <Route path='/' component={HeaderBar} />
       <Route exact path='/' component={LandingPage} />
-      <Route path='/userDashboard' component={UserDashboard} />
+      {/* <Route path='/userDashboard' component={UserDashboard} /> */}
       <Route path='/leaderboard' component={Leaderboard} />
       <ProtectedRoute path='/categories' component={CategoriesPage} />
       <ProtectedRoute path='/users' component={CheckUser} />
-      <ProtectedRoute path='/profile' component={UserDashboard} />
+      <ProtectedRoute path='/profile' component={ProfilePage} />
     </>
   )
 }
