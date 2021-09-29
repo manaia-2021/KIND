@@ -4,11 +4,20 @@ import { Link } from 'react-router-dom'
 import AddIcon from '@material-ui/icons/Add'
 
 import { getUserActions, updateUserAction, updateUserPoints } from '../apis/api'
-import { Box, IconButton } from '@material-ui/core'
+import { Box, IconButton, Tooltip, withStyles } from '@material-ui/core'
 
 function DashboardPage ({ user }) {
   const [userActions, setUserActions] = useState([])
   const [totalPoints, setTotalPoints] = useState(0)
+
+  const LightTooltip = withStyles((theme) => ({
+    tooltip: {
+      backgroundColor: theme.palette.common.white,
+      color: 'rgba(0, 0, 0, 0.87)',
+      boxShadow: theme.shadows[1],
+      fontSize: 14
+    }
+  }))(Tooltip)
 
   useEffect(() => {
     if (user?.id) {
@@ -65,16 +74,21 @@ function DashboardPage ({ user }) {
             justifyContent='center'
             alignItems='center'
           >
-            <h2>My Actions</h2>
-            <IconButton component={Link} to='/categories' color="primary">
-              <AddIcon fontSize="large" />
-            </IconButton>
+            <h2>My Actions&nbsp;&nbsp;</h2>
+            <LightTooltip title="Add" placement="right">
+              <IconButton component={Link} to='/categories' color="primary">
+                <AddIcon fontSize="large" />
+              </IconButton>
+            </LightTooltip>
           </Box>
           <table>
             <thead>
               <tr>
                 <th>Actions</th>
                 <th>Points</th>
+                <th/>
+                <th/>
+                <th>Complete</th>
               </tr>
             </thead>
             <tbody>
@@ -82,8 +96,10 @@ function DashboardPage ({ user }) {
                 return (
                   <tr key={`userAction ${userAction.id}`}>
                     <td className='table-data'>{userAction.description}</td>
+                    <td/>
                     <td>{userAction.points}</td>
-                    <th><input type="checkbox" name={userAction.id} onChange={handleChange} checked={userAction.completed} /></th>
+                    <td/>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name={userAction.id} onChange={handleChange} checked={userAction.completed} /></td>
                   </tr>
                 )
               })}
