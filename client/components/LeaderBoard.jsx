@@ -59,7 +59,7 @@ function Leaderboard () {
         <Typography className={classes.title}>
           Leaderboard
         </Typography>
-        {users.sort((a, b) => (a.points < b.points) ? 1 : -1).map((user, index) => {
+        {users.map((user, index) => {
           return (
             <div key={`div-${index}`}>
               <Card className={classes.root}>
