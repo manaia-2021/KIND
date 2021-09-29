@@ -60,6 +60,14 @@ function UserActions ({ user }) {
   return (
     <>
       <div className="userAction">
+        <div className="points">
+          <label>
+            <h1> Total Points: {totalPoints} </h1>
+          </label>
+        </div>
+        <Button component={Link} variant='contained' to='/categories' style={{ backgroundColor: teal[400], color: '#FFFFFF' }}>
+          Choose more actions!
+        </Button>
         <h3> User Actions</h3>
         <table>
           <thead>
@@ -83,15 +91,6 @@ function UserActions ({ user }) {
             })}
           </tbody>
         </table>
-        <div className="points">
-          <label>
-            <h1> Total Points: {totalPoints} </h1>
-          </label>
-        </div>
-        <Button component={Link} variant='contained' to='/categories' style={{ backgroundColor: teal[400], color: '#FFFFFF' }}>
-          Choose more actions!
-        </Button>
-
       </div>
     </>
   )
