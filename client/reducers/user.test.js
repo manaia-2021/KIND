@@ -1,5 +1,5 @@
 import userReducer from './user'
-import { fetchUserProfile, FETCH_USER } from '../actions/user'
+import { FETCH_USER } from '../actions/user'
 
 describe('userReducer', () => {
   const mockUser = { id: 8, name: 'test name', user_name: 'testuser', email_address: 'test@gmail.com', avatar_url: 'https://avatars.dicebear.com/api/bottts/211.svg', points: 0 }
