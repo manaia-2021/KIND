@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import UserActions from './UserActions'
+// import UserActions from './UserActions'
 
 import { deleteUser } from '../apis/api'
-import { Avatar, Button, makeStyles, TextField } from '@material-ui/core'
+import { Avatar, Button, makeStyles, TextField, Box } from '@material-ui/core'
 import { teal } from '@material-ui/core/colors'
 
 const useStyles = makeStyles((theme) => ({
@@ -35,24 +35,23 @@ function UserDashboard (props) {
 
   return (
     <>
-      <div className="profileboard">
-        <UserActions />
-        <div className="dashboard">
-          <form>
-            <Avatar alt='avatar picture' src={props.user.avatar_url}/>
-            <TextField label='Name' variant='outlined' className={classes.fields} value={form.name} />
-            <TextField label="username" value={form.username} variant='outlined' className={classes.fields} />
-            <TextField label='Email' variant='outlined' className={classes.fields} value={form.email} disabled />
-          </form>
-          <div>
-            <Button variant='contained' style={{ backgroundColor: teal[400], color: '#FFFFFF' }} className={classes.fields}> Save </Button>
-          </div>
-          <div>
-            <Button variant='contained' color='secondary' className={classes.fields} onClick={handleDeleteUser}> Delete my account
-            </Button>
-          </div>
-        </div>
-      </div>
+      <Box display='flex'
+        alignItems='center'
+        flexDirection='column'
+      >
+        <Avatar alt='avatar picture' src={props.user.avatar_url}
+          style={{ minWidth: '100px', height: 'auto' }} />
+        <Box
+          display='flex'
+          flexDirection='column'>
+          <TextField label='Name' variant='outlined' className={classes.fields} value={form.name} />
+          <TextField label="username" value={form.username} variant='outlined' className={classes.fields} />
+          <TextField label='Email' variant='outlined' className={classes.fields} value={form.email} disabled />
+          <Button variant='contained' style={{ backgroundColor: teal[400], color: '#FFFFFF' }} className={classes.fields}> Save </Button>
+          <Button variant='contained' color='secondary' className={classes.fields} onClick={handleDeleteUser}> Delete my account
+          </Button>
+        </Box>
+      </Box>
     </>
   )
 }
