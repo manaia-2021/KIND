@@ -7,11 +7,11 @@ import ProtectedRoute from '../auth/ProtectedRoute'
 import HeaderBar from '../components/HeaderBar'
 import LandingPage from './LandingPage'
 import CategoriesPage from './CategoriesPage'
-import UserDashboard from './UserDashboard'
+import DashboardPage from './DashboardPage'
+import ProfilePage from './ProfilePage'
 import Leaderboard from './LeaderBoard'
 
 import { fetchUserProfile } from '../actions/user'
-import ProfilePage from './ProfilePage'
 
 function App (props) {
   const { user, isAuthenticated } = useAuth0()
@@ -30,6 +30,7 @@ function App (props) {
       <Route path='/leaderboard' component={Leaderboard} />
       <ProtectedRoute path='/categories' component={CategoriesPage} />
       <ProtectedRoute path='/profile' component={ProfilePage} />
+      <ProtectedRoute path='/dashboard' component={DashboardPage} />
     </>
   )
 }
