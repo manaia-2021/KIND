@@ -54,7 +54,6 @@ function DashboardPage ({ user }) {
     setUserAction(updateUAction)
     setTotalPoints(countPoints(updateUAction))
   }
-
   // updateUserAction()
 
   return (
