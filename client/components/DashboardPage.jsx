@@ -80,7 +80,7 @@ function DashboardPage ({ user }) {
             <tbody>
               {userActions.map((userAction) => {
                 return (
-                  <tr key={userAction.id}>
+                  <tr key={`userAction ${userAction.id}`}>
                     <td className='table-data'>{userAction.description}</td>
                     <td>{userAction.points}</td>
                     <th><input type="checkbox" name={userAction.id} onChange={handleChange} checked={userAction.completed} /></th>

@@ -105,9 +105,9 @@ function addNewUserActions (userId, actionIds, db = connection) {
 }
 
 // Update user action
-function updateUserAction (userActionId, status, db = connection) {
+function updateUserAction (id, status, db = connection) {
   return db('user_action')
-    .where('id', userActionId)
+    .where('id', id)
     .update({
       completed: status
     })
