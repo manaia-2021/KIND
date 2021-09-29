@@ -12,7 +12,7 @@ afterEach(() => {
 test('send request to random avatar api and returns response', () => {
   const response = getRandomAvatar()
 
-  expect(response).toBe('https://avatars.dicebear.com/api/bottts/123.svg')
+  expect(response).toBe('https://avatars.dicebear.com/api/jdenticon/123.svg')
 })
 
 test('create random username', () => {

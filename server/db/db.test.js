@@ -21,7 +21,7 @@ test('getAllUsers returns all users', () => {
 })
 
 test('addNewUser adds a new user', () => {
-  const user = { name: 'bob', user_name: 'kindBob' }
+  const user = { name: 'bob', email: 'bob@test.com' }
   return db.addNewUser(user, testDb)
     .then(() => {
       return db.getAllUsers(testDb)
@@ -72,7 +72,7 @@ test('getAllActions returns all actions', () => {
 test('getUserActionByUser returns the correct number of actions', () => {
   return db.getUserActionByUser(1, testDb)
     .then(actions => {
-      expect(actions).toHaveLength(1)
+      expect(actions).toHaveLength(4)
     })
 })
 
@@ -81,5 +81,51 @@ test('getActionsByCategory returns the correct number of actions', () => {
     // eslint-disable-next-line promise/always-return
     .then(actions => {
       expect(actions).toHaveLength(8)
+    })
+})
+
+test('addNewUserActions updates actions of a given user and returns id of last updated row', () => {
+  return db.addNewUserActions(1, [1, 2], testDb)
+    .then(updatedRows => {
+      expect(updatedRows[0]).not.toBeNull()
+    })
+})
+
+describe('updateUserAction', () => {
+  test('updateUserAction updates status of action successfully for found user returning 1', () => {
+    return db.updateUserAction(1, true, testDb)
+      .then(updatedRows => {
+        expect(updatedRows).toBe(1)
+      })
+  })
+
+  test('updateUserAction returns 0 if user not found', () => {
+    return db.updateUserAction(999, true, testDb)
+      .then(updatedRows => {
+        expect(updatedRows).toBe(0)
+      })
+  })
+})
+
+describe('updateUserPoints', () => {
+  test('updateUserPoints updates users points for user found returning 1', () => {
+    return db.updateUserPoints(1, 100, testDb)
+      .then((res) => {
+        expect(res).toBe(1)
+      })
+  })
+
+  test('updateUserPoints for user not found returns 0 to indicate 0 rows updated', () => {
+    return db.updateUserPoints(999, 100, testDb)
+      .then((res) => {
+        expect(res).toBe(0)
+      })
+  })
+})
+
+test('getUsersByPoints gets users points', () => {
+  return db.getUsersByPoints(testDb)
+    .then((res) => {
+      expect(res).toHaveLength(5)
     })
 })

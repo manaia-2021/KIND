@@ -1,25 +1,37 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
 import { Route } from 'react-router-dom'
+import { useAuth0 } from '@auth0/auth0-react'
 
-// import { useAuth0 } from '@auth0/auth0-react'
-import HeaderBar from '../components/HeaderBar'
 import ProtectedRoute from '../auth/ProtectedRoute'
-
+import HeaderBar from '../components/HeaderBar'
 import LandingPage from './LandingPage'
-import Profile from './Profile'
-import CheckUser from './CheckUser'
 import CategoriesPage from './CategoriesPage'
+import UserDashboard from './UserDashboard'
+import Leaderboard from './LeaderBoard'
 
-function App () {
+import { fetchUserProfile } from '../actions/user'
+import ProfilePage from './ProfilePage'
+
+function App (props) {
+  const { user, isAuthenticated } = useAuth0()
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      const { name, email } = user
+      props.dispatch(fetchUserProfile({ name, email }))
+    }
+  }, [isAuthenticated])
+
   return (
     <>
       <Route path='/' component={HeaderBar} />
       <Route exact path='/' component={LandingPage} />
-      <Route path='/categories' component={CategoriesPage} />
-      <ProtectedRoute path='/users' component={CheckUser} />
-      <ProtectedRoute path='/profile' component={Profile} />
+      <Route path='/leaderboard' component={Leaderboard} />
+      <ProtectedRoute path='/categories' component={CategoriesPage} />
+      <ProtectedRoute path='/profile' component={UserDashboard} />
     </>
   )
 }
 
-export default App
+export default connect()(App)

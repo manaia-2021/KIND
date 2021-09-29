@@ -1,17 +1,34 @@
 import nock from 'nock'
-import { addNewUserActions, createUser, deleteUser, getCategories, getCategoryActions, getLeaderboard, getUser, getUserByEmail, getUserActions, updateUserAction } from './api'
+import { addNewUserActions, createUser, deleteUser, getCategories, getCategoryActions, getLeaderboard, getUser, getUserByEmail, getUserActions, updateUserAction, updateUserPoints, findOrCreateUser } from './api'
 
-describe('createUser', () => {
+// describe('createUser', () => {
+//   test('send user to api/v1/users and return res.body', () => {
+//     expect.assertions(2)
+//     const user = { name: 'test name', email: 'test@gmail.com' }
+
+//     const scope = nock('http://localhost:80')
+//       .post('/api/v1/users', user)
+//       .reply(201, { data: { id: 7 } })
+
+//     return createUser(user).then((id) => {
+//       expect(id).toBe(7)
+//       expect(scope.isDone()).toBeTruthy()
+//       return null
+//     })
+//   })
+// })
+
+describe('findOrCreateUser', () => {
   test('send user to api/v1/users and return res.body', () => {
     expect.assertions(2)
+    const user = { name: 'test name', email: 'test@gmail.com' }
 
     const scope = nock('http://localhost:80')
-      .post('/api/v1/users', { name: 'test name', username: 'testusername', email: 'test@gmail.com' })
-      .reply(201, { status: 'success', data: { id: 7 } })
+      .put('/api/v1/users', user)
+      .reply(201, { data: { user: { id: 7, name: 'test name', email: 'test@gmail.com' } } })
 
-    const user = { name: 'test name', username: 'testusername', email: 'test@gmail.com' }
-    return createUser(user).then((id) => {
-      expect(id).toBe(7)
+    return findOrCreateUser(user).then((user) => {
+      expect(user).toEqual({ id: 7, name: 'test name', email: 'test@gmail.com' })
       expect(scope.isDone()).toBeTruthy()
       return null
     })
@@ -97,6 +114,21 @@ describe('updateUserAction', () => {
   })
 })
 
+describe('updateUserPoints', () => {
+  test('PATCH request to api/v1/users/1/points returning null', () => {
+    expect.assertions(1)
+
+    const scope = nock('http://localhost:80')
+      .patch('/api/v1/users/1/points', { points: 100 })
+      .reply(201)
+
+    return updateUserPoints(1, 100).then(() => {
+      expect(scope.isDone()).toBeTruthy()
+      return null
+    })
+  })
+})
+
 describe('deleteUser', () => {
   test('DELETE request to api/v1/users/1 deletes user returning null', () => {
     expect.assertions(1)
@@ -118,7 +150,7 @@ describe('getCategories', () => {
 
     const scope = nock('http://localhost:80')
       .get('/api/v1/categories')
-      .reply(200, { status: 'success', data: { categories: [{ id: 1, title: 'travel' }] } })
+      .reply(200, { data: { categories: [{ id: 1, title: 'travel' }] } })
 
     return getCategories().then((categories) => {
       expect(categories).toHaveLength(1)

@@ -1,21 +1,23 @@
 import React from 'react'
-import { Box, Button, Grid, makeStyles, Typography } from '@material-ui/core'
+import { Link } from 'react-router-dom'
+import { Box, Button, Grid, makeStyles, Typography, Card, CardContent } from '@material-ui/core'
 import { teal } from '@material-ui/core/colors'
 
 const useStyles = makeStyles((theme) => {
   return {
     page: {
-      background: '#e8edea',
+      background: '#ffffff',
       marginTop: '80px',
-      height: '700px',
-      border: '1px solid black',
-      backgroundColor: teal[100]
+      height: '700px'
+
     },
     button: {
       marginTop: '20px'
     },
     buttonColor: {
-      backgroundColor: teal[200]
+      backgroundColor: teal[400],
+      color: '#FFFFFF',
+      marginBottom: '20px'
     }
   }
 })
@@ -24,40 +26,74 @@ export default function LandingPage () {
   const classes = useStyles()
   return (
     <>
-      <Box>
-        <Grid container spacing={1}>
-          <Grid item xs={12} sm={12} md={6} lg={6}>
-            <Box className={classes.page}>
-              <Typography variant="h3">
-            What is a carbon footprint?
-              </Typography>
-              <Typography variant="h6">
-The term carbon footprint crops up a lot these days. What exactly does it actually mean?
-
-Carbon footprint is a horribly abused phrase, so it’s worth spelling out exactly what it means.
-
-When talking about climate change, footprint is a metaphor for the total impact that something has. And carbon is a shorthand for all the different greenhouse gases that contribue to global warming.
-
-The term carbon footprint, therefore, is a shorthand to describe the best estimate that we can get of the full climate change impact of something. That something could be anything – an activity, an item, a lifestyle, a company, a country or even the whole world.
-              </Typography>
-              <Typography variant="h5">
-                Here at KIND we want to enable you to make the right choices and to have fun while doing it.
-              </Typography>
+      <Box display='flex' pt={3}>
+        <Box className={classes.page} px={'25%'}>
+          <Typography component="div">
+            <Box textAlign="center" fontSize="h3.fontSize" py={3}>
+                Take Action Against Climate Change
             </Box>
-          </Grid>
-
-          <Grid item xs={12} sm={12} md={6} lg={6}>
-            <Box className={classes.page}>
-              {/* 825w x 700h image */}
-              <img src='/What-is-a-carbon-footprint-825x700.png' alt='KIND' />
+            <Box textAlign="left" m={1} pb={3}>
+                Climate change is affecting every country on every continent. It is disrupting national economies and affecting lives. Weather patterns are changing, sea levels are rising, and weather related events are becoming more extreme.
             </Box>
-          </Grid>
-        </Grid>
-      </Box>
-      <Box className={classes.button} display='flex' justifyContent='center'>
-        <Button variant='contained' href='/categories' className={classes.buttonColor}>
-          Start
-        </Button>
+            <Box textAlign="left" m={1}>
+                Saving lives and livelihoods requires urgent action and here at KIND we want to enable you to make the right choices and to have fun while doing it.
+            </Box>
+            <Box textAlign="center" fontSize="h4.fontSize" py={3}>
+                How does it work?
+            </Box>
+            <Box textAlign="left" m={1}>
+                Our philosophy is that lots of people making small changes can make a big difference on climate change. Getting started is really simple:
+            </Box>
+
+            {/* Cards */}
+            <Box py={5} px={5}>
+              <Grid container spacing={6} justifyContent="center">
+                <Grid item md={4} style={{ display: 'flex' }}>
+                  <Card sx={{ minWidth: 275 }} >
+                    <CardContent display='flex' >
+                      <Typography variant="h5" component="div" >
+                        1. Select
+                      </Typography>
+                      <Typography variant="body2">
+                        Choose from the list of high-impact, everyday actions to help reduce your carbon footprint.
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+                <Grid item md={4} style={{ display: 'flex' }}>
+                  <Card sx={{ minWidth: 275 }}>
+                    <CardContent>
+                      <Typography variant="h5" component="div">
+                        2. Take Action
+                      </Typography>
+                      <Typography variant="body2">
+                        You’ll be awarded points for each action you complete. Points vary based on the action’s impact on climate change.
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+                <Grid item md={4} style={{ display: 'flex' }}>
+                  <Card sx={{ minWidth: 275 }}>
+                    <CardContent>
+                      <Typography variant="h5" component="div">
+                        3. Celebrate
+                      </Typography>
+                      <Typography variant="body2">
+                        Compete with friends and family on the leaderboard.
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              </Grid>
+            </Box>
+            <Box className={classes.button} display='flex' justifyContent='center'>
+              <Button component={Link} variant='contained' to='/categories' className={classes.buttonColor}>
+                  Start
+              </Button>
+            </Box>
+
+          </Typography>
+        </Box>
       </Box>
     </>
   )

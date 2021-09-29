@@ -1,6 +1,6 @@
 const request = require('supertest')
 const server = require('../server')
-const { getAllUsers, getUser, getUserByEmail, addNewUser, deleteUser, getUserActionByUser, addNewUserActions, updateUserAction } = require('../db/db')
+const { getAllUsers, getUser, getUserByEmail, addNewUser, deleteUser, getUserActionByUser, addNewUserActions, updateUserAction, updateUserPoints } = require('../db/db')
 
 jest.mock('../db/db')
 
@@ -122,18 +122,68 @@ describe('GET /api/v1/user/email/email@address.com', () => {
   })
 })
 
+describe('PUT /api/v1/users', () => {
+  test('if user already found returns status code of 200 with user details', () => {
+    getUserByEmail.mockResolvedValue({ id: 1, name: 'john doe', email_address: 'johndoe@gmail.com' })
+    // addNewUser.mockResolvedValue([1])
+
+    expect.assertions(4)
+    return request(server)
+      .put('/api/v1/users')
+      .send({ name: 'john doe', email: 'johndoe@gmail.com' })
+      .then((res) => {
+        expect(res.status).toBe(200)
+        expect(res.body.data).toEqual({ user: { id: 1, name: 'john doe', email_address: 'johndoe@gmail.com' } })
+        expect(getUserByEmail).toHaveBeenCalledWith('johndoe@gmail.com')
+        expect(addNewUser).not.toHaveBeenCalled()
+        return null
+      })
+  })
+
+  test('if user not found, create user and return status of 201 with newly created user', () => {
+    getUserByEmail.mockResolvedValue()
+    addNewUser.mockResolvedValue({ id: 10, name: 'john doe', email_address: 'johndoe@gmail.com' })
+
+    expect.assertions(4)
+    return request(server)
+      .put('/api/v1/users')
+      .send({ name: 'john doe', email: 'johndoe@gmail.com' })
+      .then((res) => {
+        expect(res.status).toBe(201)
+        expect(getUserByEmail).toHaveBeenCalledWith('johndoe@gmail.com')
+        expect(addNewUser).toHaveBeenCalledWith({ name: 'john doe', email: 'johndoe@gmail.com' })
+        expect(res.body.data).toEqual({ user: { id: 10, name: 'john doe', email_address: 'johndoe@gmail.com' } })
+        return null
+      })
+  })
+
+  test('returns status code of 500 on error with appropriate error message', () => {
+    addNewUser.mockRejectedValue(new Error('not working'))
+
+    expect.assertions(2)
+    return request(server)
+      .post('/api/v1/users')
+      .send({ name: 'john doe', username: 'johndoe' })
+      .then(res => {
+        expect(res.status).toBe(500)
+        expect(res.body.message).toBe('Backend server error')
+        return null
+      })
+  })
+})
+
 describe('POST /api/v1/users', () => {
-  test('returns status code of 201 and id of newly created user', () => {
-    addNewUser.mockResolvedValue([1])
+  test('returns status code of 201 an details of newly created user', () => {
+    addNewUser.mockResolvedValue({ id: 10, name: 'john doe', email_address: 'johndoe@gmail.com' })
 
     expect.assertions(3)
     return request(server)
       .post('/api/v1/users')
-      .send({ name: 'john doe', username: 'johndoe' })
+      .send({ name: 'john doe', email: 'johndoe@gmail.com' })
       .then((res) => {
         expect(res.status).toBe(201)
-        expect(res.body.data).toEqual({ id: 1 })
-        expect(addNewUser).toHaveBeenCalledWith({ name: 'john doe', username: 'johndoe' })
+        expect(res.body.data).toEqual({ user: { id: 10, name: 'john doe', email_address: 'johndoe@gmail.com' } })
+        expect(addNewUser).toHaveBeenCalledWith({ name: 'john doe', email: 'johndoe@gmail.com' })
         return null
       })
   })
@@ -279,7 +329,7 @@ describe('PATCH /api/v1/users/1/actions', () => {
 
     expect.assertions(3)
     return request(server)
-      .get('/api/v1/users/999')
+      .patch('/api/v1/users/999/actions')
       .then((res) => {
         expect(res.status).toBe(404)
         expect(res.body.message).toBe('No user with that corresponding ID was found')
@@ -296,6 +346,52 @@ describe('PATCH /api/v1/users/1/actions', () => {
     return request(server)
       .patch('/api/v1/users/1/actions')
       .send({ userActionId: 1, status: true })
+      .then(res => {
+        expect(res.status).toBe(500)
+        expect(res.body.message).toBe('Backend server error')
+        return null
+      })
+  })
+})
+
+describe('PATCH /api/v1/users/1/points', () => {
+  test('returns status code of 200', () => {
+    updateUserPoints.mockResolvedValue()
+
+    expect.assertions(2)
+    return request(server)
+      .patch('/api/v1/users/1/points')
+      .send({ points: 100 })
+      .then((res) => {
+        expect(res.status).toBe(201)
+        expect(updateUserPoints).toHaveBeenCalledWith(1, 100)
+        return null
+      })
+  })
+
+  test('returns a status code of 404 and appropriate error message if user not found', () => {
+    getUser.mockResolvedValue()
+    updateUserPoints.mockResolvedValue(0)
+
+    expect.assertions(3)
+    return request(server)
+      .patch('/api/v1/users/999/points')
+      .then((res) => {
+        expect(res.status).toBe(404)
+        expect(res.body.message).toBe('No user with that corresponding ID was found')
+        expect(updateUserPoints).not.toHaveBeenCalled()
+        return null
+      })
+  })
+
+  test('returns status code of 500 on error with appropriate error message', () => {
+    getUser.mockResolvedValue(true)
+    updateUserPoints.mockRejectedValue(new Error('not working'))
+
+    expect.assertions(2)
+    return request(server)
+      .patch('/api/v1/users/1/points')
+      .send({ points: 100 })
       .then(res => {
         expect(res.status).toBe(500)
         expect(res.body.message).toBe('Backend server error')
