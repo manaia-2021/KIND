@@ -6,7 +6,7 @@ import AddIcon from '@material-ui/icons/Add'
 import { getUserActions, updateUserAction, updateUserPoints } from '../apis/api'
 import { Box, IconButton } from '@material-ui/core'
 
-function UserActions ({ user }) {
+function DashboardPage ({ user }) {
   const [userAction, setUserAction] = useState([])
   const [totalPoints, setTotalPoints] = useState(0)
 
@@ -59,42 +59,47 @@ function UserActions ({ user }) {
 
   return (
     <>
-      <div className="userAction">
-        <div className="points">
-          <label>
-            <h1> Total Points: {totalPoints} </h1>
-          </label>
+      <Box display='flex'
+        alignItems='center'
+        flexDirection='column'
+      >
+        <div className="userAction">
+          <div className="points">
+            <label>
+              <h1> Total Points: {totalPoints} </h1>
+            </label>
+          </div>
+          <Box
+            display='flex'
+            justifyContent='center'
+            alignItems='center'
+          >
+            <h2>My Actions</h2>
+            <IconButton component={Link} to='/categories' color="primary">
+              <AddIcon fontSize="large" />
+            </IconButton>
+          </Box>
+          <table>
+            <thead>
+              <tr>
+                <th>Actions</th>
+                <th>Points</th>
+              </tr>
+            </thead>
+            <tbody>
+              {userAction.map((action, index) => {
+                return (
+                  <tr key={index}>
+                    <td className='table-data'>{action.description}</td>
+                    <td>{action.points}</td>
+                    <th><input type="checkbox" name={action.id} onChange={handleChange} checked={action.completed === 1} /></th>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
         </div>
-        <Box
-          display='flex'
-          justifyContent='center'
-          alignItems='center'
-        >
-          <h2>My Actions</h2>
-          <IconButton component={Link} to='/categories' color="primary">
-            <AddIcon fontSize="large" />
-          </IconButton>
-        </Box>
-        <table>
-          <thead>
-            <tr>
-              <th>Actions</th>
-              <th>Points</th>
-            </tr>
-          </thead>
-          <tbody>
-            {userAction.map((action, index) => {
-              return (
-                <tr key={index}>
-                  <td className='table-data'>{action.description}</td>
-                  <td>{action.points}</td>
-                  <th><input type="checkbox" name={action.id} onChange={handleChange} checked={action.completed === 1} /></th>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </div>
+      </Box>
     </>
   )
 }
@@ -104,4 +109,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(UserActions)
+export default connect(mapStateToProps)(DashboardPage)
