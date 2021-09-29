@@ -54,7 +54,6 @@ function UserActions ({ user }) {
     setUserAction(updateUAction)
     setTotalPoints(countPoints(updateUAction))
   }
-
   // updateUserAction()
 
   return (
