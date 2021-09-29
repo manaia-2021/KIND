@@ -11,7 +11,6 @@ export const getUsers = () => {
 }
 
 export const updateUserProfile = ({ id, name, username }) => {
-  console.log('hitting function')
   return request.patch(`${rootUrl}/users/${id}`).send({ name, username })
     .then(() => {
       return null
