@@ -18,12 +18,12 @@ test('cards display correctly', async () => {
 // findByAllText
 // fireevent.click on bitton
 
-jest.mock('./CategoriesCards', () => (() => <button onClick={handleOpen}></button>))
-getCategoryActions.mockReturnValue(Promise.resolve({}))
-test('checks onClick', async () => {
-  expect.assertions(1)
-  const handleClick = jest.fn()
-  render(<CategoriesCards/>)
-  fireEvent.click(screen.getByTestId('button'))
-  expect(handleClick).toHaveBeenCalledTimes(1)
-})
+// jest.mock('./CategoriesCards', () => (() => <button onClick={handleOpen}></button>))
+// getCategoryActions.mockReturnValue(Promise.resolve({}))
+// test('checks onClick', async () => {
+//   expect.assertions(1)
+//   const handleClick = jest.fn()
+//   render(<CategoriesCards/>)
+//   fireEvent.click(screen.getByTestId('button'))
+//   expect(handleClick).toHaveBeenCalledTimes(1)
+// })

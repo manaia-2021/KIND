@@ -75,7 +75,7 @@ const CategoriesPage = ({ user }) => {
             <Box>
               <Alert severity="success">
                 <AlertTitle>Success</AlertTitle>
-                  Actions have been added! - <strong><a href="/dashboard">View Dashboard</a></strong>
+                  Actions have been added! - <strong><a href="/dashboard">See Actions</a></strong>
               </Alert>
             </Box>
           )}
