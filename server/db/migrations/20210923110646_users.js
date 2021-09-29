@@ -3,6 +3,7 @@ exports.up = function (knex) {
     table.increments('id').primary()
     table.string('name')
     table.string('user_name')
+    table.string('email_address').unique()
     table.string('avatar_url').defaultTo('/images/avatar.jpg')
     table.integer('points').defaultTo(0)
     table.timestamps(true, true)

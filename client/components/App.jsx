@@ -2,13 +2,10 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Route } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
-// import { useAuth0 } from '@auth0/auth0-react'
-import HeaderBar from '../components/HeaderBar'
-import ProtectedRoute from '../auth/ProtectedRoute'
 
+import ProtectedRoute from '../auth/ProtectedRoute'
+import HeaderBar from '../components/HeaderBar'
 import LandingPage from './LandingPage'
-// import Profile from './Profile'
-import CheckUser from './CheckUser'
 import CategoriesPage from './CategoriesPage'
 import UserDashboard from './UserDashboard'
 import Leaderboard from './LeaderBoard'
@@ -17,24 +14,22 @@ import { fetchUserProfile } from '../actions/user'
 import ProfilePage from './ProfilePage'
 
 function App (props) {
-  const { user } = useAuth0()
+  const { user, isAuthenticated } = useAuth0()
 
   useEffect(() => {
-    if (user?.email) {
+    if (isAuthenticated) {
       const { name, email } = user
       props.dispatch(fetchUserProfile({ name, email }))
     }
-  }, [user?.email])
+  }, [isAuthenticated])
 
   return (
     <>
       <Route path='/' component={HeaderBar} />
       <Route exact path='/' component={LandingPage} />
-      {/* <Route path='/userDashboard' component={UserDashboard} /> */}
       <Route path='/leaderboard' component={Leaderboard} />
       <ProtectedRoute path='/categories' component={CategoriesPage} />
-      <ProtectedRoute path='/users' component={CheckUser} />
-      <ProtectedRoute path='/profile' component={ProfilePage} />
+      <ProtectedRoute path='/profile' component={UserDashboard} />
     </>
   )
 }
