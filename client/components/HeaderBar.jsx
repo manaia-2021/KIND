@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 
 import { AppBar, Toolbar, Typography, makeStyles, Button } from '@material-ui/core'
 import { teal } from '@material-ui/core/colors'
@@ -16,13 +16,8 @@ const useStyles = makeStyles((theme) => {
       fontSize: 50,
       cursor: 'pointer'
     },
-    avatar: {
-      marginRight: theme.spacing(2)
-    },
     button: {
-      marginTop: '20px'
-    },
-    buttonColor: {
+      marginLeft: '10px',
       backgroundColor: teal[200]
     },
     background: {
@@ -47,7 +42,10 @@ export default function HeaderBar () {
               KIND
             </Typography>
             <Typography>
-              <Button variant='contained' onClick={handleButtonClick} className={classes.buttonColor}>
+              <Button component={Link} to="/dashboard" variant="contained" className={classes.button}>My Actions</Button>
+            </Typography>
+            <Typography>
+              <Button variant='contained' onClick={handleButtonClick} className={classes.button}>
                 Leaderboard
               </Button>
             </Typography>

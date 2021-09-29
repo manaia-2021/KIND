@@ -13,7 +13,6 @@ const CategoriesPage = ({ user }) => {
   const [showAlert, setShowAlert] = useState(false)
 
   useEffect(() => {
-    console.log(showAlert)
     getCategories()
       .then(categories => {
         setCategories(categories)
@@ -38,16 +37,15 @@ const CategoriesPage = ({ user }) => {
   }
 
   const handleButtonClick = () => {
-    addNewUserActions(user.id, checkedActions)
     if (checkedActions.length > 0) {
+      addNewUserActions(user.id, checkedActions)
       setShowAlert(true)
+      setCheckedActions([])
     }
-    setCheckedActions([])
   }
 
   return (
     <>
-      {/* <HeaderBar /> */}
       <Toolbar />
       <Box pt={10}>
         <Box textAlign="center" fontSize="h4.fontSize" >
@@ -68,19 +66,19 @@ const CategoriesPage = ({ user }) => {
           </Grid>
         </Box>
         <Box display='flex' justifyContent='center' alignItems='flex-end' direction='column' style={{ paddingTop: '20px', minHeight: '2vw', border: '0px solid black' }}>
-          <Button size='large' variant='contained' style={{ backgroundColor: teal[400], color: '#FFFFFF' }} onClick={handleButtonClick}>
+          { (checkedActions.length > 0) && (<Button size='large' variant='contained' style={{ backgroundColor: teal[400], color: '#FFFFFF' }} onClick={handleButtonClick}>
             Done
-          </Button>
+          </Button>)}
         </Box>
         <Box display='flex' justifyContent='center' alignItems='flex-end' direction='column' style={{ paddingTop: '20px', minHeight: '2vw' }}>
-          {showAlert
-            ? <Box><Alert severity="success">
-              <AlertTitle>Success</AlertTitle>
-                  Actions have been added! - <strong><a href="/profile">View Dashboard</a></strong>
-            </Alert>
+          {showAlert && (
+            <Box>
+              <Alert severity="success">
+                <AlertTitle>Success</AlertTitle>
+                  Actions have been added! - <strong><a href="/dashboard">See Actions</a></strong>
+              </Alert>
             </Box>
-            : console.log(showAlert)
-          }
+          )}
         </Box>
       </Box>
     </>
