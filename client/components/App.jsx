@@ -29,7 +29,7 @@ function App (props) {
       <Route exact path='/' component={LandingPage} />
       <Route path='/leaderboard' component={Leaderboard} />
       <ProtectedRoute path='/categories' component={CategoriesPage} />
-      <ProtectedRoute path='/profile' component={UserDashboard} />
+      <ProtectedRoute path='/profile' component={ProfilePage} />
     </>
   )
 }
