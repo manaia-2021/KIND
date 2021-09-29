@@ -11,6 +11,7 @@ import UserDashboard from './UserDashboard'
 import Leaderboard from './LeaderBoard'
 
 import { fetchUserProfile } from '../actions/user'
+import ProfilePage from './ProfilePage'
 
 function App (props) {
   const { user, isAuthenticated } = useAuth0()
