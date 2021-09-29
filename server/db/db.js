@@ -14,7 +14,8 @@ module.exports = {
   addNewUser,
   getActionsByCategory,
   getUserActionByUser,
-  updateUserPoints
+  updateUserPoints,
+  updateUserProfile
 }
 
 // Add a new user
@@ -114,4 +115,9 @@ function updateUserAction (actionId, status, db = connection) {
 
 function updateUserPoints (id, points, db = connection) {
   return db('users').where('id', id).update({ points })
+}
+
+function updateUserProfile (user, db = connection) {
+  const { id, name, username } = user
+  return db('users').where('id', id).update({ name, user_name: username })
 }

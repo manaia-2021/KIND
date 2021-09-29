@@ -10,12 +10,13 @@ export const getUsers = () => {
     })
 }
 
-// export const createUser = ({ name, email }) => {
-//   return request.post(`${rootUrl}/users`).send({ name, email })
-//     .then(res => {
-//       return res.body.data.id
-//     })
-// }
+export const updateUserProfile = ({ id, name, username }) => {
+  console.log('hitting function')
+  return request.patch(`${rootUrl}/users/${id}`).send({ name, username })
+    .then(() => {
+      return null
+    })
+}
 
 export const findOrCreateUser = ({ name, email }) => {
   return request.put(`${rootUrl}/users`).send({ name, email })
