@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { useAuth0 } from '@auth0/auth0-react'
 
-import { deleteUser } from '../apis/api'
+import { deleteUser, updateUserProfile } from '../apis/api'
 import { Avatar, Button, makeStyles, TextField, Box, Toolbar } from '@material-ui/core'
 import { teal } from '@material-ui/core/colors'
 
@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 function Profile (props) {
+  const classes = useStyles()
   const { logout } = useAuth0()
   const [form, setForm] = useState({ name: '', username: '', email: '' })
 
@@ -32,7 +33,20 @@ function Profile (props) {
       .catch((error) => { console.log(error) })
   }
 
-  const classes = useStyles()
+  function handleChange (e) {
+    setForm({ ...form, [e.target.name]: e.target.value })
+  }
+
+  function handleButtonClick () {
+    updateUserProfile({ id: props.user.id, name: form.name, username: form.username })
+      .then(() => {
+        alert('User profile updated successfullly')
+        return null
+      })
+      .catch(() => {
+        alert('Could not update your profile')
+      })
+  }
 
   return (
     <>
@@ -46,10 +60,10 @@ function Profile (props) {
         <Box
           display='flex'
           flexDirection='column'>
-          <TextField label='Name' variant='outlined' className={classes.fields} value={form.name} />
-          <TextField label="username" value={form.username} variant='outlined' className={classes.fields} />
+          <TextField label='Name' name="name" variant='outlined' className={classes.fields} value={form.name} onChange={handleChange} />
+          <TextField label="username" name="username" value={form.username} variant='outlined' className={classes.fields} onChange={handleChange} />
           <TextField label='Email' variant='outlined' className={classes.fields} value={form.email} disabled />
-          <Button variant='contained' style={{ backgroundColor: teal[400], color: '#FFFFFF' }} className={classes.fields}> Save </Button>
+          <Button variant='contained' style={{ backgroundColor: teal[400], color: '#FFFFFF' }} className={classes.fields} onClick={handleButtonClick}> Save </Button>
           <Button variant='contained' color='secondary' className={classes.fields} onClick={handleDeleteUser}> Delete my account
           </Button>
         </Box>

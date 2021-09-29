@@ -133,4 +133,17 @@ router.patch('/:id/points', async (req, res) => {
   }
 })
 
+router.patch('/:id', async (req, res) => {
+  const { id } = req.params
+  const { username, name } = req.body
+  try {
+    const user = await db.getUser(Number(id))
+    if (!user) return res.status(404).json({ message: 'No user with that corresponding ID was found' })
+    await db.updateUserProfile({ id, username, name })
+    res.sendStatus(204)
+  } catch (err) {
+    res.status(500).json({ message: 'Backend server error' })
+  }
+})
+
 module.exports = router
