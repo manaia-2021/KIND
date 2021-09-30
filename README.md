@@ -18,4 +18,4 @@ You can find the server running on [http://localhost:3000](http://localhost:3000
 
 ## Details
 
-https://kind-manaia.herokuapp.com/leaderboard
+https://kind-manaia.herokuapp.com/
