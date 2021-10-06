@@ -1,21 +1,12 @@
-# Fullstack boilerplate
+# KIND
+A react based web application designed to help people make behavioural changes to aid combatting climate change. Created by students at [EDA](https://devacademy.co.nz) as a final project.
 
-## Getting Started
+## Check it Out
+https://kind-manaia.herokuapp.com
 
-### From the Github UI
-See the instructions [here](https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template) to use Github's feature to create a new repo from a template.
-
-### From the command line
-
-```
-git clone https://github.com/dev-academy-challenges/boilerplate-fullstack [your-project-name]
-cd [your-project-name]
-npm install # to install dependencies
-npm run dev # to start the dev server
-```
-
-You can find the server running on [http://localhost:3000](http://localhost:3000).
-
-## Details
-
-https://kind-manaia.herokuapp.com/
+### The Team
+* [Brad Booysen](https://github.com/brad-booysen)
+* [Kerry Davis](https://github.com/kerry-davis)
+* [Chris Wagg](https://github.com/Chris-Wagg)
+* [Nirvan Gurung](https://github.com/nirvanmeghi)
+* [Chris Arrowsmith](https://github.com/chrisarrow90)
